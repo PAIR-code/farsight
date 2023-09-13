@@ -1,0 +1,214 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@import '../../define.scss';
+
+$section-background-color: change-color(
+  $color: $blue-gray-100,
+  $lightness: 92%
+);
+$section-height: 60px;
+
+.harm-node-accident {
+  width: 100%;
+  height: $section-height;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.accident-card {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+
+  border-radius: $border-radius;
+
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  a {
+    height: 100%;
+    display: flex;
+  }
+
+  .news-image {
+    border-radius: $border-radius;
+    height: 45px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 1px solid $blue-gray-100;
+    margin-top: 5px;
+
+    transform-origin: center;
+    transition: transform 80ms;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  overflow: hidden;
+
+  .title {
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+    a {
+      color: currentColor;
+      text-decoration-color: change-color($color: $gray-400, $alpha: 0.4);
+      text-decoration-thickness: 1px;
+      transition: text-decoration-color 100ms;
+
+      &:hover {
+        text-decoration-color: $gray-600;
+      }
+    }
+  }
+}
+
+.controller {
+  display: flex;
+  flex-direction: row;
+
+  .svg-icon {
+    width: calc(1em + 8px);
+    height: calc(1em + 8px);
+    padding: 2px;
+    box-sizing: border-box;
+    color: $blue-gray-300;
+    background-color: change-color($color: $blue-gray-100, $alpha: 0.4);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    cursor: pointer;
+    transition: background-color 100ms, color 100ms;
+
+    &:hover {
+      background-color: change-color($color: $blue-gray-100, $lightness: 88%);
+      color: $blue-gray-500;
+    }
+
+    &:active {
+      background-color: change-color($color: $blue-gray-100, $lightness: 86%);
+    }
+  }
+
+  .left-button {
+    transform: rotate(90deg);
+    border-top: 1px solid change-color($color: $blue-gray-100, $lightness: 86%);
+  }
+
+  .right-button {
+    transform: rotate(-90deg);
+  }
+}
+
+.section-header {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0px 8px;
+
+  line-height: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .header-container {
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+    padding: 4px 6px;
+
+    background-color: change-color($color: $blue-gray-100, $alpha: 0.4);
+
+    .svg-icon {
+      color: $blue-gray-800;
+    }
+  }
+}
+
+.section-content {
+  box-sizing: border-box;
+  padding: 2px 8px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.svg-icon {
+  width: 1em;
+  height: 1em;
+  padding: 0px 0px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: transform 100ms linear, opacity 100ms linear,
+    background-color 100ms linear, color 100ms linear;
+  transform-origin: center;
+
+  background-color: transparent;
+  color: currentColor;
+
+  svg {
+    fill: currentColor;
+    stroke: currentColor;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.tag-content {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 4px;
+  column-gap: 6px;
+}
+
+.tag {
+  display: flex;
+  accent-color: $blue-gray-400;
+  gap: 2px;
+}

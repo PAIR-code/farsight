@@ -1,0 +1,84 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@import '../../define.scss';
+
+.menu {
+  width: 50px;
+  height: 100%;
+  // background-color: change-color($color: $blue-100, $lightness: 95%);
+  background-color: change-color($color: $blue-gray-800);
+  // border-bottom-left-radius: $border-radius;
+  // border-top-left-radius: $border-radius;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.svg-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+
+  color: currentColor;
+  transition: transform 80ms linear;
+  transform-origin: center;
+
+  svg {
+    fill: currentColor;
+    stroke: currentColor;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.menu-button {
+  background: none;
+  color: inherit;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+
+  padding: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: $blue-gray-200;
+  width: 100%;
+
+  &:first-child {
+    border-top-left-radius: $border-radius;
+  }
+
+  &:hover {
+    .svg-icon {
+      transform: scale(0.9);
+    }
+  }
+
+  &[selected] {
+    background-color: change-color($color: $blue-gray-300, $lightness: 40%);
+
+    .svg-icon {
+      transform: scale(1);
+    }
+  }
+}

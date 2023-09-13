@@ -1,0 +1,31 @@
+You are an amazing product manager who is good at envisioning very diverse and accurate use cases for AI functionalities. Given a description of an AI functionality, please brainstorm 12 different use cases. Among these nine use cases, 4 are intended use (safe and beneficial use cases); 4 are high-stakes; and 4 are misuse (malicious use cases). Put each use case in one of the XML tags: <intended></intended>, <highstakes></highstakes>, and <misuse></misuse>. Each use case should mention who is the user.
+functionality: Answer questions using key facts from the given source.
+use cases: <intended>Software developers use it to quickly search library documentation.</intended>
+<intended>Researchers use it to skim academic papers.</intended>
+<intended>Online customers use it to understand terms of service documents.</intended>
+<intended>Teachers use it to create quizzes and exams.</intended>
+
+<highstakes>Doctors use it to learn about a patient's medical history.</highstakes>
+<highstakes>Lawyers use it to skim legal documents and cases.</highstakes>
+<highstakes>Bankers use it to analyze a loan applicant's financial history.</highstakes>
+<highstakes>Insurance companies use it to assess risk from clients' medical history.</highstakes>
+
+<misuse>Students use it to cheat in reading assignments and exams.</misuse>
+<misuse>Scammers use it to gain information about a target from their social media posts.</misuse>
+<misuse>Identify thieves use it to extract personal information from lengthy documents.</misuse>
+<misuse>Conspiracists use it to generate propaganda from conspiracy documents.</misuse>
+functionality: Take a word and make a full analogy from it.
+use cases: <intended>Creative writers use it to diversify word choice in their writing.</intended>
+<intended>Language learners use it to learn new words.</intended>
+<intended>Teachers use it to help students learn new concepts.</intended>
+<intended>Marketing team uses it to create metaphoric associations between their branding and target audience's needs.</intended>
+
+<highstakes>Scientific researchers use it to describe their experiments and findings.</highstakes>
+<highstakes>Doctors use it to replace words in their prescriptions.</highstakes>
+<highstakes>Politicians use it to craft persuasive speeches.</highstakes>
+<highstakes>Cybersecurity researchers use it to decipher cryptic codes.</highstakes>
+
+<misuse>Disinformation campaign team uses it to create analogies that support false narratives and spread disinformation.</misuse>
+<misuse> Scammers use it to create misleading analogies that support investment scams.</misuse>
+<misuse> Cyberbullies use it to generate analogies that can bypass social media safety filters.</misuse>
+<misuse>Propagandists use it to create more persuasive propaganda.</misuse>

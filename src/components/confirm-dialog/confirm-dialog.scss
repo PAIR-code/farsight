@@ -1,0 +1,142 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@import '../../define.scss';
+
+$padding-v: 18px;
+$padding-h: 20px;
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.confirm-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  max-width: 500px;
+  box-shadow: 0px 11px 15px -7px hsla(0, 0%, 0%, 0.2),
+    0px 24px 38px 3px hsla(0, 0%, 0%, 0.14),
+    0px 9px 46px 8px hsla(0, 0%, 0%, 0.12);
+
+  padding: 0;
+  border: none;
+}
+
+dialog[open] {
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  pointer-events: all;
+
+  &::backdrop {
+    background-color: hsla(0, 0%, 0%, 0.55);
+    animation: fade-in 300ms;
+  }
+}
+
+.header {
+  padding: $padding-v $padding-h 0px $padding-h;
+  margin: 0;
+  line-height: 1;
+  font-size: $font-u3;
+  width: 100%;
+
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.separator {
+  display: flex;
+  width: calc(100% - 40px);
+  height: 3px;
+  border-radius: 5px;
+  background-color: $gray-200;
+}
+
+.content {
+  display: flex;
+  flex-flow: column;
+  gap: 12px;
+  padding: 16px $padding-h;
+
+  .skip-bar {
+    color: $gray-800;
+  }
+}
+
+.button-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  box-sizing: border-box;
+
+  gap: 10px;
+  width: 100%;
+  padding: 0px $padding-h $padding-v $padding-h;
+
+  button {
+    all: unset;
+    cursor: pointer;
+    background-color: $gray-200;
+    padding: 3px 8px;
+    border-radius: 8px;
+    display: flex;
+    flex-grow: 0;
+    transition: background-color 150ms ease-in-out;
+
+    &:hover {
+      background-color: $gray-300;
+    }
+
+    &:active {
+      background-color: $gray-400;
+    }
+
+    // &.cancel-button {
+    //   color: white;
+    //   background-color: $blue-500;
+
+    //   &:hover {
+    //     background-color: $blue-600;
+    //   }
+
+    //   &:active {
+    //     background-color: $blue-700;
+    //   }
+    // }
+  }
+
+  a {
+    color: currentColor;
+    font-style: normal;
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,110 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@import '../../define.scss';
+
+.prompt-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: $gray-200;
+  border-radius: $border-radius;
+  border: 1px solid $gray-border;
+}
+
+.input-container {
+  display: flex;
+  height: 100%;
+
+  textarea {
+    width: 100%;
+    flex-grow: 1;
+    resize: none;
+    border: none;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.svg-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+
+  color: currentColor;
+
+  svg {
+    fill: currentColor;
+    stroke: currentColor;
+    width: 100%;
+    height: 100%;
+  }
+
+  &.flip-horizontal {
+    transform: rotate(-180deg);
+  }
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+  font-size: $font-d1;
+}
+
+.bottom-button {
+  background: none;
+  color: inherit;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+
+  padding: 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: $gray-500;
+
+  &:first-child {
+    border-top-left-radius: $border-radius;
+  }
+
+  &:hover {
+    color: $gray-600;
+  }
+
+  &:active {
+    color: $gray-700;
+  }
+}
+
+.prompt-index-text {
+  font-variant-numeric: tabular-nums;
+}

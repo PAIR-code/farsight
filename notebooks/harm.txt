@@ -1,0 +1,238 @@
+You are an amazing product manager who is good at envisioning relevant potential harms of an AI product on various stakeholders. Given a description of an AI product's functionality (<functionality></functionality>), a use case (<usecase></usecase>), and a stakeholder (<stakeholder></stakeholder>), you will predict three most relevant harms to that stakeholder. For each harm (<harm></harm>), you will determine its type of harm (<type></type>), a one-sentence explanation (<explain></explain>), and a severity rating (<severity></severity>). The explanation must start with the stakeholder appeared in <stakeholder></stakeholder>.
+
+The harm type (<type></type>) can only come from the below list.
+
+<type>Stereotyping</type>: Oversimplified and undesirable representations
+<type>Demeaning and alienating social groups</type>: Narratives used to socially control or oppress social groups
+<type>Denying people opportunity to self-identify</type>: Non-consensual classifications or representations of a person in algorithmic systems
+<type>Opportunity loss</type>: Discrimination in domains that affect material well-being (e.g., education, government, healthcare, or housing domains)
+<type>Economic loss</type>: Employment or hiring discrimination; Financial losses or injuries, including price discrimination
+<type>Alienation</type>: Adverse emotions (e.g., frustration, anger) experienced when interacting with technologies that fail based on one’s identity
+<type>Increased labor</type>: Additional effort required to make technologies operate as intended
+<type>Service or benefit loss</type>: Disproportionate loss of technological benefits
+<type>Loss of agency or social control</type>: Loss of autonomy; Algorithmic profiling
+<type>Technology-facilitated violence</type>: Inciting or enabling offline violence; Online abuse
+<type>Diminished health and well-being</type>: Emotional, physical, reputational harm; behavioral manipulation
+<type>Privacy violations</type>: Exploitative or undesired inference; Non-consensual data collection
+<type>Information harms</type>: Disinformation; misinformation; malinformation
+<type>Cultural harms</type>: Cultural hegemony; Proliferating false perceptions about cultural groups
+<type>Political and civic harms</type>: Erosion of democracy; human rights violation; nation destabilization
+<type>Macro socio-economic harms</type>: Digital divides; labor exploitation; technological unemployment
+<type>Environmental harms</type>: Damage to natural environment
+
+The severity rating describes (1) how likely this harm will occur and (2) how severe it is; it must come from the below list.
+
+<severity>very severe</severity>
+<severity>severe</severity>
+<severity>not severe</severity>
+
+Put your answer in XML tags. Each harm is specific to the given use case and stakeholder. All harms and explanations should makes sense to your colleagues and friends.
+scenario: <functionality>Generate a response to a query using key facts from a quote.</functionality>
+<usecase>Software developers use it to quickly search library documentation.</usecase>
+<stakeholder>Software developer</stakeholder>
+harms: <harm>
+<explain>Software developers may lose jobs due to using inaccurate AI output.</explain>
+<type>Economic loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Software developers working in working in underrepresented domains or languages may feel frustrated about AI's lower performance. </explain>
+<type>Diminished health and well-being</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Software developers may be offended by toxic and biased AI output.</explain>
+<type>Stereotyping</type>
+<severity>severe</severity>
+</harm>
+scenario: <functionality>Generate a response to a query using key facts from a quote.</functionality>
+<usecase>Software developers use it to quickly search library documentation.</usecase>
+<stakeholder>Technical writer</stakeholder>
+harms: <harm>
+<explain>Technical writers may feel underappreciated for the effort to writing good documentation.</explain>
+<type>Diminished health and well-being</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Technical writers may face decreased demand for technical writing services due to popularity of AI tools.</explain>
+<type>Economic loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Technical writers may lose control of how the documentation will be interpreted.</explain>
+<type>Loss of agency or social control</type>
+<severity>severe</severity>
+</harm>
+scenario: <functionality>Generate a response to a query using key facts from a quote.</functionality>
+<usecase>Software developers use it to quickly search library documentation.</usecase>
+<stakeholder>End users of the developer's software</stakeholder>
+harms: <harm>
+<explain>End users may experience bugs or errors in the software due to the inaccurate AI output.</explain>
+<type>Service or benefit loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>End users may encounter financial loss due to software vulnerabilities introduced by the AI output.</explain>
+<type>Service or benefit loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>End users may experience anxiety or physical harm due to inaccurate AI output.</explain>
+<type>Diminished health and well-being</type>
+<severity>severe</severity>
+</harm>
+scenario: <functionality>Generate a response to a query using key facts from a quote.</functionality>
+<usecase>Students use it to cheat in their assignments and exams.</usecase>
+
+harms: <harm>
+<explain>Students who use AI to cheat may lose out on the opportunity to learn the material.</explain>
+<type>Opportunity loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Students who use AI to cheat may feel stressed or anxious about being caught.</explain>
+<type>Diminished health and well-being</type>
+<severity>very severe</severity>
+</harm>
+scenario: <functionality>Fix grammatical errors in the text.</functionality>
+<usecase>Scammers use it to improve their phishing emails.</usecase>
+<stakeholder>Scammer</stakeholder>
+harms: <harm>
+<explain>Scammers may be able to generate a larger volume of convincing phishing emails that pose a greater threat to their targets.</explain>
+<type>Economic loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Scammers may feel pressured to use AI tools to stay competitive and relevant.</explain>
+<type>Diminished health and well-being</type>
+<severity>not severe</severity>
+</harm>
+scenario: <functionality>Take a word and make a full analogy from it.</functionality>
+<usecase>Creative writers use it to diversify word choice in their writing.</usecase>
+<stakeholder>Editor</stakeholder>
+harms: <harm>
+<explain>Editors may have to spend more time editing the writer's work with AI-generated text.</explain>
+<type>Increased labor</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Editors may feel stressed or anxious about the accuracy of the writer's work with AI-generated text.</explain>
+<type>Diminished health and well-being</type>
+<severity>not severe</severity>
+</harm>
+scenario: <functionality>Generate a response to a query using key facts from a quote.</functionality>
+<usecase>Online customers use it to understand terms of service documents.</usecase>
+<stakeholder>Online shop</stakeholder>
+harms: <harm>
+<explain>Online shops may face decreased sales due to misunderstandings of their terms of service.</explain>
+<type>Economic Loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Online shops may face increased legal liability due to misunderstandings of their terms of service.</explain>
+<type>Economic los</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Online shops may lose control over how their terms of service are interpreted.</explain>
+<type>Loss of agency or social control</type>
+<severity>not severe</severity>
+</harm>
+scenario: <functionality>Generate a follow-up question to a client's injury.</functionality>
+<usecase>Doctors use it to gather more information about a patient's injury.</usecase>
+<stakeholder>Hospital</stakeholder>
+harms: <harm>
+<explain>Hospitals may face increased legal liability due to errors made by doctors using the AI tool.</explain>
+<type>Economic Loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Hospitals may have to spend more time training their doctors on how to correctly use the AI tool.</explain>
+<type>Increased labor</type>
+<severity>not severe</severity>
+</harm>
+scenario: <functionality>Fix grammatical errors in the text.</functionality>
+<usecase>Doctors use it to improve their medical prescriptions.</usecase>
+<stakeholder>Doctors</stakeholder>
+harms: <harm>
+<explain>Doctors may lose jobs if their prescriptions contain AI-generated mistakes.</explain>
+<type>Economic loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Doctors may spend more time proofreading AI's output.</explain>
+<type>Increased labor</type>
+<severity>severe</severity>
+</harm>
+<harm>
+<explain>Doctors may lose the skill to write prescriptions independently.</explain>
+<type>opportunity loss</type>
+<severity>severe</severity>
+</harm>
+scenario: <functionality>Generate a response to a query using key facts from a source.</functionality>
+<usecase>Companies use it to answer customer's questions.</usecase>
+<stakeholder>Customers</stakeholder>
+harms: <harm>
+<explain>Customers may have to spend more time trying to get in touch with a human representative.</explain>
+<type>Increased labor</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Customers may feel like they are not being heard by the company.</explain>
+<type>Alienation</type>
+<severity>severe</severity>
+</harm>
+<harm>
+<explain>Customers may feel frustrated or anxious when they cannot get a response from the company.</explain>
+<type>Diminished health and well-being</type>
+<severity>severe</severity>
+</harm>
+scenario: <functionality>Make the text funny and engaging.</functionality>
+<usecase>Content creators use it to make their content more entertaining.</usecase>
+<stakeholder>Content creators.</stakeholder>
+harms: <harm>
+<explain>Content creators may lose audience due to AI-generated content being offensive.</explain>
+<type>Economic loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Content creators working in underrepresented domains may feel frustrated about AI's lower performance.</explain>
+<type>Diminished health and well-being</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Content creators may feel like they are losing control over their own creative process.</explain>
+<type>Loss of agency or social control</type>
+<severity>severe</severity>
+</harm>
+scenario: <functionality>Generate a story based on an outline.</functionality>
+<usecase>Screen writers use it to write new scripts.</usecase>
+<stakeholder>Screenwriters.</stakeholder>
+harms: <harm>
+<explain>Screenwriters may lose jobs due to AI-generated scripts being offensive.</explain>
+<type>Economic loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Screenwriters working in niche areas or languages may feel frustrated about AI's lower performance.</explain>
+<type>Diminished health and well-being</type>
+<severity>very severe</severity>
+</harm>
+scenario: <functionality>Make the text more concise and easy to understand.</functionality>
+<usecase>Lawyers use it to prepare questions in court.</usecase>
+<stakeholder>Lawyers</stakeholder>
+harms: <harm>
+<explain>Lawyers may lose the case due to AI-generated questions being offensive and misleading.</explain>
+<type>Economic loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Lawyers may feel frustrated or anxious about the accuracy of AI-generated questions.</explain>
+<type>Diminished health and well-being</type>
+<severity>severe</severity>
+</harm>
+<harm>
+<explain>Lawyers may lose the skill to write concise questions to ask witness independently.</explain>
+<type>Opportunity loss</type>
+<severity>severe</severity>
+</harm>
