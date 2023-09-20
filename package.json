@@ -8,8 +8,18 @@
   ],
   "types": "./dist/farsight.d.ts",
   "exports": {
-    ".": "./dist/farsight-inline-worker.es.js",
-    "./extension": "./dist-extension/farsight-external-worker.es.js"
+    ".": {
+      "import": {
+        "types": "./dist/farsight.d.ts",
+        "default": "./dist/farsight-inline-worker.es.js"
+      }
+    },
+    "./extension": {
+      "import": {
+        "types": "./dist/farsight.d.ts",
+        "default": "./dist-extension/farsight-external-worker.es.js"
+      }
+    }
   },
   "scripts": {
     "dev": "vite --port 3030",

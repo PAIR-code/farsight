@@ -796,7 +796,10 @@ export class FarsightContainerLite extends LitElement {
         `Failed to find tab node '${selectedTab.toLocaleLowerCase()}.'`
       );
     }
+
+    const containerBBox = this.containerElement!.getBoundingClientRect();
     const bbox = tabNode.getBoundingClientRect();
+    const xOffset = bbox.x - containerBBox.x;
 
     // Move the tab indicator
     if (tabIndicatorElement !== undefined) {
@@ -805,7 +808,7 @@ export class FarsightContainerLite extends LitElement {
       }
 
       tabIndicatorElement.style.width = `${Math.min(100, bbox.width)}px`;
-      tabIndicatorElement.style.left = `${bbox.x + bbox.width / 2}px`;
+      tabIndicatorElement.style.left = `${xOffset + bbox.width / 2}px`;
       tabIndicatorElement.style.backgroundColor = color;
 
       if (!showTransition) {
