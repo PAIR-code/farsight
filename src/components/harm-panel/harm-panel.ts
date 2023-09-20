@@ -762,7 +762,7 @@ export class FarsightHarmPanel extends LitElement {
             <span class="name">Farsight</span>
           </span>
           <span class="tagline"
-            >Your Visionary Sidekick for Responsible AI Innovation</span
+            >Your Sidekick for Responsible AI Innovation</span
           >
         </div>
         <div class="buttons">

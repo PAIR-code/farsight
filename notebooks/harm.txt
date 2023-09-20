@@ -83,10 +83,15 @@ harms: <harm>
 </harm>
 scenario: <functionality>Generate a response to a query using key facts from a quote.</functionality>
 <usecase>Students use it to cheat in their assignments and exams.</usecase>
-
+<stakeholder>Students who use AI to cheat</stakeholder>
 harms: <harm>
 <explain>Students who use AI to cheat may lose out on the opportunity to learn the material.</explain>
 <type>Opportunity loss</type>
+<severity>very severe</severity>
+</harm>
+<harm>
+<explain>Students who use AI to cheat may learn wrong concepts due to inaccurate AI responses.</explain>
+<type>Information harms</type>
 <severity>very severe</severity>
 </harm>
 <harm>
