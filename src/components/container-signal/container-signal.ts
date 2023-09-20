@@ -21,7 +21,7 @@ import { customElement, property, state, query } from 'lit/decorators.js';
 import { config } from '../../utils/config';
 import { tooltipMouseEnter, tooltipMouseLeave } from '@xiaohk/utils';
 import { computePosition, flip, shift, offset, arrow } from '@floating-ui/dom';
-import { EmbFakeWorker } from '../../workers/text-emb-fake-worker';
+import { TextEmbFakeWorker } from '../../workers/text-emb-fake-worker';
 
 import type {
   TextEmbWorkerMessage,
@@ -111,8 +111,7 @@ export class FarsightContainerSignal extends LitElement {
       const workerMessageHandler = (e: MessageEvent<TextEmbWorkerMessage>) => {
         this.textEmbWorkerMessageHandler(e);
       };
-      this.textEmbWorker = new EmbFakeWorker(workerMessageHandler);
-      console.log(this.textEmbWorker);
+      this.textEmbWorker = new TextEmbFakeWorker(workerMessageHandler);
     }
 
     // Check if we can load API key from the cache

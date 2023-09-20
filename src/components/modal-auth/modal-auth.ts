@@ -16,6 +16,9 @@
 
 import { LitElement, css, unsafeCSS, html, PropertyValues } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
+import { TextGenFakeWorker } from '../../workers/text-gen-fake-worker';
+
+import type { FakeWorker } from '../../workers/fake-worker';
 import type {
   TextGenWorkerMessage,
   SimpleEventMessage
@@ -26,6 +29,7 @@ import componentCSS from './modal-auth.scss?inline';
 
 const USE_CACHE = import.meta.env.MODE !== 'x20';
 const LIB_MODE = import.meta.env.MODE === 'library';
+const EXTENSION_MODE = import.meta.env.MODE === 'extension';
 
 /**
  * Modal auth element.
@@ -49,16 +53,25 @@ export class FarsightModalAuth extends LitElement {
   @state()
   message = 'Verifying...';
 
-  textGenWorker: Worker;
+  textGenWorker: Worker | FakeWorker<TextGenWorkerMessage>;
   textGenWorkerRequestID = 1;
 
   // ===== Lifecycle Methods ======
   constructor() {
     super();
 
-    this.textGenWorker = new TextGenWorkerInline();
-    this.textGenWorker.onmessage = (e: MessageEvent<TextGenWorkerMessage>) =>
-      this.textGenWorkerMessageHandler(e);
+    if (!EXTENSION_MODE) {
+      this.textGenWorker = new TextGenWorkerInline();
+      this.textGenWorker.onmessage = (e: MessageEvent<TextGenWorkerMessage>) =>
+        this.textGenWorkerMessageHandler(e);
+    } else {
+      const textGenWorkerMessageHandler = (
+        e: MessageEvent<TextGenWorkerMessage>
+      ) => {
+        this.textGenWorkerMessageHandler(e);
+      };
+      this.textGenWorker = new TextGenFakeWorker(textGenWorkerMessageHandler);
+    }
   }
 
   connectedCallback(): void {

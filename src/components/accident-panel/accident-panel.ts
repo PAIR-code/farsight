@@ -25,8 +25,10 @@ import {
 } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { config } from '../../utils/config';
+import { TextEmbFakeWorker } from '../../workers/text-emb-fake-worker';
 import '../accident-card/accident-card';
 
+import type { FakeWorker } from '../../workers/fake-worker';
 import type {
   TextEmbWorkerMessage,
   AccidentReport,
@@ -42,6 +44,7 @@ const REQUEST_NAME = 'farsight';
 const DEV_MODE = import.meta.env.MODE === 'development';
 const USE_CACHE = import.meta.env.MODE !== 'x20';
 const LIB_MODE = import.meta.env.MODE === 'library';
+const EXTENSION_MODE = import.meta.env.MODE === 'extension';
 
 /**
  * Accident panel element.
@@ -56,7 +59,7 @@ export class FarsightAccidentPanel extends LitElement {
   @property()
   apiKey: string | null = null;
 
-  textEmbWorker: Worker;
+  textEmbWorker: Worker | FakeWorker<TextEmbWorkerMessage>;
   textEmbWorkerRequestID = 1;
 
   accidentReportMap: Map<number, AccidentReport> = new Map<
@@ -76,14 +79,26 @@ export class FarsightAccidentPanel extends LitElement {
   constructor() {
     super();
 
-    this.textEmbWorker = new TextEmbWorkerInline();
-    this.dataInitialized = this.initData().then(_ => {
+    this.dataInitialized = this.initData();
+
+    if (!EXTENSION_MODE) {
+      this.textEmbWorker = new TextEmbWorkerInline();
       this.textEmbWorker.onmessage = (
         e: MessageEvent<TextEmbWorkerMessage>
       ) => {
         this.textEmbWorkerMessageHandler(e);
       };
-    });
+    } else {
+      // Use fake workers for extension build
+      const textEmbWorkerMessageHandler = (
+        e: MessageEvent<TextEmbWorkerMessage>
+      ) => {
+        this.textEmbWorkerMessageHandler(e);
+      };
+      this.textEmbWorker = new TextEmbFakeWorker(textEmbWorkerMessageHandler);
+
+      console.log('extension mode, finished creating fake workers');
+    }
   }
 
   /**
@@ -191,7 +206,11 @@ export class FarsightAccidentPanel extends LitElement {
    * Helper function to route different web worker messages
    * @param e Web worker message event
    */
-  textEmbWorkerMessageHandler = (e: MessageEvent<TextEmbWorkerMessage>) => {
+  textEmbWorkerMessageHandler = async (
+    e: MessageEvent<TextEmbWorkerMessage>
+  ) => {
+    await this.dataInitialized;
+
     switch (e.data.command) {
       case 'finishEmbedding': {
         if (e.data.payload.requestID.includes(REQUEST_NAME)) {

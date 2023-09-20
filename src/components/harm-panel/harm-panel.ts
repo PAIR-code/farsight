@@ -35,6 +35,7 @@ import {
   startLogoBlinkAnimation,
   stopLogoAnimation
 } from '../container-signal/container-signal';
+import { TextGenFakeWorker } from '../../workers/text-gen-fake-worker';
 
 import deleteIcon from '../../images/icon-delete.svg?raw';
 import editIcon from '../../images/icon-edit.svg?raw';
@@ -51,6 +52,7 @@ import directIcon from '../../images/icon-person-filled.svg?raw';
 import indirectIcon from '../../images/icon-person-outline.svg?raw';
 import saveIcon from '../../images/icon-download.svg?raw';
 
+import type { FakeWorker } from '../../workers/fake-worker';
 import type { PropertyValues } from 'lit';
 import type { TextGenWorkerMessage } from '../../types/common-types';
 import type { DialogInfo } from '../confirm-dialog/confirm-dialog';
@@ -61,6 +63,7 @@ import TextGenWorkerInline from '../../workers/text-gen-worker?worker&inline';
 
 const DEV_MODE = import.meta.env.MODE === 'development';
 const LIB_MODE = import.meta.env.MODE === 'library';
+const EXTENSION_MODE = import.meta.env.MODE === 'extension';
 const USE_CACHE = import.meta.env.MODE !== 'x20';
 const STORAGE = DEV_MODE ? localStorage : sessionStorage;
 const REQUEST_NAME = 'farsight';
@@ -126,7 +129,7 @@ export class FarsightHarmPanel extends LitElement {
   @state()
   hasSkippedOnboarding = false;
 
-  textGenWorker: Worker;
+  textGenWorker: Worker | FakeWorker<TextGenWorkerMessage>;
   textGenWorkerRequestID = 1;
 
   envisionTree: EnvisionTree | null = null;
@@ -157,10 +160,18 @@ export class FarsightHarmPanel extends LitElement {
   constructor() {
     super();
 
-    this.textGenWorker = new TextGenWorkerInline();
-    this.textGenWorker.onmessage = (e: MessageEvent<TextGenWorkerMessage>) => {
-      this.textGenWorkerMessageHandler(e);
-    };
+    if (!EXTENSION_MODE) {
+      this.textGenWorker = new TextGenWorkerInline();
+      this.textGenWorker.onmessage = (e: MessageEvent<TextGenWorkerMessage>) =>
+        this.textGenWorkerMessageHandler(e);
+    } else {
+      const textGenWorkerMessageHandler = (
+        e: MessageEvent<TextGenWorkerMessage>
+      ) => {
+        this.textGenWorkerMessageHandler(e);
+      };
+      this.textGenWorker = new TextGenFakeWorker(textGenWorkerMessageHandler);
+    }
 
     // Check if the user has finished onboarding before. If so, the user can skip
     // the tutorial

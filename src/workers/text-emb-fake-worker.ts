@@ -46,7 +46,7 @@ const accidentPromise = decompress(JSON_GZIP_URL)
     throw Error(`Failed to load accident report embeddings: ${error}`);
   });
 
-export class EmbFakeWorker extends FakeWorker<TextEmbWorkerMessage> {
+export class TextEmbFakeWorker extends FakeWorker<TextEmbWorkerMessage> {
   constructor(
     workerMessageHandler: (e: MessageEvent<TextEmbWorkerMessage>) => void
   ) {

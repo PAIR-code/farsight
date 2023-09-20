@@ -46,11 +46,15 @@ import {
   stakeholderPrompt,
   harmPrompt
 } from '../../data/static-data';
+import { TextEmbFakeWorker } from '../../workers/text-emb-fake-worker';
+import { TextGenFakeWorker } from '../../workers/text-gen-fake-worker';
+
 import type {
   UseCaseNodeData,
   StakeholderNodeData
 } from '../harm-panel/harm-types';
 import type { TooltipConfig } from '@xiaohk/utils';
+import type { FakeWorker } from '../../workers/fake-worker';
 import type {
   AccidentReportData,
   AccidentReport,
@@ -83,6 +87,7 @@ const USE_API = true;
 const USE_CACHE = import.meta.env.MODE !== 'x20';
 const DEV_MODE = import.meta.env.MODE === 'development';
 const LIB_MODE = import.meta.env.MODE === 'library';
+const EXTENSION_MODE = import.meta.env.MODE === 'extension';
 let MAX_ACCIDENTS_PER_PAGE = 4;
 const MAX_ACCIDENTS = 20;
 const MAX_USE_CASE_PER_CAT = 3;
@@ -190,10 +195,10 @@ export class FarsightContainerLite extends LitElement {
   @state()
   latestAccidentReports: AccidentReport[] = [];
 
-  textEmbWorker: Worker;
+  textEmbWorker: Worker | FakeWorker<TextEmbWorkerMessage>;
   textEmbWorkerRequestID = 1;
 
-  textGenWorker: Worker;
+  textGenWorker: Worker | FakeWorker<TextGenWorkerMessage>;
   textGenWorkerRequestID = 1;
 
   randomSeed = d3.randomLcg(0.20230505);
@@ -217,19 +222,38 @@ export class FarsightContainerLite extends LitElement {
       this.positionTabIndicator(false, 'accident');
     });
 
-    this.textGenWorker = new TextGenWorkerInline();
-    this.textGenWorker.onmessage = (e: MessageEvent<TextGenWorkerMessage>) => {
-      this.textGenWorkerMessageHandler(e);
-    };
+    this.dataInitialized = this.initData();
 
-    this.textEmbWorker = new TextEmbWorkerInline();
-    this.dataInitialized = this.initData().then(() => {
+    if (!EXTENSION_MODE) {
+      this.textGenWorker = new TextGenWorkerInline();
+      this.textGenWorker.onmessage = (
+        e: MessageEvent<TextGenWorkerMessage>
+      ) => {
+        this.textGenWorkerMessageHandler(e);
+      };
+
+      this.textEmbWorker = new TextEmbWorkerInline();
       this.textEmbWorker.onmessage = (
         e: MessageEvent<TextEmbWorkerMessage>
       ) => {
         this.textEmbWorkerMessageHandler(e);
       };
-    });
+    } else {
+      // Use fake workers for extension build
+      const textGenWorkerMessageHandler = (
+        e: MessageEvent<TextGenWorkerMessage>
+      ) => {
+        this.textGenWorkerMessageHandler(e);
+      };
+      this.textGenWorker = new TextGenFakeWorker(textGenWorkerMessageHandler);
+
+      const textEmbWorkerMessageHandler = (
+        e: MessageEvent<TextEmbWorkerMessage>
+      ) => {
+        this.textEmbWorkerMessageHandler(e);
+      };
+      this.textEmbWorker = new TextEmbFakeWorker(textEmbWorkerMessageHandler);
+    }
   }
 
   firstUpdated() {
@@ -930,7 +954,8 @@ export class FarsightContainerLite extends LitElement {
    * Helper function to route different web worker messages
    * @param e Web worker message event
    */
-  textEmbWorkerMessageHandler(e: MessageEvent<TextEmbWorkerMessage>) {
+  async textEmbWorkerMessageHandler(e: MessageEvent<TextEmbWorkerMessage>) {
+    await this.dataInitialized;
     switch (e.data.command) {
       case 'finishEmbedding': {
         if (e.data.payload.requestID.includes(REQUEST_NAME)) {

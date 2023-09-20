@@ -55,6 +55,9 @@ import {
   harmPrompt
 } from '../../data/static-data';
 import { harmThemeCategoryList } from '../envision-node/envision-node';
+import { TextGenFakeWorker } from '../../workers/text-gen-fake-worker';
+
+import type { FakeWorker } from '../../workers/fake-worker';
 import type {
   Size,
   Padding,
@@ -82,6 +85,7 @@ import TextGenWorkerInline from '../../workers/text-gen-worker?worker&inline';
 
 const DEV_MODE = import.meta.env.MODE === 'development';
 const LIB_MODE = import.meta.env.MODE === 'library';
+const EXTENSION_MODE = import.meta.env.MODE === 'extension';
 const USE_CACHE = import.meta.env.MODE !== 'x20';
 const STORAGE = DEV_MODE ? localStorage : sessionStorage;
 const MOCK_TIME_DELAY = 500;
@@ -137,7 +141,7 @@ export class EnvisionTree {
   harmPlaceholderText = 'Double click to edit';
 
   // Workers
-  textGenWorker: Worker;
+  textGenWorker: Worker | FakeWorker<TextGenWorkerMessage>;
   textGenWorkerRequestID = 1;
   apiKey: string | null = null;
 
@@ -204,10 +208,21 @@ export class EnvisionTree {
     this.updateFooterInfo = updateFooterInfo;
 
     // Initialize the worker
-    this.textGenWorker = new TextGenWorkerInline();
-    this.textGenWorker.onmessage = (e: MessageEvent<TextGenWorkerMessage>) => {
-      this.textGenWorkerMessageHandler(e);
-    };
+    if (!EXTENSION_MODE) {
+      this.textGenWorker = new TextGenWorkerInline();
+      this.textGenWorker.onmessage = (
+        e: MessageEvent<TextGenWorkerMessage>
+      ) => {
+        this.textGenWorkerMessageHandler(e);
+      };
+    } else {
+      const textGenWorkerMessageHandler = (
+        e: MessageEvent<TextGenWorkerMessage>
+      ) => {
+        this.textGenWorkerMessageHandler(e);
+      };
+      this.textGenWorker = new TextGenFakeWorker(textGenWorkerMessageHandler);
+    }
 
     // Capture the size
     const bbox = paneElement.getBoundingClientRect();
