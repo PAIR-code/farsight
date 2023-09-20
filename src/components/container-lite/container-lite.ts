@@ -83,7 +83,7 @@ const USE_API = true;
 const USE_CACHE = import.meta.env.MODE !== 'x20';
 const DEV_MODE = import.meta.env.MODE === 'development';
 const LIB_MODE = import.meta.env.MODE === 'library';
-let MAX_ACCIDENTS_PER_PAGE = 3;
+let MAX_ACCIDENTS_PER_PAGE = 4;
 const MAX_ACCIDENTS = 20;
 const MAX_USE_CASE_PER_CAT = 3;
 const REQUEST_NAME = 'farsight';
@@ -175,7 +175,7 @@ export class FarsightContainerLite extends LitElement {
   @state()
   useCasesInitialized = false;
 
-  dataInitialized = false;
+  dataInitialized: Promise<void>;
   isLoading = false;
 
   accidentReportMap: Map<number, AccidentReport> = new Map<
@@ -223,7 +223,7 @@ export class FarsightContainerLite extends LitElement {
     };
 
     this.textEmbWorker = new TextEmbWorkerInline();
-    this.initData().then(() => {
+    this.dataInitialized = this.initData().then(() => {
       this.textEmbWorker.onmessage = (
         e: MessageEvent<TextEmbWorkerMessage>
       ) => {
@@ -240,7 +240,7 @@ export class FarsightContainerLite extends LitElement {
       const bbox = this.containerElement.getBoundingClientRect();
       if (bbox.height < 510) {
         MAX_ACCIDENTS_PER_PAGE = 2;
-      } else if (bbox.height < 700) {
+      } else if (bbox.height < 750) {
         MAX_ACCIDENTS_PER_PAGE = 3;
       }
     }
@@ -364,8 +364,6 @@ export class FarsightContainerLite extends LitElement {
     this.totalLatestAccidentPage = Math.ceil(
       this.latestAccidentReports.length / MAX_ACCIDENTS_PER_PAGE
     );
-
-    this.dataInitialized = true;
   }
 
   createNewEmptyUseCases() {
@@ -414,7 +412,9 @@ export class FarsightContainerLite extends LitElement {
 
       window.setTimeout(
         () => {
-          this.updateRelevantAccidents(relevantAccidents);
+          this.dataInitialized.then(() => {
+            this.updateRelevantAccidents(relevantAccidents);
+          });
         },
         DEV_MODE ? 800 : 0
       );
