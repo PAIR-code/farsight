@@ -21,12 +21,14 @@ import { customElement, property, state, query } from 'lit/decorators.js';
 import { config } from '../../utils/config';
 import { tooltipMouseEnter, tooltipMouseLeave } from '@xiaohk/utils';
 import { computePosition, flip, shift, offset, arrow } from '@floating-ui/dom';
+import { EmbFakeWorker } from '../../workers/text-emb-fake-worker';
 
 import type {
   TextEmbWorkerMessage,
   RelevantAccident
 } from '../../types/common-types';
 import type { TooltipConfig } from '@xiaohk/utils';
+import type { FakeWorker } from '../../workers/fake-worker';
 
 import componentCSS from './container-signal.scss?inline';
 import telescopeIcon from '../../images/icon-logo.svg?raw';
@@ -76,9 +78,6 @@ export class FarsightContainerSignal extends LitElement {
   @property({ type: String })
   prompt = '';
 
-  @property({ type: String })
-  embWorkerURL = '';
-
   @state()
   alertNum = 0;
 
@@ -92,7 +91,7 @@ export class FarsightContainerSignal extends LitElement {
   popperElementTop!: HTMLElement;
   tooltipTop: TooltipConfig | null = null;
 
-  textEmbWorker: Worker | null = null;
+  textEmbWorker: Worker | FakeWorker<TextEmbWorkerMessage> | null = null;
   textEmbWorkerRequestID = 1;
 
   // ===== Lifecycle Methods ======
@@ -108,8 +107,12 @@ export class FarsightContainerSignal extends LitElement {
       this.textEmbWorker.onmessage = (e: MessageEvent<TextEmbWorkerMessage>) =>
         this.textEmbWorkerMessageHandler(e);
     } else {
-      // Need to create a worker to export the worker script
-      const _temp = new TextEmbWorker();
+      // Cannot use worker in extension
+      const workerMessageHandler = (e: MessageEvent<TextEmbWorkerMessage>) => {
+        this.textEmbWorkerMessageHandler(e);
+      };
+      this.textEmbWorker = new EmbFakeWorker(workerMessageHandler);
+      console.log(this.textEmbWorker);
     }
 
     // Check if we can load API key from the cache
@@ -150,16 +153,6 @@ export class FarsightContainerSignal extends LitElement {
    * @param changedProperties Property that has been changed
    */
   willUpdate(changedProperties: PropertyValues<this>) {
-    if (EXTENSION_MODE && changedProperties.has('embWorkerURL')) {
-      if (this.embWorkerURL !== '') {
-        this.textEmbWorker = new Worker(this.embWorkerURL, { type: 'module' });
-        this.textEmbWorker.onmessage = (
-          e: MessageEvent<TextEmbWorkerMessage>
-        ) => this.textEmbWorkerMessageHandler(e);
-        console.log(this.textEmbWorker);
-      }
-    }
-
     // If the prompt has been changed, we need to query new accidents
     if (changedProperties.has('prompt')) {
       // Skip query if the prompt has not been set yet

@@ -30,7 +30,7 @@ $padding-h: 20px;
 }
 
 .confirm-dialog {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -44,7 +44,7 @@ $padding-h: 20px;
   border: none;
 }
 
-dialog[open] {
+.confirm-dialog[open] {
   border-radius: 8px;
   border: none;
   display: flex;
