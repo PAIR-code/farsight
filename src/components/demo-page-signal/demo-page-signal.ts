@@ -25,8 +25,7 @@ interface NotebookEventData extends Event {
   prompt: string;
 }
 
-// const NOTEBOOK_MODE = import.meta.env.MODE === 'notebook';
-const NOTEBOOK_MODE = true;
+const NOTEBOOK_MODE = import.meta.env.MODE === 'notebook';
 
 /**
  * Demo page signal element.
