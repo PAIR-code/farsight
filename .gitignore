@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 dist-extension
+dist-notebook
 *.local
 
 # Editor directories and files
