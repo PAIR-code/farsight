@@ -138,6 +138,9 @@ export class FarsightContainerLite extends LitElement {
   apiKeyPromise: Promise<void>;
   apiKeyPromiseResolve: () => void;
 
+  @property({ type: Boolean })
+  notebookMode = false;
+
   @state()
   selectedUseCaseTab = UseCaseTab.ALL;
 
@@ -1645,6 +1648,7 @@ export class FarsightContainerLite extends LitElement {
           <div
             class="segue-button"
             ?disabled=${this.prompt === ''}
+            ?is-hidden=${this.notebookMode}
             @click=${(e: MouseEvent) => this.segueButtonClicked(e)}
             @mouseenter=${() => this.segueButtonMouseEnter()}
             @mouseleave=${() => this.segueButtonMouseLeave()}

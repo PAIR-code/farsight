@@ -19,7 +19,7 @@ from scipy.stats import norm
 from typing import Tuple
 
 
-def _make_html(prompt):
+def _make_html(prompt, component):
     """
     Function to create an HTML string to bundle Farsight's html, css, and js.
     We use base64 to encode the js so that we can use inline defer for <script>
@@ -29,6 +29,7 @@ def _make_html(prompt):
 
     Args:
         prompt(str): Current prompt for an AI feature
+        component(str): Value of "farsight" | "lite" | "signal"
 
     Return:
         HTML code with deferred JS code in base64 format
@@ -38,6 +39,9 @@ def _make_html(prompt):
     html_bottom = (
         """</head><body><farsight-demo-page></farsight-demo-page></body></html>"""
     )
+
+    if component == "lite":
+        html_bottom = """</head><body><farsight-demo-page-lite></farsight-demo-page-lite></body></html>"""
 
     # Read the bundled JS file
     js_b = pkgutil.get_data(__name__, "farsight.js")
@@ -88,7 +92,69 @@ def envision(prompt, height=700):
     Return:
         HTML code with deferred JS code in base64 format
     """
-    html_str = _make_html(prompt)
+    html_str = _make_html(prompt, "farsight")
+
+    # Randomly generate an ID for the iframe to avoid collision
+    iframe_id = "Farsight-iframe-" + str(int(random.random() * 1e8))
+
+    iframe = f"""
+        <iframe
+            srcdoc="{html_str}"
+            frameBorder="0"
+            width="100%"
+            height="{height}px"
+            id="{iframe_id}"
+            style="border: 1px solid hsl(0, 0%, 90%); border-radius: 5px;">
+        </iframe>
+    """
+
+    # Display the iframe
+    display_html(iframe, raw=True)
+
+
+def sidebar(prompt, height=700):
+    """
+    Render Farsight Awareness Sidebar in the output cell.
+
+    Args:
+        prompt(str): Current prompt for an AI feature
+        height(int): Height of the whole window
+
+    Return:
+        HTML code with deferred JS code in base64 format
+    """
+    html_str = _make_html(prompt, "lite")
+
+    # Randomly generate an ID for the iframe to avoid collision
+    iframe_id = "Farsight-iframe-" + str(int(random.random() * 1e8))
+
+    iframe = f"""
+        <iframe
+            srcdoc="{html_str}"
+            frameBorder="0"
+            width="100%"
+            height="{height}px"
+            id="{iframe_id}"
+            style="border: 1px solid hsl(0, 0%, 90%); border-radius: 5px;">
+        </iframe>
+    """
+
+    # Display the iframe
+    display_html(iframe, raw=True)
+
+
+def symbol(prompt, height=700):
+    """
+    Render Farsight Symbol in the output cell.
+
+    Args:
+        prompt(str): Current prompt for an AI feature
+        height(int): Height of the whole window
+
+    Return:
+        HTML code with deferred JS code in base64 format
+    """
+    html_str = _make_html(prompt, "signal")
 
     # Randomly generate an ID for the iframe to avoid collision
     iframe_id = "Farsight-iframe-" + str(int(random.random() * 1e8))

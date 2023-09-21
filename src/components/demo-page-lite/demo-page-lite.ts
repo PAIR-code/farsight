@@ -22,6 +22,13 @@ import '../prompt-panel/prompt-panel';
 
 import componentCSS from './demo-page-lite.scss?inline';
 
+interface NotebookEventData extends Event {
+  prompt: string;
+}
+
+// const NOTEBOOK_MODE = import.meta.env.MODE === 'notebook';
+const NOTEBOOK_MODE = true;
+
 /**
  * Demo page lite element.
  *
@@ -40,6 +47,15 @@ export class FarsightDemoPageLite extends LitElement {
   // ===== Lifecycle Methods ======
   constructor() {
     super();
+
+    // Listen to notebook widget's event
+    if (NOTEBOOK_MODE) {
+      document.addEventListener('farsightData', (e: Event) => {
+        const notebookEvent = e as NotebookEventData;
+        this.prompt = notebookEvent.prompt;
+        this.promptToChild = notebookEvent.prompt;
+      });
+    }
   }
 
   // ===== Custom Methods ======
@@ -55,34 +71,44 @@ export class FarsightDemoPageLite extends LitElement {
 
   // ===== Templates and Styles ======
   render() {
-    return html`
-      <div class="demo-page-lite">
-        <img src="/images/background.png" />
-        <div class="lite-content">
-          <farsight-container-lite
-            prompt=${this.promptToChild}
-            @launch-farsight=${() => {
-              alert('Farsight time!');
-            }}
-          ></farsight-container-lite>
-        </div>
+    if (!NOTEBOOK_MODE) {
+      return html`
+        <div class="demo-page-lite">
+          <img src="/images/background.png" />
+          <div class="lite-content">
+            <farsight-container-lite
+              prompt=${this.promptToChild}
+              @launch-farsight=${() => {}}
+            ></farsight-container-lite>
+          </div>
 
-        <div class="signal-content">
-          <farsight-container-signal
-            prompt=${this.promptToChild}
-            @clicked=${() => {
-              alert('clicked!');
-            }}
-          ></farsight-container-signal>
-        </div>
+          <div class="signal-content">
+            <farsight-container-signal
+              prompt=${this.promptToChild}
+              @clicked=${() => {}}
+            ></farsight-container-signal>
+          </div>
 
-        <div class="prompt-panel">
-          <farsight-prompt-panel
-            .promptChangedCallback="${this.promptChangedCallback}"
-          ></farsight-prompt-panel>
+          <div class="prompt-panel">
+            <farsight-prompt-panel
+              .promptChangedCallback="${this.promptChangedCallback}"
+            ></farsight-prompt-panel>
+          </div>
         </div>
-      </div>
-    `;
+      `;
+    } else {
+      return html`
+        <div ?notebook-mode=${NOTEBOOK_MODE} class="demo-page-lite">
+          <div class="lite-content">
+            <farsight-container-lite
+              prompt=${this.promptToChild}
+              ?notebookMode=${NOTEBOOK_MODE}
+              @launch-farsight=${() => {}}
+            ></farsight-container-lite>
+          </div>
+        </div>
+      `;
+    }
   }
 
   static styles = [

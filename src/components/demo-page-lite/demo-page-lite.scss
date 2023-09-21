@@ -28,6 +28,18 @@
     height: 900px;
     pointer-events: none;
   }
+
+  &[notebook-mode] {
+    display: flex;
+
+    .lite-content {
+      position: relative;
+      width: 320px;
+      height: 100%;
+      overflow: hidden;
+      top: unset;
+    }
+  }
 }
 
 .lite-content {
