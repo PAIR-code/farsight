@@ -126,10 +126,10 @@ export async function drawTree(
 
   const newNodes = containers
     .append('farsight-envision-node')
-    .attr('type', d => d.data.type)
-    .attr('nodeID', d => d.data.id)
-    .attr('nodeText', d => d.data.text)
-    .attr('nodeCategory', d => d.data.category);
+    .property('type', d => d.data.type)
+    .property('nodeID', d => d.data.id)
+    .property('nodeText', d => d.data.text)
+    .property('nodeCategory', d => d.data.category);
 
   // Add harm summary nodes
   // Find all the harm nodes data
@@ -157,10 +157,10 @@ export async function drawTree(
 
   const newSummaryNodes = summaryContainers
     .append('farsight-harm-summary')
-    .attr('type', d => d.type)
-    .attr('nodeID', d => d.id)
-    .attr('nodeText', d => d.text)
-    .attr('nodeCategory', d => d.category);
+    .property('type', d => d.type)
+    .property('nodeID', d => d.id)
+    .property('nodeText', d => d.text)
+    .property('nodeCategory', d => d.category);
 
   // Wait for all shadow children to update
   await Promise.all([
@@ -304,16 +304,16 @@ export function _drawNodes(
 
         const newNodes = newContainers
           .append('farsight-envision-node')
-          .attr('type', d => d.data.type)
-          .attr('nodeID', d => d.data.id)
-          .attr('nodeText', d => d.data.text)
-          .attr('nodeCategory', d => d.data.category)
-          .attr('placeholderText', d =>
+          .property('type', d => d.data.type)
+          .property('nodeID', d => d.data.id)
+          .property('nodeText', d => d.data.text)
+          .property('nodeCategory', d => d.data.category)
+          .property('placeholderText', d =>
             d.data.type === 'harm'
               ? this.harmPlaceholderText
               : 'Double click to edit'
           )
-          .attr('harmSeverity', d =>
+          .property('harmSeverity', d =>
             d.data.type === 'harm'
               ? (d.data as HarmNodeData).userRatedSeverity
               : 1
@@ -406,7 +406,7 @@ export function _drawNodes(
               : null;
           })
           .attr('hasParent', d => (d.parent === null ? null : 'true'))
-          .attr('node-text', d => d.data.text);
+          .property('node-text', d => d.data.text);
 
         return update;
       },
@@ -992,7 +992,7 @@ export function animateHarmNodePlaceholders(this: EnvisionTree) {
     )
     .filter(d => d.data.type === 'harm')
     .select('farsight-envision-node')
-    .attr('placeholderText', () => {
+    .property('placeholderText', () => {
       const randomIndex = getRandomIndex();
       return SHORT_SUB_HARMS[randomIndex] + '?';
     });

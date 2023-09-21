@@ -474,11 +474,11 @@ export function handleRefreshClicked(
     if (d.type === 'harm') {
       const dHarm = d as HarmNodeData;
       dHarm.severity = (newNode as HarmNodeData).severity;
-      nodeSelection.attr('harmSeverity', dHarm.severity);
+      nodeSelection.property('harmSeverity', dHarm.severity);
     }
 
-    nodeSelection.attr('nodeCategory', d.category);
-    nodeSelection.attr('nodeText', d.text);
+    nodeSelection.property('nodeCategory', d.category);
+    nodeSelection.property('nodeText', d.text);
 
     // Stop showing the loader
     if (detail.endHandler) {
