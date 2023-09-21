@@ -80,6 +80,14 @@ export class FarsightContainer extends LitElement {
     this.apiKey = e.detail.message;
   }
 
+  closeFarsightHandler() {
+    const event = new Event('close-farsight', {
+      bubbles: true,
+      composed: true
+    });
+    this.dispatchEvent(event);
+  }
+
   // ===== Templates and Styles ======
   render() {
     return html`
@@ -96,6 +104,7 @@ export class FarsightContainer extends LitElement {
             .apiKey="${this.apiKey}"
             .sizeDetermined=${this.sizeDetermined}
             ?displayed="${this.activeMenuButton == 'harm'}"
+            @close-farsight=${() => this.closeFarsightHandler()}
           ></farsight-harm-panel>
         </div>
 
