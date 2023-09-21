@@ -1,22 +1,9 @@
-import numpy as np
 import random
 import html
 import base64
 import pkgutil
-import ndjson
 
-from glob import glob
-from os.path import exists, join, basename
-from tqdm import tqdm
-from collections import Counter
 from IPython.display import display_html
-from json import dump, load, dumps
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from quadtreed3 import Quadtree, Node
-from scipy.sparse import csr_matrix
-from sklearn.neighbors import KernelDensity
-from scipy.stats import norm
-from typing import Tuple
 
 
 def _make_html(prompt, component):
