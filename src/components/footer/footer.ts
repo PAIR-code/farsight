@@ -166,22 +166,44 @@ export class FarsightFooter extends LitElement {
   }
 
   // ===== Event Methods ======
+  notifyParent(eventName: string) {
+    const event = new Event(eventName, {
+      bubbles: true,
+      composed: true
+    });
+    this.dispatchEvent(event);
+  }
 
   // ===== Templates and Styles ======
   render() {
     return html`
       <div class="footer-container">
         <div class="zoom-control">
-          <button class="zoom-button zoom-button-reset" @click=${() => {}}>
+          <button
+            class="zoom-button zoom-button-reset"
+            @click=${() => {
+              this.notifyParent('zoom-reset');
+            }}
+          >
             <div class="svg-icon">${unsafeHTML(iconHome)}</div>
           </button>
         </div>
 
         <div class="zoom-control">
-          <button class="zoom-button zoom-button-plus" @click=${() => {}}>
+          <button
+            class="zoom-button zoom-button-plus"
+            @click=${() => {
+              this.notifyParent('zoom-in');
+            }}
+          >
             <div class="svg-icon">${unsafeHTML(iconPlus)}</div>
           </button>
-          <button class="zoom-button zoom-button-minus" @click=${() => {}}>
+          <button
+            class="zoom-button zoom-button-minus"
+            @click=${() => {
+              this.notifyParent('zoom-out');
+            }}
+          >
             <div class="svg-icon">${unsafeHTML(iconMinus)}</div>
           </button>
         </div>

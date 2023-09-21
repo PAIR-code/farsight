@@ -65,7 +65,7 @@ const DEV_MODE = import.meta.env.MODE === 'development';
 const LIB_MODE = import.meta.env.MODE === 'library';
 const EXTENSION_MODE = import.meta.env.MODE === 'extension';
 const USE_CACHE = import.meta.env.MODE !== 'x20';
-const STORAGE = DEV_MODE ? localStorage : sessionStorage;
+const STORAGE = DEV_MODE ? localStorage : localStorage;
 const REQUEST_NAME = 'farsight';
 const HOT_DEV_MODE = config.hotDev;
 const IS_LOGGING = true;
@@ -432,7 +432,7 @@ export class FarsightHarmPanel extends LitElement {
         () => {
           this.updatePromptSummary(response);
         },
-        DEV_MODE ? 1000 : 0
+        DEV_MODE ? 1000 : 1000
       );
     } else {
       // API call
@@ -448,6 +448,18 @@ export class FarsightHarmPanel extends LitElement {
       this.textGenWorker.postMessage(message);
     }
   };
+
+  zoomIn() {
+    this.envisionTree?.zoomIn();
+  }
+
+  zoomOut() {
+    this.envisionTree?.zoomOut();
+  }
+
+  zoomReset() {
+    this.envisionTree?.zoomReset();
+  }
 
   // ===== Event Methods ======
   /**
@@ -466,7 +478,7 @@ export class FarsightHarmPanel extends LitElement {
 
           // Save the (text => accidents) pair in the local storage cache to
           // save future API calls
-          if (DEV_MODE && USE_CACHE) {
+          if (USE_CACHE) {
             const prompt = e.data.payload.prompt;
             STORAGE.setItem(`<${REQUEST_NAME}>` + prompt, summary);
           }
@@ -832,7 +844,18 @@ export class FarsightHarmPanel extends LitElement {
         <farsight-confirm-dialog
           .dialogInfo=${this.dialogInfo}
         ></farsight-confirm-dialog>
-        <farsight-footer .footerInfo=${this.footerInfo}></farsight-footer>
+        <farsight-footer
+          .footerInfo=${this.footerInfo}
+          @zoom-in=${() => {
+            this.zoomIn();
+          }}
+          @zoom-out=${() => {
+            this.zoomOut();
+          }}
+          @zoom-reset=${() => {
+            this.zoomReset();
+          }}
+        ></farsight-footer>
       </div>
     `;
   }

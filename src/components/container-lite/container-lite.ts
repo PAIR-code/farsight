@@ -94,7 +94,8 @@ const MAX_USE_CASE_PER_CAT = 3;
 const REQUEST_NAME = 'farsight';
 const ACCIDENT_CARD_HEIGHT = 35;
 const ACCIDENT_LIST_GAP = 9;
-const STORAGE = DEV_MODE ? localStorage : sessionStorage;
+const STORAGE = DEV_MODE ? localStorage : localStorage;
+const RANDOM_DELAY = d3.randomInt(600, 3000);
 
 enum UseCaseTab {
   ALL = 'All',
@@ -445,7 +446,7 @@ export class FarsightContainerLite extends LitElement {
             this.updateRelevantAccidents(relevantAccidents);
           });
         },
-        DEV_MODE ? 800 : 0
+        DEV_MODE ? 800 : RANDOM_DELAY()
       );
     } else {
       // API call
@@ -472,16 +473,18 @@ export class FarsightContainerLite extends LitElement {
     const response = USE_CACHE
       ? STORAGE.getItem(`<${REQUEST_NAME}>` + compiledPrompt)
       : null;
-    if (DEV_MODE && response !== null) {
+    if (USE_CACHE && response !== null) {
       // Skip API call
       // Time out to mock the API call delay
-      if (DEV_MODE)
+      if (DEV_MODE) {
         console.log('Skip text gen API call (prompt summary, cached, lite)');
+      }
+
       window.setTimeout(
         () => {
           this.generateUseCases(response);
         },
-        DEV_MODE ? 1000 : 0
+        DEV_MODE ? 1000 : RANDOM_DELAY()
       );
     } else {
       // API call
@@ -519,15 +522,16 @@ export class FarsightContainerLite extends LitElement {
       ? STORAGE.getItem(`<${REQUEST_NAME}>` + compiledPrompt)
       : null;
 
-    if (DEV_MODE && response !== null) {
+    if (response !== null) {
       // Time out to mock the API call delay
-      if (DEV_MODE)
+      if (DEV_MODE) {
         console.log('Skip text gen API call (use case, cached, lite)');
+      }
       window.setTimeout(
         () => {
           this.useCaseResponseUpdated(response);
         },
-        DEV_MODE ? 100 : 800
+        DEV_MODE ? 100 : RANDOM_DELAY()
       );
     } else {
       const message: TextGenWorkerMessage = {
@@ -646,7 +650,7 @@ export class FarsightContainerLite extends LitElement {
         () => {
           this.stakeholderResponseUpdated(useCaseNodeData.id, response);
         },
-        DEV_MODE ? 100 : 800
+        DEV_MODE ? 100 : RANDOM_DELAY()
       );
     } else {
       const message: TextGenWorkerMessage = {
@@ -735,7 +739,7 @@ export class FarsightContainerLite extends LitElement {
         () => {
           this.harmResponseUpdated(useCaseNodeData.id, stakeholder, response);
         },
-        DEV_MODE ? 100 : 800
+        DEV_MODE ? 100 : RANDOM_DELAY()
       );
     } else {
       const detail = JSON.stringify([useCaseNodeData.id, stakeholder]);
@@ -1018,7 +1022,7 @@ export class FarsightContainerLite extends LitElement {
 
             // Save the (text => accidents) pair in the local storage cache to
             // save future API calls
-            if (DEV_MODE && USE_CACHE) {
+            if (USE_CACHE) {
               const prompt = e.data.payload.prompt;
               STORAGE.setItem(`<${REQUEST_NAME}>` + prompt, this.summary);
             }
@@ -1027,11 +1031,9 @@ export class FarsightContainerLite extends LitElement {
             this.useCaseResponseUpdated(useCaseResponse);
 
             // Save the API response in the local storage cache to
-            if (DEV_MODE) {
+            if (USE_CACHE) {
               const prompt = e.data.payload.prompt;
-              if (USE_CACHE) {
-                STORAGE.setItem(`<${REQUEST_NAME}>` + prompt, useCaseResponse);
-              }
+              STORAGE.setItem(`<${REQUEST_NAME}>` + prompt, useCaseResponse);
             }
           } else if (responseRequestID.includes('stakeholder')) {
             const stakeholderResponse = e.data.payload.result;
@@ -1039,14 +1041,12 @@ export class FarsightContainerLite extends LitElement {
             this.stakeholderResponseUpdated(nodeDataID, stakeholderResponse);
 
             // Save the API response in the local storage cache to
-            if (DEV_MODE) {
+            if (USE_CACHE) {
               const prompt = e.data.payload.prompt;
-              if (USE_CACHE) {
-                STORAGE.setItem(
-                  `<${REQUEST_NAME}>` + prompt,
-                  stakeholderResponse
-                );
-              }
+              STORAGE.setItem(
+                `<${REQUEST_NAME}>` + prompt,
+                stakeholderResponse
+              );
             }
           } else if (responseRequestID.includes('harm')) {
             const harmResponse = e.data.payload.result;

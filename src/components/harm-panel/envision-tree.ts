@@ -87,7 +87,7 @@ const DEV_MODE = import.meta.env.MODE === 'development';
 const LIB_MODE = import.meta.env.MODE === 'library';
 const EXTENSION_MODE = import.meta.env.MODE === 'extension';
 const USE_CACHE = import.meta.env.MODE !== 'x20';
-const STORAGE = DEV_MODE ? localStorage : sessionStorage;
+const STORAGE = DEV_MODE ? localStorage : localStorage;
 const MOCK_TIME_DELAY = 500;
 
 const REQUEST_NAME = 'farsight';
@@ -113,6 +113,13 @@ const nodeTypeCounter = {
   harm: 0,
   harmSummary: 0
 };
+
+interface Rect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
 
 export class EnvisionTree {
   // HTML elements
@@ -385,6 +392,10 @@ export class EnvisionTree {
 
     // Start the endless animation to update harm node's placeholder text
     this.animateHarmNodePlaceholders();
+
+    setTimeout(() => {
+      this.zoomIn();
+    }, 5000);
   };
 
   /**
@@ -899,6 +910,81 @@ export class EnvisionTree {
         break;
       }
     }
+  };
+
+  /**
+   * Get the current viewing zoom box
+   * @returns Current zoom box
+   */
+  getCurViewingZoomBox = () => {
+    const box: Rect = {
+      x: this.curTransform.invertX(0),
+      y: this.curTransform.invertY(0),
+      width: Math.abs(
+        this.curTransform.invertX(this.paneSize.width) -
+          this.curTransform.invertX(0)
+      ),
+      height: Math.abs(
+        this.curTransform.invertY(this.paneSize.height) -
+          this.curTransform.invertY(0)
+      )
+    };
+    return box;
+  };
+
+  /**
+   * Automatically zoom into the view center
+   */
+  zoomIn = () => {
+    const zoomBox = this.getCurViewingZoomBox();
+    const centerX = zoomBox.x + zoomBox.width / 2;
+    const centerY = zoomBox.y + zoomBox.height / 2;
+
+    const transform = d3.zoomIdentity
+      .translate(this.paneSize.width / 2, this.paneSize.height / 2)
+      .scale(Math.min(2, this.curTransform.k * 1.2))
+      .translate(-centerX, -centerY);
+
+    this.pane
+      .transition()
+      .duration(300)
+      .call(selection => {
+        this.zoom!.transform(selection, transform);
+      });
+  };
+
+  /**
+   * Automatically zoom out of the view center
+   */
+  zoomOut = () => {
+    const zoomBox = this.getCurViewingZoomBox();
+    const centerX = zoomBox.x + zoomBox.width / 2;
+    const centerY = zoomBox.y + zoomBox.height / 2;
+
+    const transform = d3.zoomIdentity
+      .translate(this.paneSize.width / 2, this.paneSize.height / 2)
+      .scale(Math.max(0.5, this.curTransform.k * 0.83))
+      .translate(-centerX, -centerY);
+
+    this.pane
+      .transition()
+      .duration(300)
+      .call(selection => {
+        this.zoom!.transform(selection, transform);
+      });
+  };
+
+  /**
+   * Reset the current zoom transform
+   */
+  zoomReset = () => {
+    this.pane
+      .transition('reset')
+      .duration(300)
+      .ease(d3.easeCubicInOut)
+      .call(selection => {
+        this.zoom!.transform(selection, d3.zoomIdentity);
+      });
   };
 }
 
