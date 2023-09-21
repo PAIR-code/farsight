@@ -43,6 +43,9 @@ def _make_html(prompt, component):
     if component == "lite":
         html_bottom = """</head><body><farsight-demo-page-lite></farsight-demo-page-lite></body></html>"""
 
+    if component == "signal":
+        html_bottom = """</head><body><farsight-demo-page-signal></farsight-demo-page-signal></body></html>"""
+
     # Read the bundled JS file
     js_b = pkgutil.get_data(__name__, "farsight.js")
 
@@ -53,13 +56,12 @@ def _make_html(prompt, component):
 
     # Encode the JS & CSS with base 64
     js_base64 = base64.b64encode(js_b).decode("utf-8")
-    safe_prompt = prompt.replace("'", "\\'")
 
     # Pass data into JS by using another script to dispatch an event
     messenger_js = f"""
         (function() {{
             const event = new Event('farsightData');
-            event.prompt = '{safe_prompt}';
+            event.prompt = `{prompt}`;
             document.dispatchEvent(event);
         }}())
     """
@@ -143,7 +145,7 @@ def sidebar(prompt, height=700):
     display_html(iframe, raw=True)
 
 
-def symbol(prompt, height=700):
+def symbol(prompt, height=65):
     """
     Render Farsight Symbol in the output cell.
 

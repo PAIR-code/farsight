@@ -28,6 +28,13 @@
     height: 900px;
     pointer-events: none;
   }
+
+  &[notebook-mode] {
+    .signal-content {
+      left: 15px;
+      top: 17px;
+    }
+  }
 }
 
 .signal-content {

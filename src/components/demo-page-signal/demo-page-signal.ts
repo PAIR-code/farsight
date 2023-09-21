@@ -21,6 +21,13 @@ import '../prompt-panel/prompt-panel';
 
 import componentCSS from './demo-page-signal.scss?inline';
 
+interface NotebookEventData extends Event {
+  prompt: string;
+}
+
+// const NOTEBOOK_MODE = import.meta.env.MODE === 'notebook';
+const NOTEBOOK_MODE = true;
+
 /**
  * Demo page signal element.
  *
@@ -39,6 +46,15 @@ export class FarsightDemoPageSignal extends LitElement {
   // ===== Lifecycle Methods ======
   constructor() {
     super();
+
+    // Listen to notebook widget's event
+    if (NOTEBOOK_MODE) {
+      document.addEventListener('farsightData', (e: Event) => {
+        const notebookEvent = e as NotebookEventData;
+        this.prompt = notebookEvent.prompt;
+        this.promptToChild = notebookEvent.prompt;
+      });
+    }
   }
 
   // ===== Custom Methods ======
@@ -54,25 +70,38 @@ export class FarsightDemoPageSignal extends LitElement {
 
   // ===== Templates and Styles ======
   render() {
-    return html`
-      <div class="demo-page-signal">
-        <img src="/images/background.png" />
-        <div class="signal-content">
-          <farsight-container-signal
-            prompt=${this.promptToChild}
-            @launch-farsight=${() => {
-              alert('Farsight time!');
-            }}
-          ></farsight-container-signal>
-        </div>
+    if (!NOTEBOOK_MODE) {
+      return html`
+        <div class="demo-page-signal">
+          <img src="/images/background.png" />
+          <div class="signal-content">
+            <farsight-container-signal
+              prompt=${this.promptToChild}
+              @launch-farsight=${() => {
+                alert('Farsight time!');
+              }}
+            ></farsight-container-signal>
+          </div>
 
-        <div class="prompt-panel">
-          <farsight-prompt-panel
-            .promptChangedCallback="${this.promptChangedCallback}"
-          ></farsight-prompt-panel>
+          <div class="prompt-panel">
+            <farsight-prompt-panel
+              .promptChangedCallback="${this.promptChangedCallback}"
+            ></farsight-prompt-panel>
+          </div>
         </div>
-      </div>
-    `;
+      `;
+    } else {
+      return html`
+        <div ?notebook-mode=${NOTEBOOK_MODE} class="demo-page-signal">
+          <div class="signal-content">
+            <farsight-container-signal
+              prompt=${this.promptToChild}
+              @launch-farsight=${() => {}}
+            ></farsight-container-signal>
+          </div>
+        </div>
+      `;
+    }
   }
 
   static styles = [
