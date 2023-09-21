@@ -122,6 +122,27 @@ export default defineConfig(({ command, mode }) => {
         };
       }
 
+      case 'notebook': {
+        // Production: notebook widget
+        return {
+          build: {
+            outDir: 'dist-notebook',
+            rollupOptions: {
+              input: {
+                main: resolve(__dirname, 'index.html'),
+                lite: resolve(__dirname, 'lite/index.html'),
+                signal: resolve(__dirname, 'signal/index.html')
+              },
+              output: {
+                entryFileNames: `assets/[name].js`,
+                manualChunks: () => 'notebook'
+              }
+            }
+          },
+          plugins: []
+        };
+      }
+
       default: {
         console.error(`Error: unknown production mode ${mode}`);
         return null;

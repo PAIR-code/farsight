@@ -22,6 +22,13 @@ import '../prompt-panel/prompt-panel';
 
 import componentCSS from './demo-page.scss?inline';
 
+interface NotebookEventData extends Event {
+  prompt: string;
+}
+
+// const NOTEBOOK_MODE = import.meta.env.MODE === 'notebook';
+const NOTEBOOK_MODE = true;
+
 /**
  * A container wrapper element.
  *
@@ -32,15 +39,19 @@ export class FarsightDemoPage extends LitElement {
   @state()
   prompt = '';
 
-  // tagline = 'Your interactive guide for creating responsible AI applications';
-  // tagline = 'An interactive guide for responsible AI creators';
-  tagline = 'An Interactive Guide to Empower Responsible AI Innovation';
-
   // ===== Constructor ======
   constructor() {
     super();
 
     this.initData();
+
+    // Listen to notebook widget's event
+    if (NOTEBOOK_MODE) {
+      document.addEventListener('farsightData', (e: Event) => {
+        const notebookEvent = e as NotebookEventData;
+        this.prompt = notebookEvent.prompt;
+      });
+    }
   }
 
   // ===== Custom Methods ======
@@ -57,15 +68,22 @@ export class FarsightDemoPage extends LitElement {
 
   // ===== Templates and Styles ======
   render() {
-    return html`
-      <div class="demo-page">
+    let promptPanel = html``;
+
+    if (!NOTEBOOK_MODE) {
+      promptPanel = html`
         <farsight-prompt-panel
           .promptChangedCallback="${this.promptChangedCallback}"
         ></farsight-prompt-panel>
         <div class="top-content">
           <span class="tool-name">Farsight</span>
-          <span class="tool-tagline">${this.tagline}</span>
         </div>
+      `;
+    }
+
+    return html`
+      <div class="demo-page" ?notebook-mode=${NOTEBOOK_MODE}>
+        ${promptPanel}
         <div class="bottom-content">
           <farsight-container
             .prompt="${this.prompt}"

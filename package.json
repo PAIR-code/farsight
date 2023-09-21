@@ -27,6 +27,7 @@
     "build:x20": "tsc && vite build --mode x20",
     "build:library": "pnpm tsc && pnpm vite build --mode library",
     "build:extension": "pnpm tsc && pnpm vite build --mode extension",
+    "build:notebook": "pnpm tsc && pnpm vite build --mode notebook",
     "build:npm": "pnpm tsc && pnpm run build:library && pnpm run build:extension",
     "preview": "vite preview"
   },

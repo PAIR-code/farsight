@@ -219,7 +219,7 @@ export class FarsightFooter extends LitElement {
           </span>
           <div class="splitter"></div>
 
-          <a href="https://github.com/pair-code" target="_blank"
+          <a href="https://github.com" target="_blank"
             ><span class="item">
               <span class="svg-icon">${unsafeHTML(iconFile)}</span>
               Paper
@@ -227,7 +227,7 @@ export class FarsightFooter extends LitElement {
           >
           <div class="splitter"></div>
 
-          <a href="https://github.com/pair-code" target="_blank"
+          <a href="https://github.com" target="_blank"
             ><span class="item">
               <span class="svg-icon">${unsafeHTML(iconGithub)}</span>
               Code
@@ -235,7 +235,7 @@ export class FarsightFooter extends LitElement {
           >
           <div class="splitter"></div>
 
-          <a href="https://github.com/pair-code" target="_blank"
+          <a href="https://github.com" target="_blank"
             ><span class="item">
               <span class="svg-icon">${unsafeHTML(iconPlay)}</span>
               Video

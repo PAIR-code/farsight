@@ -25,6 +25,24 @@
   grid-template-rows: 1fr auto auto 10px;
   overflow: hidden;
   box-sizing: border-box;
+
+  &[notebook-mode] {
+    display: flex;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    width: 100vw;
+    height: 100vh;
+
+    .bottom-content {
+      width: 100%;
+      height: 100%;
+    }
+
+    farsight-container {
+      height: 100%;
+    }
+  }
 }
 
 .top-content {

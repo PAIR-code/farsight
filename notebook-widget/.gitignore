@@ -1,0 +1,5 @@
+*.ipynb
+farsight/*.html
+farsight/farsight.js
+*.egg-info
+__pycache__
