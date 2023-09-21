@@ -16,7 +16,7 @@
     },
     "./extension": {
       "import": {
-        "types": "./dist/farsight.d.ts",
+        "types": "./dist-extension/farsight.d.ts",
         "default": "./dist-extension/farsight-external-worker.es.js"
       }
     }

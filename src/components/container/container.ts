@@ -15,7 +15,7 @@
  */
 
 /* eslint-disable lit/attribute-value-entities */
-import { LitElement, css, unsafeCSS, html } from 'lit';
+import { LitElement, css, unsafeCSS, html, PropertyValues } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
 import { config } from '../../utils/config';
 
@@ -41,6 +41,9 @@ export class FarsightContainer extends LitElement {
   // ===== Class properties ======
   @property({ type: String })
   prompt = '';
+
+  @property({ type: String })
+  sizeDetermined = '';
 
   @state()
   activeMenuButton: PanelName = 'harm';
@@ -91,6 +94,7 @@ export class FarsightContainer extends LitElement {
             class="panel"
             .prompt="${this.prompt}"
             .apiKey="${this.apiKey}"
+            .sizeDetermined=${this.sizeDetermined}
             ?displayed="${this.activeMenuButton == 'harm'}"
           ></farsight-harm-panel>
         </div>

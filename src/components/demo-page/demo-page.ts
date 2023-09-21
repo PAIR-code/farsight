@@ -16,6 +16,7 @@
 
 import { LitElement, css, unsafeCSS, html } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
+import { FarsightContainer } from '../container/container';
 import '../container/container';
 import '../prompt-panel/prompt-panel';
 
@@ -66,7 +67,10 @@ export class FarsightDemoPage extends LitElement {
           <span class="tool-tagline">${this.tagline}</span>
         </div>
         <div class="bottom-content">
-          <farsight-container .prompt="${this.prompt}"></farsight-container>
+          <farsight-container
+            .prompt="${this.prompt}"
+            sizeDetermined="true"
+          ></farsight-container>
         </div>
       </div>
     `;

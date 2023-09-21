@@ -90,6 +90,9 @@ export class FarsightHarmPanel extends LitElement {
   @property({ type: String })
   prompt = '';
 
+  @property({ type: String })
+  sizeDetermined = '';
+
   @property()
   apiKey: string | null = null;
 
@@ -201,36 +204,17 @@ export class FarsightHarmPanel extends LitElement {
       addLoader(selection, false);
     });
 
-    // Initialize the harm tree
-    if (this.envisionTreePane === null) {
-      throw Error('harm-tree-pane is not initialized.');
-    }
-
-    const firstUseCaseExpanded = () => {
-      this.hasFirstUseCaseExpanded = true;
-    };
-
-    this.envisionTree = new EnvisionTree(
-      this.envisionTreePane,
-      this.popperElementTop,
-      this.popperElementBottom,
-      this.apiKey,
-      this.logger,
-      firstUseCaseExpanded,
-      (dialogInfo: DialogInfo) => {
-        this.showDialog(dialogInfo);
-      },
-      (newFooterInfo: FooterInfo) => {
-        this.updateFooterInfo(newFooterInfo);
-      }
-    );
-
     if (this.popperElementOutside) {
       this.tooltipOutside = {
         tooltipElement: this.popperElementOutside,
         mouseenterTimer: null,
         mouseleaveTimer: null
       };
+    }
+
+    // Initialize the harm tree
+    if (this.sizeDetermined === 'true' && this.envisionTreePane !== null) {
+      this.initEnvisionTree();
     }
 
     if (HOT_DEV_MODE) {
@@ -243,6 +227,13 @@ export class FarsightHarmPanel extends LitElement {
    * @param changedProperties Property that has been changed
    */
   willUpdate(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('sizeDetermined')) {
+      if (this.sizeDetermined === 'true' && this.envisionTreePane !== null) {
+        // Initialize the harm tree
+        this.initEnvisionTree();
+      }
+    }
+
     // If the prompt has been changed, we need to query relevant accidents based
     // on the new prompt. We update accidents in willUpdate() so that we can trigger
     // a new cycle of update.
@@ -292,6 +283,31 @@ export class FarsightHarmPanel extends LitElement {
 
   // ===== Custom Methods ======
   initData = async () => {};
+
+  initEnvisionTree() {
+    if (this.envisionTreePane === null) {
+      throw Error('envision-tree-pane is not initialized yet');
+    }
+
+    const firstUseCaseExpanded = () => {
+      this.hasFirstUseCaseExpanded = true;
+    };
+
+    this.envisionTree = new EnvisionTree(
+      this.envisionTreePane,
+      this.popperElementTop,
+      this.popperElementBottom,
+      this.apiKey,
+      this.logger,
+      firstUseCaseExpanded,
+      (dialogInfo: DialogInfo) => {
+        this.showDialog(dialogInfo);
+      },
+      (newFooterInfo: FooterInfo) => {
+        this.updateFooterInfo(newFooterInfo);
+      }
+    );
+  }
 
   progressPlayStage = (finishPlay: PlayStage.DONE | undefined = undefined) => {
     let curPlayStage = this.curPlayStage;

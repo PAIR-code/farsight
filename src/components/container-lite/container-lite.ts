@@ -306,8 +306,10 @@ export class FarsightContainerLite extends LitElement {
 
     // Listen to API set event from the signal
     window.addEventListener('message', (e: MessageEvent<SignalMessage>) => {
-      this.apiKey = e.data.payload.apiKey;
-      this.apiKeyPromiseResolve();
+      if (e.data.command && e.data.command === 'palmAPIKeyAdded') {
+        this.apiKey = e.data.payload.apiKey;
+        this.apiKeyPromiseResolve();
+      }
     });
   }
 
