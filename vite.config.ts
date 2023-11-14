@@ -131,6 +131,8 @@ export default defineConfig(({ command, mode }) => {
               input: {
                 main: resolve(__dirname, 'index.html'),
                 lite: resolve(__dirname, 'lite/index.html'),
+                liteIncident: resolve(__dirname, 'lite/incident.html'),
+                liteUseCases: resolve(__dirname, 'lite/use-cases.html'),
                 signal: resolve(__dirname, 'signal/index.html')
               },
               output: {

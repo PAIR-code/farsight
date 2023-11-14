@@ -41,7 +41,7 @@ type APIFormStatus = 'wait' | 'verify' | 'error';
 const USE_CACHE = import.meta.env.MODE !== 'x20';
 const REQUEST_NAME = 'farsight';
 const DEV_MODE = import.meta.env.MODE === 'development';
-const STORAGE = DEV_MODE ? localStorage : sessionStorage;
+const STORAGE = DEV_MODE ? localStorage : localStorage;
 const LIB_MODE = import.meta.env.MODE === 'library';
 const EXTENSION_MODE = import.meta.env.MODE === 'extension';
 
@@ -215,7 +215,7 @@ export class FarsightContainerSignal extends LitElement {
         () => {
           this.updateRiskScore(relevantAccidents);
         },
-        DEV_MODE ? 1000 : 0
+        DEV_MODE ? 1000 : 1000
       );
     } else {
       // API call

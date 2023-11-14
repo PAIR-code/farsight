@@ -89,6 +89,7 @@ const EXTENSION_MODE = import.meta.env.MODE === 'extension';
 const USE_CACHE = import.meta.env.MODE !== 'x20';
 const STORAGE = DEV_MODE ? localStorage : localStorage;
 const MOCK_TIME_DELAY = 500;
+const RANDOM_DELAY = d3.randomInt(500, 3000);
 
 const REQUEST_NAME = 'farsight';
 const GRID_GAP = 24;
@@ -392,10 +393,6 @@ export class EnvisionTree {
 
     // Start the endless animation to update harm node's placeholder text
     this.animateHarmNodePlaceholders();
-
-    setTimeout(() => {
-      this.zoomIn();
-    }, 5000);
   };
 
   /**
@@ -450,7 +447,7 @@ export class EnvisionTree {
         () => {
           this.addAutoUseCases(response);
         },
-        DEV_MODE ? MOCK_TIME_DELAY : 0
+        DEV_MODE ? MOCK_TIME_DELAY : RANDOM_DELAY()
       );
     } else {
       const message: TextGenWorkerMessage = {
@@ -529,7 +526,7 @@ export class EnvisionTree {
         () => {
           this.addAutoStakeholders(nodeData, response);
         },
-        DEV_MODE ? MOCK_TIME_DELAY : 200
+        DEV_MODE ? MOCK_TIME_DELAY : RANDOM_DELAY()
       );
     } else {
       const message: TextGenWorkerMessage = {

@@ -423,16 +423,19 @@ export class FarsightHarmPanel extends LitElement {
     const response = USE_CACHE
       ? STORAGE.getItem(`<${REQUEST_NAME}>` + compiledPrompt)
       : null;
-    if (DEV_MODE && response !== null) {
+    if (USE_CACHE && response !== null) {
       // Skip API call
       // Time out to mock the API call delay
-      if (DEV_MODE)
+      if (DEV_MODE) {
         console.log('Skip text gen API call (prompt summary, cached)');
+      }
+      console.log('skipping summary');
+
       window.setTimeout(
         () => {
           this.updatePromptSummary(response);
         },
-        DEV_MODE ? 1000 : 1000
+        DEV_MODE ? 1000 : 3000
       );
     } else {
       // API call

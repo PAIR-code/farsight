@@ -16,7 +16,7 @@ def _make_html(prompt, component):
 
     Args:
         prompt(str): Current prompt for an AI feature
-        component(str): Value of "farsight" | "lite" | "signal"
+        component(str): Value of "farsight" | "lite" | "signal" | "incident" | "use-cases"
 
     Return:
         HTML code with deferred JS code in base64 format
@@ -30,7 +30,13 @@ def _make_html(prompt, component):
     if component == "lite":
         html_bottom = """</head><body><farsight-demo-page-lite></farsight-demo-page-lite></body></html>"""
 
-    if component == "signal":
+    elif component == "incident":
+        html_bottom = """</head><body><farsight-demo-page-lite-incident></farsight-demo-page-lite-incident></body></html>"""
+
+    elif component == "use-cases":
+        html_bottom = """</head><body><farsight-demo-page-lite-use-cases></farsight-demo-page-lite-use-cases></body></html>"""
+
+    elif component == "signal":
         html_bottom = """</head><body><farsight-demo-page-signal></farsight-demo-page-signal></body></html>"""
 
     # Read the bundled JS file
@@ -70,13 +76,14 @@ def _make_html(prompt, component):
     return html.escape(html_str)
 
 
-def envision(prompt, height=700):
+def envision(prompt, height=700, width=None):
     """
     Render Farsight in the output cell.
 
     Args:
         prompt(str): Current prompt for an AI feature
         height(int): Height of the whole window
+        width(int?): Width of the whole window, default 100%
 
     Return:
         HTML code with deferred JS code in base64 format
@@ -90,7 +97,7 @@ def envision(prompt, height=700):
         <iframe
             srcdoc="{html_str}"
             frameBorder="0"
-            width="100%"
+            width="{'100%' if width is None else width + 'px'}"
             height="{height}px"
             id="{iframe_id}"
             style="border: 1px solid hsl(0, 0%, 90%); border-radius: 5px;">
@@ -101,13 +108,14 @@ def envision(prompt, height=700):
     display_html(iframe, raw=True)
 
 
-def sidebar(prompt, height=700):
+def sidebar(prompt, height=700, width=None):
     """
     Render Farsight Awareness Sidebar in the output cell.
 
     Args:
         prompt(str): Current prompt for an AI feature
         height(int): Height of the whole window
+        width(int?): Width of the whole window, default 100%
 
     Return:
         HTML code with deferred JS code in base64 format
@@ -121,7 +129,71 @@ def sidebar(prompt, height=700):
         <iframe
             srcdoc="{html_str}"
             frameBorder="0"
-            width="100%"
+            width="{'100%' if width is None else width + 'px'}"
+            height="{height}px"
+            id="{iframe_id}"
+            style="border: 1px solid hsl(0, 0%, 90%); border-radius: 5px;">
+        </iframe>
+    """
+
+    # Display the iframe
+    display_html(iframe, raw=True)
+
+
+def incident(prompt, height=400, width=None):
+    """
+    Render Farsight incident panel in the output cell.
+
+    Args:
+        prompt(str): Current prompt for an AI feature
+        height(int): Height of the whole window
+        width(int?): Width of the whole window, default 100%
+
+    Return:
+        HTML code with deferred JS code in base64 format
+    """
+    html_str = _make_html(prompt, "incident")
+
+    # Randomly generate an ID for the iframe to avoid collision
+    iframe_id = "Farsight-iframe-" + str(int(random.random() * 1e8))
+
+    iframe = f"""
+        <iframe
+            srcdoc="{html_str}"
+            frameBorder="0"
+            width="{'100%' if width is None else width + 'px'}"
+            height="{height}px"
+            id="{iframe_id}"
+            style="border: 1px solid hsl(0, 0%, 90%); border-radius: 5px;">
+        </iframe>
+    """
+
+    # Display the iframe
+    display_html(iframe, raw=True)
+
+
+def use_cases(prompt, height=500, width=None):
+    """
+    Render Farsight use cases panel in the output cell.
+
+    Args:
+        prompt(str): Current prompt for an AI feature
+        height(int): Height of the whole window
+        width(int?): Width of the whole window, default 100%
+
+    Return:
+        HTML code with deferred JS code in base64 format
+    """
+    html_str = _make_html(prompt, "use-cases")
+
+    # Randomly generate an ID for the iframe to avoid collision
+    iframe_id = "Farsight-iframe-" + str(int(random.random() * 1e8))
+
+    iframe = f"""
+        <iframe
+            srcdoc="{html_str}"
+            frameBorder="0"
+            width="{'100%' if width is None else width + 'px'}"
             height="{height}px"
             id="{iframe_id}"
             style="border: 1px solid hsl(0, 0%, 90%); border-radius: 5px;">

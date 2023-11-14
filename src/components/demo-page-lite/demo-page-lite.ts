@@ -17,6 +17,8 @@
 import { LitElement, css, unsafeCSS, html } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
 import '../container-lite/container-lite';
+import '../container-lite-incident/container-lite-incident';
+import '../container-lite-use-cases/container-lite-use-cases';
 import '../container-signal/container-signal';
 import '../prompt-panel/prompt-panel';
 
