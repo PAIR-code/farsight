@@ -97,7 +97,7 @@ def envision(prompt, height=700, width=None):
         <iframe
             srcdoc="{html_str}"
             frameBorder="0"
-            width="{'100%' if width is None else width + 'px'}"
+            width="{'100%' if width is None else str(width) + 'px'}"
             height="{height}px"
             id="{iframe_id}"
             style="border: 1px solid hsl(0, 0%, 90%); border-radius: 5px;">
@@ -129,7 +129,7 @@ def sidebar(prompt, height=700, width=None):
         <iframe
             srcdoc="{html_str}"
             frameBorder="0"
-            width="{'100%' if width is None else width + 'px'}"
+            width="{'100%' if width is None else str(width) + 'px'}"
             height="{height}px"
             id="{iframe_id}"
             style="border: 1px solid hsl(0, 0%, 90%); border-radius: 5px;">
@@ -161,7 +161,7 @@ def incident(prompt, height=400, width=None):
         <iframe
             srcdoc="{html_str}"
             frameBorder="0"
-            width="{'100%' if width is None else width + 'px'}"
+            width="{'100%' if width is None else str(width) + 'px'}"
             height="{height}px"
             id="{iframe_id}"
             style="border: 1px solid hsl(0, 0%, 90%); border-radius: 5px;">
@@ -193,7 +193,7 @@ def use_cases(prompt, height=500, width=None):
         <iframe
             srcdoc="{html_str}"
             frameBorder="0"
-            width="{'100%' if width is None else width + 'px'}"
+            width="{'100%' if width is None else str(width) + 'px'}"
             height="{height}px"
             id="{iframe_id}"
             style="border: 1px solid hsl(0, 0%, 90%); border-radius: 5px;">

@@ -162,7 +162,7 @@ export class FarsightContainerLiteIncident extends LitElement {
   @query('.tab-indicator-accident')
   accidentTabIndicatorElement: HTMLElement | undefined;
 
-  @query('.container-lite-incident')
+  @query('.container-lite')
   containerElement: HTMLElement | undefined;
 
   @query('#popper-tooltip-top')
@@ -1418,7 +1418,7 @@ export class FarsightContainerLiteIncident extends LitElement {
         rel="stylesheet"
       />
 
-      <div class="container-lite-incident">
+      <div class="container-lite">
         <div class="lite-header">
           <a
             class="left"
