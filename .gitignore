@@ -25,3 +25,4 @@ dist-notebook
 *.sln
 *.sw?
 pnpm-lock.yaml
+notebooks/data

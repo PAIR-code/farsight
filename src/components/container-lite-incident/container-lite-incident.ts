@@ -88,7 +88,7 @@ const USE_CACHE = import.meta.env.MODE !== 'x20';
 const DEV_MODE = import.meta.env.MODE === 'development';
 const LIB_MODE = import.meta.env.MODE === 'library';
 const EXTENSION_MODE = import.meta.env.MODE === 'extension';
-let MAX_ACCIDENTS_PER_PAGE = 4;
+const MAX_ACCIDENTS_PER_PAGE = 4;
 const MAX_ACCIDENTS = 20;
 const MAX_USE_CASE_PER_CAT = 3;
 const REQUEST_NAME = 'farsight';
@@ -793,7 +793,7 @@ export class FarsightContainerLiteIncident extends LitElement {
   positionTabIndicator(showTransition: boolean, list: 'use-case' | 'accident') {
     let tabIndicatorElement = this.useCaseTabIndicatorElement;
     let selectedTab: UseCaseTab | AccidentTab = this.selectedUseCaseTab;
-    let color = config.colors['blue-600'];
+    const color = config.colors['blue-600'];
     if (list === 'use-case') return;
 
     if (list === 'accident') {
