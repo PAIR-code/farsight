@@ -1,0 +1,64 @@
+.footer {
+  width: 100%;
+  padding: var(--container-v-padding) var(--container-h-padding);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+
+  font-size: 14px;
+  line-height: 1;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+
+  background-color: var(--gray-200);
+  padding: 7px 14px;
+  border-radius: 4px;
+  line-height: 1;
+
+  display: flex;
+  flex-grow: 0;
+  transition: background-color 150ms ease-in-out;
+
+  &:hover {
+    background-color: var(--gray-300);
+  }
+
+  &:active {
+    background-color: var(--gray-400);
+  }
+
+  &.run-button {
+  }
+}
+
+.run-button {
+  margin-left: auto;
+  color: white;
+  background-color: var(--blue-500);
+
+  &:hover {
+    background-color: var(--blue-600);
+  }
+
+  &:active {
+    background-color: var(--blue-700);
+  }
+}
+
+.control-item {
+  display: flex;
+  flex-flow: row no-wrap;
+  align-items: center;
+  gap: 3px;
+}
+
+promptpad-slider {
+  width: 100px;
+}

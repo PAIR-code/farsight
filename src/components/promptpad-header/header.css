@@ -1,0 +1,137 @@
+.header {
+  width: 100%;
+  padding: var(--container-v-padding) var(--container-h-padding);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+
+  font-size: 14px;
+  line-height: 1;
+}
+
+.item-group {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.control-item {
+  display: flex;
+  flex-flow: row no-wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+promptpad-slider {
+  width: 100px;
+}
+
+.temperature-input {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  margin-right: 10px;
+
+  .temperature-value {
+    /* text-align: right; */
+    font-variant-numeric: tabular-nums;
+    width: 31px;
+  }
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+
+  background-color: var(--gray-200);
+  padding: 7px 14px;
+  border-radius: 4px;
+  line-height: 1;
+
+  position: relative;
+  display: flex;
+  flex-grow: 0;
+  transition: background-color 150ms ease-in-out;
+
+  &:hover {
+    background-color: var(--gray-300);
+  }
+
+  &:active {
+    background-color: var(--gray-400);
+  }
+
+  &.run-button {
+  }
+}
+
+.run-button {
+  margin-left: auto;
+  color: white;
+  background-color: var(--teal-500);
+
+  .run-text {
+    transition: opacity 200ms ease-in-out;
+  }
+
+  &:hover {
+    background-color: var(--teal-600);
+  }
+
+  &:active {
+    background-color: var(--teal-700);
+  }
+
+  &[is-running] {
+    pointer-events: none;
+
+    .loader-container {
+      opacity: 1;
+    }
+
+    .run-text {
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes circle-loader-animation {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.loader-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  align-items: center;
+  white-space: nowrap;
+  color: var(--gray-600);
+  font-size: 1em;
+  line-height: 1;
+
+  transition: opacity 200ms ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+
+  .circle-loader {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    border: 2px solid;
+    border-color: var(--gray-100);
+    border-right-color: var(--teal-500);
+    animation: circle-loader-animation 1s infinite linear;
+  }
+}

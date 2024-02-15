@@ -1,0 +1,73 @@
+.select {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  position: relative;
+}
+
+.select-box {
+  display: flex;
+
+  padding: 5px 8px;
+  padding-right: 22px;
+  border-radius: 5px;
+  border: 1px solid var(--gray-300);
+  transition: border 100ms;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid var(--gray-400);
+
+    &::after {
+      border-color: var(--gray-600);
+    }
+  }
+
+  /* Draw an arrow on the right */
+  --arrow-width: 1px;
+  &::after {
+    border: var(--arrow-width) solid transparent;
+    border-top-width: var(--arrow-width);
+    border-top-style: solid;
+    border-top-color: transparent;
+    border-right-width: var(--arrow-width);
+    border-right-style: solid;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-radius: 1px;
+    border-right: 0;
+    border-right-color: currentcolor;
+    border-top: 0;
+    border-top-color: currentcolor;
+
+    content: ' ';
+    display: flex;
+
+    height: 6px;
+    width: 6px;
+    right: 8px;
+
+    position: absolute;
+    pointer-events: none;
+    top: 50%;
+    transform-origin: center;
+    transform: translate(0, -55%) rotate(-45deg);
+    transition: border 100ms;
+    border-color: var(--gray-400);
+  }
+}
+
+.hidden-select {
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}

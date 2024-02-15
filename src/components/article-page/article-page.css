@@ -1,0 +1,183 @@
+.article-page {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+  // Layouts
+  --border-radius: 5px;
+  --container-h-padding: 12px;
+  --container-v-padding: 10px;
+}
+
+.svg-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 1em;
+  height: 1em;
+  color: currentColor;
+  transition: transform 80ms linear;
+  transform-origin: center;
+
+  & svg {
+    fill: currentColor;
+    stroke: currentColor;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.logo-container {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-weight: 800;
+  font-size: 60px;
+  color: var(--gray-300);
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1;
+}
+
+.top-region {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+  width: 100%;
+  height: 100%;
+
+  height: min(900px, calc(100vh - 100px));
+  /* border-bottom: 1px solid var(--gray-300); */
+}
+
+.middle-content {
+  display: flex;
+  flex-flow: row;
+  height: 100%;
+}
+
+.left-content {
+  position: relative;
+  flex: 1 1 auto;
+  align-self: flex-start;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  top: 50px;
+}
+
+.content-wrapper {
+  padding-right: 20px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.example-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  & button {
+    all: unset;
+    font-size: 14px;
+    padding: 2px 10px;
+    background-color: var(--teal-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--teal-100);
+    }
+
+    &:active {
+      background-color: color-mix(in lab, var(--teal-100), hsla(0, 0%, 80%));
+    }
+  }
+}
+
+.right-content {
+  flex: 1 1 auto;
+}
+
+.promptpad-wrapper {
+  position: relative;
+  height: 100%;
+
+  display: flex;
+  flex-flow: row;
+}
+
+.lite-wrapper {
+  display: flex;
+  position: relative;
+  width: 360px;
+  height: 100%;
+  border: 1px solid var(--gray-300);
+  border-left: none;
+  z-index: 10;
+
+  &[is-hidden] {
+    opacity: 0;
+    pointer-events: none;
+    width: 0px;
+  }
+}
+
+farsight-container-signal {
+  position: absolute;
+  top: 70px;
+  right: 22px;
+}
+
+farsight-container-lite {
+  width: 100%;
+  height: 100%;
+}
+
+#farsight-dialog[open] {
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+  pointer-events: all;
+  box-shadow: 0px 0px 10px 1px hsla(0, 0%, 0%, 0.1);
+  background-color: white;
+
+  width: 90%;
+  height: 90%;
+
+  &::backdrop {
+    background-color: hsla(0, 0%, 0%, 0.1);
+    animation: fade-in 300ms;
+  }
+}
+
+.farsight-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+farsight-container {
+  width: 100%;
+  height: 100%;
+}
