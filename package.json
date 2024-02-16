@@ -22,7 +22,7 @@
     }
   },
   "scripts": {
-    "dev": "vite --port 3030",
+    "dev": "vite --port 3000",
     "build": "tsc && vite build",
     "build:x20": "tsc && vite build --mode x20",
     "build:library": "pnpm tsc && pnpm vite build --mode library",

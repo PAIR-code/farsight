@@ -2,6 +2,7 @@ import { LitElement, css, unsafeCSS, html, PropertyValues } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
 import { round } from '@xiaohk/utils';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { SupportedRemoteModel } from '../../llms/farsight-gen';
 import type { SelectChangedMessage } from '../promptpad-select/select';
 import type { ValueChangedMessage } from '../promptpad-slider/slider';
 
@@ -17,7 +18,7 @@ export interface TemperatureChangedMessage {
 }
 
 export interface ModelChangedMessage {
-  model: string;
+  model: keyof typeof SupportedRemoteModel;
 }
 
 /**
@@ -29,9 +30,6 @@ export class PromptPadHeader extends LitElement {
   // ===== Class properties ======
   @property({ type: Number })
   requestID = 0;
-
-  @property({ attribute: false })
-  modelList: string[] = [];
 
   @property({ type: String })
   defaultModel = '';
@@ -130,7 +128,6 @@ export class PromptPadHeader extends LitElement {
             <span class="control-label">LLM Model</span>
             <promptpad-select
               defaultItem=${this.defaultModel}
-              .items=${this.modelList}
               @select-changed=${(e: CustomEvent<SelectChangedMessage>) =>
                 this.modelSelectChanged(e)}
             ></promptpad-select>

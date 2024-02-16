@@ -1,11 +1,12 @@
 import { LitElement, css, unsafeCSS, html, PropertyValues } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { SupportedRemoteModel } from '../../llms/farsight-gen';
 
 import componentCSS from './select.css?inline';
 
 export interface SelectChangedMessage {
-  selectedItem: string;
+  selectedItem: keyof typeof SupportedRemoteModel;
 }
 
 /**
@@ -15,14 +16,14 @@ export interface SelectChangedMessage {
 @customElement('promptpad-select')
 export class PromptPadSelect extends LitElement {
   // ===== Class properties ======
-  @property({ attribute: false })
-  items: string[] = [];
-
   @property({ type: String })
   defaultItem = '';
 
   @state()
-  selectedItem = '';
+  items: (keyof typeof SupportedRemoteModel)[] = [];
+
+  @state()
+  selectedItem: keyof typeof SupportedRemoteModel = 'gemini-pro-free';
 
   @query('.select-box')
   selectBoxElement: HTMLElement | undefined;
@@ -30,6 +31,12 @@ export class PromptPadSelect extends LitElement {
   // ===== Lifecycle Methods ======
   constructor() {
     super();
+
+    // Initialize the select options
+    this.items = [];
+    for (const key in SupportedRemoteModel) {
+      this.items.push(key as keyof typeof SupportedRemoteModel);
+    }
   }
 
   firstUpdated() {}
@@ -39,15 +46,10 @@ export class PromptPadSelect extends LitElement {
    * @param changedProperties Property that has been changed
    */
   willUpdate(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('items')) {
-      if (this.items.length > 1) {
-        this.selectedItem = this.items[0];
-      }
-    }
-
     if (changedProperties.has('defaultItem')) {
       if (this.defaultItem !== '') {
-        this.selectedItem = this.defaultItem;
+        this.selectedItem = this
+          .defaultItem as keyof typeof SupportedRemoteModel;
       }
     }
   }
@@ -77,7 +79,7 @@ export class PromptPadSelect extends LitElement {
     for (const [i, item] of this.items.entries()) {
       selectOption = html`${selectOption}
         <option value="item-${i}" ?selected=${item === this.selectedItem}>
-          ${item}
+          ${SupportedRemoteModel[item]}
         </option>`;
     }
 
@@ -90,7 +92,7 @@ export class PromptPadSelect extends LitElement {
           >
             ${selectOption}
           </select>
-          ${this.selectedItem}
+          ${SupportedRemoteModel[this.selectedItem]}
         </div>
       </div>
     `;

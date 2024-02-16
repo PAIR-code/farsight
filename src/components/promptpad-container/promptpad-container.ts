@@ -1,8 +1,7 @@
 import { LitElement, css, unsafeCSS, html, PropertyValues } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { textGenPalm } from '../../llms/palm';
-import { textGenGpt } from '../../llms/gpt';
+import { SupportedRemoteModel, textGenFarsight } from '../../llms/farsight-gen';
 
 import type {
   TemperatureChangedMessage,
@@ -17,13 +16,13 @@ import type {
 import '../promptpad-header/header';
 import '../promptpad-editor/editor';
 import '../promptpad-footer/footer';
-import componentCSS from './container.css?inline';
+import componentCSS from './promptpad-container.css?inline';
 
 export interface PromptRunMessage {
   prompt: string;
 }
 
-const MODEL_LIST = ['GPT-3.5 Turbo', 'PaLM 2'];
+const DEV_MODE = import.meta.env.DEV;
 
 /**
  * Container element.
@@ -41,15 +40,12 @@ export class PromptPadContainer extends LitElement {
   @state()
   showError = false;
 
-  curModel = MODEL_LIST[1];
-  modelCallMap: Map<string, typeof textGenPalm>;
+  curModel: keyof typeof SupportedRemoteModel = 'gemini-pro-free';
 
   prompt = '';
 
   @state()
   respondedPrompt = '';
-
-  apiKeyMap = new Map<string, string>();
 
   @query('promptpad-editor')
   editorElement: PromptPadEditor | undefined;
@@ -60,18 +56,6 @@ export class PromptPadContainer extends LitElement {
   // ===== Lifecycle Methods ======
   constructor() {
     super();
-
-    this.modelCallMap = new Map<string, typeof textGenPalm>();
-    this.modelCallMap.set('PaLM 2', textGenPalm);
-    this.modelCallMap.set('GPT-3.5 Turbo', textGenGpt);
-
-    this.apiKeyMap.set(
-      'GPT-3.5 Turbo',
-      atob(
-        'c2stdkJ5Y3RXeExZWGJ4U1hwa0UyTFFUM0JsYmtGSjFaZXprTXc0QVVkWGxzQTY2YkQy'
-      )
-    );
-    this.apiKeyMap.set('PaLM 2', 'AIzaSyDDHPz7ZX4t3Db9OIghv_eF0WKjCeJYEQc');
   }
 
   firstUpdated() {
@@ -94,23 +78,19 @@ export class PromptPadContainer extends LitElement {
    * Start generating text based on the prompt.
    */
   startTextGen() {
-    const curCallFunction = this.modelCallMap.get(this.curModel);
-    const curApiKey = this.apiKeyMap.get(this.curModel);
-
-    if (curCallFunction === undefined) {
-      throw Error(`Cannot find ${this.curModel} in this.modelCallMap`);
+    // Get the endpoint from local storage
+    const endPoint = localStorage.getItem('farsight-endpoint');
+    if (endPoint === null) {
+      throw Error('Farsight endpoint is not found.');
     }
 
-    if (curApiKey === undefined) {
-      throw Error(`Cannot find ${this.curModel} in this.apiKeyMap`);
-    }
-
-    const result = curCallFunction(
-      curApiKey,
+    const result = textGenFarsight(
       `${this.requestID}`,
+      endPoint,
       this.prompt,
       this.temperature,
-      [],
+      this.curModel,
+      false,
       ''
     );
 
@@ -205,7 +185,6 @@ export class PromptPadContainer extends LitElement {
       <div class="container">
         <promptpad-header
           requestID=${this.requestID}
-          .modelList=${MODEL_LIST}
           defaultModel=${this.curModel}
           @request-run=${() => this.requestRun()}
           @model-changed=${(e: CustomEvent<ModelChangedMessage>) =>

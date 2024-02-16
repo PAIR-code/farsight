@@ -5,12 +5,12 @@ import { FarsightContainerSignal } from '../container-signal/container-signal';
 import type {
   PromptRunMessage,
   PromptPadContainer
-} from '../promptpad-container/container';
+} from '../promptpad-container/promptpad-container';
 
 import '../container/container';
 import '../container-lite/container-lite';
 import '../container-signal/container-signal';
-import '../promptpad-container/container';
+import '../promptpad-container/promptpad-container';
 
 import componentCSS from './article-page.css?inline';
 import iconLogo from '../../images/icon-logo.svg?raw';
@@ -97,8 +97,8 @@ export class FarsightArticlePage extends LitElement {
   constructor() {
     super();
     localStorage.setItem(
-      'palmAPIKey',
-      'AIzaSyDDHPz7ZX4t3Db9OIghv_eF0WKjCeJYEQc'
+      'farsight-endpoint',
+      'https://e6uzge3qj1.execute-api.us-east-1.amazonaws.com/prod/run/'
     );
   }
 
