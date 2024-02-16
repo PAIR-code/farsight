@@ -82,7 +82,7 @@ export class FarsightArticlePage extends LitElement {
   respondedPrompt = '';
 
   @state()
-  showLite = false;
+  showLite = true;
 
   @state()
   modalSizeDetermined = 'false';
@@ -179,11 +179,6 @@ export class FarsightArticlePage extends LitElement {
 
     return html`
       <div class="article-page">
-        <div class="logo-container">
-          <span class="svg-icon">${unsafeHTML(iconLogo)}</span>
-          <span class="logo">Farsight</span>
-        </div>
-
         <div class="top-region">
           <div class="left-content">
             <div class="content-wrapper">
