@@ -1,4 +1,5 @@
 import type { TextGenWorkerMessage } from './gpt';
+import type { TextEmbWorkerMessage } from '../types/common-types';
 import type { ChatCompletion } from '../types/gpt-types';
 
 export enum SupportedRemoteModel {
@@ -47,21 +48,23 @@ export const textGenFarsight = async (
   detail = ''
 ): Promise<TextGenWorkerMessage> => {
   // Check if the model output is cached
-  const cachedValue = localStorage.getItem('[farsight]' + prompt);
-  if (useCache && cachedValue !== null) {
-    console.log('Use cached output (text gen)');
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    const message: TextGenWorkerMessage = {
-      command: 'finishTextGen',
-      payload: {
-        requestID: '',
-        apiKey: '',
-        result: cachedValue,
-        prompt: prompt,
-        detail: detail
-      }
-    };
-    return message;
+  if (useCache) {
+    const cachedValue = localStorage.getItem('[farsight]' + prompt);
+    if (cachedValue !== null) {
+      console.log('Use cached output (text gen)');
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      const message: TextGenWorkerMessage = {
+        command: 'finishTextGen',
+        payload: {
+          requestID: '',
+          apiKey: '',
+          result: cachedValue,
+          prompt: prompt,
+          detail: detail
+        }
+      };
+      return message;
+    }
   }
 
   // Run the prompt through farsight API
@@ -130,6 +133,74 @@ export const textGenFarsight = async (
       payload: {
         requestID: requestID,
         originalCommand: 'startTextGen',
+        message: error as string
+      }
+    };
+    return message;
+  }
+};
+
+export const getEmbeddingFarsight = async (
+  endPoint: string,
+  text: string
+): Promise<TextEmbWorkerMessage> => {
+  // Run the prompt through farsight API
+  const body = {
+    prompt: text,
+    temperature: 0.2,
+    model: 'gemini-embedding'
+  };
+
+  const url = new URL(endPoint);
+  url.searchParams.append('type', 'run');
+
+  const requestOptions: RequestInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+    body: JSON.stringify(body)
+  };
+
+  try {
+    const response = await fetch(url.toString(), requestOptions);
+    const data = (await response.json()) as
+      | PromptRunSuccessResponse
+      | PromptRunErrorResponse;
+    if (response.status !== 200) {
+      // Throw the error to the main thread
+      const errorData = data as PromptRunErrorResponse;
+      const message: TextEmbWorkerMessage = {
+        command: 'error',
+        payload: {
+          requestID: '',
+          originalCommand: 'startEmbedding',
+          message: errorData.message
+        }
+      };
+      return message;
+    }
+
+    const successData = data as PromptRunSuccessResponse;
+    // Send back the data to the main thread
+    const message: TextEmbWorkerMessage = {
+      command: 'finishEmbedding',
+      payload: {
+        requestID: '',
+        apiKey: '',
+        embedding: successData.payload.result as unknown as number[]
+      }
+    };
+
+    return message;
+  } catch (error) {
+    // Throw the error to the main thread
+    const message: TextEmbWorkerMessage = {
+      command: 'error',
+      payload: {
+        requestID: '',
+        originalCommand: 'startEmbedding',
         message: error as string
       }
     };

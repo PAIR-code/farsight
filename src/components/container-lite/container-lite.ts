@@ -1018,6 +1018,9 @@ export class FarsightContainerLite extends LitElement {
 
             // Parse the summary
             this.summary = parseTags(summaryResponse, 'summary')[0];
+            if (!summaryResponse.includes('<summary>')) {
+              this.summary = summaryResponse;
+            }
             this.generateUseCases(this.summary);
 
             // Save the (text => accidents) pair in the local storage cache to

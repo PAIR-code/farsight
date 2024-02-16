@@ -21,6 +21,7 @@ import {
   SafetySetting,
   HarmBlockThreshold
 } from '../types/gemini-types';
+import { textGenFarsight } from '../llms/farsight-gen';
 import type { TextGenWorkerMessage } from '../types/common-types';
 
 /**
@@ -40,11 +41,25 @@ self.onmessage = (e: MessageEvent<TextGenWorkerMessage>) => {
         detail = e.data.payload.detail;
       }
 
+      const { apiKey, requestID, prompt, temperature } = e.data.payload;
+      // If the API is set to a a URL (endpoint address), we use Farsight's
+      // endpoint to make the call.
+      if (apiKey.match(/https:\/\/.*/)) {
+        startTextGenFromFarsightAPI(
+          apiKey,
+          requestID,
+          prompt,
+          temperature,
+          detail
+        );
+        break;
+      }
+
       startTextGen(
-        e.data.payload.apiKey,
-        e.data.payload.requestID,
-        e.data.payload.prompt,
-        e.data.payload.temperature,
+        apiKey,
+        requestID,
+        prompt,
+        temperature,
         stopSequences,
         detail
       );
@@ -55,6 +70,51 @@ self.onmessage = (e: MessageEvent<TextGenWorkerMessage>) => {
       console.error('Worker: unknown message', e.data.command);
       break;
     }
+  }
+};
+
+const startTextGenFromFarsightAPI = async (
+  endpoint: string,
+  requestID: string,
+  prompt: string,
+  temperature: number,
+  detail: string
+) => {
+  const response = await textGenFarsight(
+    requestID,
+    endpoint,
+    prompt,
+    temperature,
+    'gemini-pro-free',
+    false,
+    detail
+  );
+
+  // Send back the data to the main thread
+  if (response.command === 'finishTextGen') {
+    const result = response.payload.result;
+    const message: TextGenWorkerMessage = {
+      command: 'finishTextGen',
+      payload: {
+        requestID,
+        apiKey: response.payload.apiKey,
+        result,
+        prompt: prompt,
+        detail: detail
+      }
+    };
+    postMessage(message);
+  } else {
+    // Throw the error to the main thread
+    const message: TextGenWorkerMessage = {
+      command: 'error',
+      payload: {
+        requestID,
+        originalCommand: 'startTextGen',
+        message: response.payload.message
+      }
+    };
+    postMessage(message);
   }
 };
 

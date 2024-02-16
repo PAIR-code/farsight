@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { getEmbeddingFarsight } from '../llms/farsight-gen';
 import { tensor2d } from '@tensorflow/tfjs';
 import { config } from '../utils/config';
 import { round } from '@xiaohk/utils';
@@ -103,6 +104,18 @@ const _queryEmbedding = async (apiKey: string, text: string) => {
   // PaLM does not support empty string, we just return 0 vector for early exit
   if (text === '') {
     return new Array<number>(EMBEDDING_SIZE).fill(0.0);
+  }
+
+  // If the API is set to a a URL (endpoint address), we use Farsight's
+  // endpoint to make the call.
+  if (apiKey.match(/https:\/\/.*/)) {
+    const response = await getEmbeddingFarsight(apiKey, text);
+
+    if (response.command === 'finishEmbedding') {
+      return response.payload.embedding;
+    } else {
+      throw Error('PaLM API error' + JSON.stringify(response.payload));
+    }
   }
 
   const parameter: PalmEmbedTextRequestBody = {

@@ -71,6 +71,11 @@ Tutor:`,
   'My Prompt': ''
 };
 
+// const ENDPOINT =
+//   'https://e6uzge3qj1.execute-api.us-east-1.amazonaws.com/prod/run/';
+const ENDPOINT =
+  'https://nloror73zf.execute-api.localhost.localstack.cloud:4566/prod/run/';
+
 /**
  * Demo page element.
  *
@@ -96,10 +101,8 @@ export class FarsightArticlePage extends LitElement {
   // ===== Lifecycle Methods ======
   constructor() {
     super();
-    localStorage.setItem(
-      'farsight-endpoint',
-      'https://e6uzge3qj1.execute-api.us-east-1.amazonaws.com/prod/run/'
-    );
+    localStorage.setItem('farsight-endpoint', ENDPOINT);
+    localStorage.setItem('palmAPIKey', ENDPOINT);
   }
 
   /**

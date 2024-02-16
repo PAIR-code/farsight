@@ -791,8 +791,8 @@ export class FarsightContainerLiteUseCases extends LitElement {
    * use case tab item.
    */
   positionTabIndicator(showTransition: boolean, list: 'use-case' | 'accident') {
-    let tabIndicatorElement = this.useCaseTabIndicatorElement;
-    let selectedTab: UseCaseTab | AccidentTab = this.selectedUseCaseTab;
+    const tabIndicatorElement = this.useCaseTabIndicatorElement;
+    const selectedTab: UseCaseTab | AccidentTab = this.selectedUseCaseTab;
     let color = config.colors['blue-600'];
 
     if (list === 'accident') return;
@@ -1015,6 +1015,9 @@ export class FarsightContainerLiteUseCases extends LitElement {
 
             // Parse the summary
             this.summary = parseTags(summaryResponse, 'summary')[0];
+            if (!summaryResponse.includes('<summary>')) {
+              this.summary = summaryResponse;
+            }
             this.generateUseCases(this.summary);
 
             // Save the (text => accidents) pair in the local storage cache to

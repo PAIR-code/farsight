@@ -1149,7 +1149,7 @@ export const parseStakeholderResponse = (response: string) => {
   const stakeholderCandidateNodes: StakeholderNodeData[] = [];
 
   // Parse the XML response into a Document
-  const wrappedXML = `${response}</stakeholders>`;
+  const wrappedXML = `${response}`;
   const parser = new DOMParser();
   const xmlDoc = parser.parseFromString(wrappedXML, 'application/xml');
   const stakeholderDocNodes = xmlDoc.querySelectorAll('stakeholder');
