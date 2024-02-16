@@ -58,12 +58,7 @@ export class PromptPadContainer extends LitElement {
     super();
   }
 
-  firstUpdated() {
-    setTimeout(() => {
-      // this.showError = true;
-      // this.startTextGen();
-    }, 1000);
-  }
+  firstUpdated() {}
 
   /**
    * This method is called before new DOM is updated and rendered
@@ -90,7 +85,7 @@ export class PromptPadContainer extends LitElement {
       this.prompt,
       this.temperature,
       this.curModel,
-      false,
+      DEV_MODE,
       ''
     );
 
@@ -172,8 +167,16 @@ export class PromptPadContainer extends LitElement {
    * Handler when user clicks run in the header
    */
   requestRun() {
+    if (!this.editorElement) {
+      throw Error('Editor is null');
+    }
+
     // Clear the last error message
     this.showError = false;
+
+    // Pull the prompt (the prompt pushed from the child can be out of dated if
+    // the user manually deletes the highlighted text)
+    this.prompt = this.editorElement.getCurPrompt();
 
     // Start the inference
     this.startTextGen();

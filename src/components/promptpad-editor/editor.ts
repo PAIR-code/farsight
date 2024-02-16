@@ -92,6 +92,18 @@ export class PromptPadEditor extends LitElement {
   initData = async () => {};
 
   /**
+   * Get the current prompt in the editor
+   * @returns Current content in the editor
+   */
+  getCurPrompt() {
+    let curPrompt = '';
+    if (this.textBoxElement?.textContent) {
+      curPrompt = this.textBoxElement?.textContent;
+    }
+    return curPrompt;
+  }
+
+  /**
    * Notify the parent about prompt change
    * @param prompt Prompt string
    */
