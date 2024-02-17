@@ -184,6 +184,17 @@ export class FarsightArticlePage extends LitElement {
       <div class="article-page">
         <div class="top-region">
           <div class="top-content">
+            <div class="header-content">
+              <div class="name">
+                <span class="svg-icon">${unsafeHTML(iconLogo)}</span>
+                <span class="name-text">Farsight</span>
+              </div>
+
+              <span class="tag-line">
+                Fostering Responsible AI Awareness During Early AI Prototyping
+              </span>
+            </div>
+
             <div class="left-content">
               <div class="content-wrapper">
                 <span class="title">Example Prompts</span>

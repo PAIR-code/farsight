@@ -24,10 +24,10 @@ export default defineConfig(({ command, mode }) => {
     // Development
     return {
       plugins: [
-        // hmrPlugin({
-        //   include: ['./src/**/*.ts'],
-        //   presets: [presets.lit]
-        // })
+        hmrPlugin({
+          include: ['./src/**/*.ts'],
+          presets: [presets.lit]
+        })
       ]
     };
   } else if (command === 'build') {
