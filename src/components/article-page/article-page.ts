@@ -183,37 +183,37 @@ export class FarsightArticlePage extends LitElement {
     return html`
       <div class="article-page">
         <div class="top-region">
-          <div class="left-content">
-            <div class="content-wrapper">
-              <span class="title">Example Prompts</span>
-              <div class="example-buttons">${exampleButtons}</div>
+          <div class="top-content">
+            <div class="left-content">
+              <div class="content-wrapper">
+                <span class="title">Example Prompts</span>
+                <div class="example-buttons">${exampleButtons}</div>
+              </div>
+            </div>
+
+            <div class="middle-content">
+              <div class="promptpad-wrapper">
+                <promptpad-container
+                  @prompt-run=${(e: CustomEvent<PromptRunMessage>) =>
+                    this.promptRunHandler(e)}
+                >
+                </promptpad-container>
+
+                <farsight-container-signal
+                  prompt=${this.respondedPrompt}
+                  @clicked=${() => this.signalClickedHandler()}
+                ></farsight-container-signal>
+              </div>
+
+              <div class="lite-wrapper" ?is-hidden=${!this.showLite}>
+                <farsight-container-lite
+                  prompt=${this.respondedPrompt}
+                  @launch-farsight=${() => this.launchFarsightHandler()}
+                  @close-lite=${() => this.closeLiteHandler()}
+                ></farsight-container-lite>
+              </div>
             </div>
           </div>
-
-          <div class="middle-content">
-            <div class="promptpad-wrapper">
-              <promptpad-container
-                @prompt-run=${(e: CustomEvent<PromptRunMessage>) =>
-                  this.promptRunHandler(e)}
-              >
-              </promptpad-container>
-
-              <farsight-container-signal
-                prompt=${this.respondedPrompt}
-                @clicked=${() => this.signalClickedHandler()}
-              ></farsight-container-signal>
-            </div>
-
-            <div class="lite-wrapper" ?is-hidden=${!this.showLite}>
-              <farsight-container-lite
-                prompt=${this.respondedPrompt}
-                @launch-farsight=${() => this.launchFarsightHandler()}
-                @close-lite=${() => this.closeLiteHandler()}
-              ></farsight-container-lite>
-            </div>
-          </div>
-
-          <div class="left-content"></div>
         </div>
 
         <dialog
@@ -224,6 +224,9 @@ export class FarsightArticlePage extends LitElement {
             <farsight-container
               prompt=${this.respondedPrompt}
               sizeDetermined=${this.modalSizeDetermined}
+              @close-farsight=${() => {
+                this.farsightDialogElement?.close();
+              }}
             ></farsight-container>
           </div>
         </dialog>

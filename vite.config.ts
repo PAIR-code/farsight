@@ -60,6 +60,22 @@ export default defineConfig(({ command, mode }) => {
         };
       }
 
+      case 'github': {
+        // Production: github page
+        return {
+          base: '/farsight/',
+          build: {
+            outDir: 'dist',
+            rollupOptions: {
+              input: {
+                main: resolve(__dirname, 'index.html')
+              }
+            }
+          },
+          plugins: []
+        };
+      }
+
       case 'library': {
         // Production: library that can be imported in other apps
         return {

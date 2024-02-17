@@ -3,7 +3,7 @@
   padding: var(--container-v-padding) var(--container-h-padding);
 
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
