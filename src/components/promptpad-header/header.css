@@ -15,7 +15,7 @@
 
 .item-group {
   display: flex;
-  flex-flow: row;
+  flex-flow: row wrap;
   align-items: center;
   gap: 12px;
 }
@@ -71,7 +71,6 @@ button {
 }
 
 .run-button {
-  margin-left: auto;
   color: white;
   background-color: var(--teal-500);
 

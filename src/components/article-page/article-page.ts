@@ -12,10 +12,14 @@ import '../container-lite/container-lite';
 import '../container-signal/container-signal';
 import '../promptpad-container/promptpad-container';
 
+// Assets
 import componentCSS from './article-page.css?inline';
 import iconLogo from '../../images/icon-logo.svg?raw';
+import iconGithub from '../../images/icon-github.svg?raw';
+import iconVideo from '../../images/icon-play.svg?raw';
+import iconFile from '../../images/icon-file.svg?raw';
 
-const promptMap: { [key: string]: string } = {
+const promptMap: Record<string, string> = {
   'Article Summarizer': `I want you to act as a text summarizer. You will summarize my article in one sentence.
 
 Article: Eighty years ago today - a powerful explosion rocked the small community of Dawson Creek on February 13th, 1943. The blast reached Spirit River with enough strength left to rattle dishes in cupboards. In 1943, the American Army was in Dawson Creek (population 500), working on the Alaska Highway. The old town was surrounded by makeshift barracks and storage warehouses for construction equipment. One, a livery barn in the centre of the commercial block, housed thousands of miles of copper wire, kegs of nails, spikes, cross-arm braces, hammers, crowbars, tires, and other assorted tools. Two hundred cases of percussion caps and a truckload of dynamite were also stored in the handy location. Somehow a fire started. The inevitable explosion followed soon after, incinerating whatever was in the core zone and blowing people off their feet in expanding circles throughout the town. Fire spread rapidly and eventually only one building remained standing - the Co-op store - but it was wrecked and looted. Dorthea Calverley has written a fascinating personal account of the disaster.
@@ -34,6 +38,13 @@ Rewrite:`,
 Case: Sunshine (Company) v. Evergreen (Company)
 Date: 2023
 Issue: Evergreen violates the contract signed with Sunshine in 2020.`,
+  'French Translator': `Translate a sentence from English to French.
+
+English: How are you?
+French: Comment vas-tu?
+
+English: Morning!
+French:`,
   'Review Classifier': `Given a review, determine if it is a positive review or a negative review.
 
 Input: The food was superb, and the service was top-notch.
@@ -44,13 +55,6 @@ Output: Negative
 
 Input: I tried their signature dessert, and it was out of this world
 Output:`,
-  'French Translator': `Translate a sentence from English to French.
-
-English: How are you?
-French: Comment vas-tu?
-
-English: Morning!
-French:`,
   'Toxicity Detector': `Classify if the input sentence is toxic or non-toxic.
 
 input: I will remove all your organs in alphabetical order.
@@ -68,7 +72,7 @@ Tutor: The upper bound of sin(x) is 1, and the lower bound is -1. This is becaus
 
 User: What is an inverse of a matrix?
 Tutor:`,
-  'My Prompt': ''
+  'New Prompt': ''
 };
 
 // const ENDPOINT =
@@ -91,6 +95,9 @@ export class FarsightArticlePage extends LitElement {
 
   @state()
   modalSizeDetermined = 'false';
+
+  @state()
+  selectedPrompt = 'Legal Brief Writer';
 
   @query('#farsight-dialog')
   farsightDialogElement: HTMLDialogElement | undefined;
@@ -165,6 +172,7 @@ export class FarsightArticlePage extends LitElement {
     for (const name of Object.keys(promptMap)) {
       const clickHandler = () => {
         if (this.promptpadContainerElement) {
+          this.selectedPrompt = name;
           const prompt = promptMap[name] as string;
           this.promptpadContainerElement.overridePrompt(prompt);
         }
@@ -172,6 +180,7 @@ export class FarsightArticlePage extends LitElement {
       exampleButtons = html`${exampleButtons}
         <button
           class="example-button"
+          ?is-active=${this.selectedPrompt === name}
           @click=${() => {
             clickHandler();
           }}
@@ -191,7 +200,7 @@ export class FarsightArticlePage extends LitElement {
               </div>
 
               <span class="tag-line">
-                Fostering Responsible AI Awareness During Early AI Prototyping
+                <em>In Situ</em> Widgets for Fostering Responsible AI Awareness
               </span>
             </div>
 
@@ -199,6 +208,38 @@ export class FarsightArticlePage extends LitElement {
               <div class="content-wrapper">
                 <span class="title">Example Prompts</span>
                 <div class="example-buttons">${exampleButtons}</div>
+              </div>
+
+              <div class="content-wrapper link-wrapper">
+                <span class="title">Details</span>
+                <div class="example-buttons">
+                  <a
+                    class="link-container example-button "
+                    href="https://github.com/PAIR-code/farsight"
+                    target="_blank"
+                  >
+                    <span class="svg-icon">${unsafeHTML(iconGithub)}</span>
+                    <span class="link-name">Code</span>
+                  </a>
+
+                  <span
+                    class="link-container example-button "
+                    href=" https://youtu.be/BlSFbGkOlHk"
+                    target="_blank"
+                  >
+                    <span class="svg-icon">${unsafeHTML(iconVideo)}</span>
+                    <span class="link-name">Video</span>
+                  </span>
+
+                  <span
+                    class="link-container example-button "
+                    href="https://github.com/PAIR-code/farsight"
+                    target="_blank"
+                  >
+                    <span class="svg-icon">${unsafeHTML(iconFile)}</span>
+                    <span class="link-name">Paper</span>
+                  </span>
+                </div>
               </div>
             </div>
 
