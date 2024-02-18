@@ -1,6 +1,11 @@
 import { LitElement, css, unsafeCSS, html, PropertyValues } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import {
+  startLogoAnimation,
+  startLogoBlinkAnimation,
+  stopLogoAnimation
+} from '../container-signal/container-signal';
 import { FarsightContainerSignal } from '../container-signal/container-signal';
 import type {
   PromptRunMessage,
@@ -167,6 +172,28 @@ export class FarsightArticlePage extends LitElement {
     }
   }
 
+  logoContainerMouseEntered(e: MouseEvent) {
+    const target = e.currentTarget as HTMLElement;
+    const leftCircle = target.querySelector('svg path#left-circle');
+    const rightCircle = target.querySelector('svg path#right-circle');
+    if (leftCircle && rightCircle) {
+      if (Math.random() < 0.5) {
+        startLogoAnimation(() => true, leftCircle, rightCircle);
+      } else {
+        startLogoBlinkAnimation(() => true, leftCircle, rightCircle);
+      }
+    }
+  }
+
+  logoContainerMouseLeft(e: MouseEvent) {
+    const target = e.currentTarget as HTMLElement;
+    const leftCircle = target.querySelector('svg path#left-circle');
+    const rightCircle = target.querySelector('svg path#right-circle');
+    if (leftCircle && rightCircle) {
+      stopLogoAnimation(leftCircle, rightCircle);
+    }
+  }
+
   // ===== Templates and Styles ======
   render() {
     let exampleButtons = html``;
@@ -194,7 +221,13 @@ export class FarsightArticlePage extends LitElement {
       <div class="article-page">
         <div class="top-region">
           <div class="top-content">
-            <div class="header-content">
+            <div class="top-filler"></div>
+            <div
+              class="header-content"
+              @mouseenter=${(e: MouseEvent) =>
+                this.logoContainerMouseEntered(e)}
+              @mouseleave=${(e: MouseEvent) => this.logoContainerMouseLeft(e)}
+            >
               <div class="name">
                 <span class="svg-icon">${unsafeHTML(iconLogo)}</span>
                 <span class="name-text">Farsight</span>
@@ -266,6 +299,8 @@ export class FarsightArticlePage extends LitElement {
                 ></farsight-container-lite>
               </div>
             </div>
+
+            <div class="bottom-filler"></div>
           </div>
         </div>
 
