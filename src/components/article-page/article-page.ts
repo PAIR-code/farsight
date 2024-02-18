@@ -11,6 +11,7 @@ import '../container/container';
 import '../container-lite/container-lite';
 import '../container-signal/container-signal';
 import '../promptpad-container/promptpad-container';
+import '../article/article';
 
 // Assets
 import componentCSS from './article-page.css?inline';
@@ -211,7 +212,7 @@ export class FarsightArticlePage extends LitElement {
               </div>
 
               <div class="content-wrapper link-wrapper">
-                <span class="title">Details</span>
+                <span class="title">External Links</span>
                 <div class="example-buttons">
                   <a
                     class="link-container example-button "
@@ -282,6 +283,8 @@ export class FarsightArticlePage extends LitElement {
             ></farsight-container>
           </div>
         </dialog>
+
+        <farsight-article></farsight-article>
       </div>
     `;
   }
