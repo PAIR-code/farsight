@@ -13,13 +13,30 @@ import {
   stopLogoAnimation
 } from '../container-signal/container-signal';
 
+// Assets
 import componentCSS from './article.css?inline';
 import iconLogo from '../../images/icon-logo.svg?raw';
 import textData from './article.yaml';
+import iconCheckBox from '../../images/icon-check-box.svg?raw';
+import iconCopy from '../../images/icon-copy-box.svg?raw';
 
 interface FigureData {
   url: string;
   caption: string;
+}
+
+interface Author {
+  name: string;
+  url: string;
+}
+
+interface PaperData {
+  bibtext: string;
+  title: string;
+  paperLink: string;
+  venue: string;
+  venueLink: string;
+  authors: Author[];
 }
 
 interface TextData {
@@ -34,6 +51,7 @@ interface TextData {
   contribution: string[];
   learnMore: string[];
   who: string[];
+  paper: PaperData;
 
   figures: {
     alert: FigureData;
@@ -55,6 +73,11 @@ export class FarsightArticle extends LitElement {
   //==========================================================================||
   //                              Class Properties                            ||
   //==========================================================================||
+  @state()
+  bibtexCopied = false;
+
+  @state()
+  bibtexHovering = false;
 
   //==========================================================================||
   //                             Lifecycle Methods                            ||
@@ -177,6 +200,7 @@ export class FarsightArticle extends LitElement {
       <p>${unsafeHTML(text.development[0])}</p>
     `;
 
+    // Who
     const who = html`
       <h2>Who Developed <span class="tool-name">Farsight</span>?</h2>
       <p>${unsafeHTML(text.who[0])}</p>
@@ -196,11 +220,80 @@ export class FarsightArticle extends LitElement {
       <p>${unsafeHTML(text.learnMore[0])}</p>
     `;
 
+    // Paper info
+    let copyButton = html`
+      <span class="svg-icon check">${unsafeHTML(iconCheckBox)}</span>
+      <span class="copy-label check">Copied!</span>
+    `;
+
+    if (!this.bibtexCopied) {
+      copyButton = html`
+        <span class="svg-icon copy">${unsafeHTML(iconCopy)}</span>
+        <span class="copy-label copy">Copy</span>
+      `;
+    }
+
+    let authorList = html``;
+    for (const [i, author] of text.paper.authors.entries()) {
+      authorList = html`${authorList}
+        <a href=${author.url} target="_blank">
+          ${author.name}${i === text.paper.authors.length - 1 ? '' : ','}
+        </a> `;
+    }
+
+    const paperInfo = html`
+      <div class="paper-info">
+        <div class="left">
+          <a target="_blank" href=${text.paper.paperLink}
+            ><img
+              src="https://github.com/xiaohk/xiaohk/assets/15007159/d02c9339-90b5-4555-bfcb-0c220d5799fa"
+          /></a>
+        </div>
+        <div class="right">
+          <a target="_blank" href=${text.paper.paperLink}
+            ><span class="paper-title">${text.paper.title}</span></a
+          >
+          <a target="_blank" href=${text.paper.venueLink}
+            ><span class="paper-venue">${text.paper.venue}</span></a
+          >
+          <div class="paper-authors">${authorList}</div>
+        </div>
+      </div>
+      <div
+        class="bibtex-block"
+        @mouseenter=${() => {
+          this.bibtexHovering = true;
+        }}
+        @mouseleave=${() => {
+          this.bibtexHovering = false;
+        }}
+      >
+        <div class="bibtex">${unsafeHTML(text.paper.bibtext)}</div>
+
+        <div
+          class="copy-button"
+          ?is-hidden=${!this.bibtexHovering}
+          @click=${() => {
+            navigator.clipboard.writeText(text.paper.bibtext).then(() => {
+              this.bibtexCopied = true;
+            });
+          }}
+          @mouseleave=${() => {
+            setTimeout(() => {
+              this.bibtexCopied = false;
+            }, 500);
+          }}
+        >
+          ${copyButton}
+        </div>
+      </div>
+    `;
+
     return html`
       <div class="article">
         ${introduction} ${usage} ${usageAlert} ${usageIncident} ${usageUseCase}
         ${usageHarmEnvisioner} ${whereTo} ${development} ${who} ${contribution}
-        ${learnMore}
+        ${learnMore} ${paperInfo}
       </div>
     `;
   }

@@ -271,6 +271,43 @@ learnMore:
     rel='noreferrer'>CHI'24</a>). If you find Farsight useful for your research,
     please consider citing our paper. Thanks!
 
+paper:
+  bibtext: >
+    @inproceedings{wangFarsightFosteringResponsible2024,
+      title = {Farsight: {{Fostering Responsible AI Awareness During AI Application Prototyping}}},
+      booktitle = {{{CHI Conference}} on {{Human Factors}} in {{Computing Systems}}},
+      author = {Wang, Zijie J. and Kulkarni, Chinmay and Wilcox, Lauren and Terry, Michael and Madaio, Michael},
+      year = {2024}
+    }
+
+  title: >
+    Farsight: Fostering Responsible AI Awareness During AI Application Prototyping
+
+  paperLink: >
+    https://github.com/PAIR-code/farsight
+
+  venue: >
+    CHI Conference on Human Factors in Computing Systems (CHI) 2024
+
+  venueLink: >
+    https://chi2024.acm.org/
+
+  authors:
+    - name: Zijie J. Wang
+      url: 'https://zijie.wang'
+
+    - name: Chinmay Kulkarni
+      url: 'https://www.linkedin.com/in/chinmayk'
+
+    - name: Lauren Wilcox
+      url: 'https://www.linkedin.com/in/laurenwilcox'
+
+    - name: Michael Terry
+      url: 'https://research.google/people/michael-terry/'
+
+    - name: Michael Madaio
+      url: 'http://michaelmadaio.com/'
+
 figures:
   alert:
     url: https://github.com/xiaohk/xiaohk/assets/15007159/8f15498c-8e2a-44d8-b569-73df5b16dabe

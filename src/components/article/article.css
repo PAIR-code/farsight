@@ -499,7 +499,7 @@ video {
       }
     }
 
-    &.hide {
+    &[is-hidden] {
       display: none;
     }
 
