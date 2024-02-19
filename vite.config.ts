@@ -17,6 +17,7 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
+import yaml from '@rollup/plugin-yaml';
 import { hmrPlugin, presets } from 'vite-plugin-web-components-hmr';
 
 export default defineConfig(({ command, mode }) => {
@@ -24,6 +25,7 @@ export default defineConfig(({ command, mode }) => {
     // Development
     return {
       plugins: [
+        yaml(),
         hmrPlugin({
           include: ['./src/**/*.ts'],
           presets: [presets.lit]

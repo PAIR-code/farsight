@@ -36,6 +36,8 @@
   "devDependencies": {
     "@floating-ui/dom": "^1.4.2",
     "@google-ai/generativelanguage": "^0.2.0",
+    "@modyfi/vite-plugin-yaml": "^1.1.0",
+    "@rollup/plugin-yaml": "^4.1.2",
     "@tensorflow/tfjs": "^4.7.0",
     "@types/d3": "^7.4.0",
     "@types/d3-array": "^3.0.5",

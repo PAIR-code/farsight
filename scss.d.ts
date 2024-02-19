@@ -25,3 +25,9 @@ declare module '*.scss' {
   const styles: CSSResult;
   export default styles;
 }
+
+// typings.d.ts or yaml.d.ts
+declare module '*.yaml' {
+  const content: any;
+  export default content;
+}

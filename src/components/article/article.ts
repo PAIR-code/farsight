@@ -15,6 +15,13 @@ import {
 
 import componentCSS from './article.css?inline';
 import iconLogo from '../../images/icon-logo.svg?raw';
+import textData from './article.yaml';
+
+interface TextData {
+  intro: string[];
+}
+
+const text = textData as TextData;
 
 /**
  * Article element.
@@ -77,19 +84,23 @@ export class FarsightArticle extends LitElement {
   //                           Templates and Styles                           ||
   //==========================================================================||
   render() {
-    return html`
-      <div class="article">
-        <h2
-          id="tool"
-          @mouseenter=${(e: MouseEvent) => this.logoContainerMouseEntered(e)}
-          @mouseleave=${(e: MouseEvent) => this.logoContainerMouseLeft(e)}
-        >
-          <span>What is </span>
-          <span class="svg-icon logo-icon">${unsafeHTML(iconLogo)}</span>
-          <span><span class="tool-name">Farsight</span>?</span>
-        </h2>
-      </div>
-    `;
+    // Introduction
+    let introduction = html`<h2
+      id="tool"
+      @mouseenter=${(e: MouseEvent) => this.logoContainerMouseEntered(e)}
+      @mouseleave=${(e: MouseEvent) => this.logoContainerMouseLeft(e)}
+    >
+      <span>What is </span>
+      <span class="svg-icon logo-icon">${unsafeHTML(iconLogo)}</span>
+      <span><span class="tool-name">Farsight</span>?</span>
+    </h2>`;
+
+    for (const p of text.intro) {
+      introduction = html`${introduction}
+        <p>${unsafeHTML(p)}</p>`;
+    }
+
+    return html` <div class="article">${introduction}</div> `;
   }
 
   static styles = [

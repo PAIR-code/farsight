@@ -1,0 +1,26 @@
+intro:
+  - >
+    Prompt-based interfaces (e.g., <a
+    href='https://aistudio.google.com/app/prompts/new_chat' target='_blank'
+    rel='noreferrer'>Google AI Studio</a>, <a
+    href='https://platform.openai.com/playground' target='_blank'
+    rel='noreferrer'>OpenAI Playground</a>, and <a
+    href='https://poloclub.github.io/wordflow/' target='_blank'
+    rel='noreferrer'>Wordflow</a>)  for Large Language Models (LLMs) have made
+    prototyping and building AI-powered applications easier than ever before.
+    However, identifying potential harms that may arise from AI applications
+    remains a challenge, particularly during prompt-based prototyping. To
+    address this challenge, we designed and developed Farsight, a novel
+    interactive <em>in situ</em> tool that helps people <strong>identify potential harms</strong>
+    from the AI applications they are prototyping.
+
+  - >
+    Farsight is designed and developed for both AI prototypers (i.e., prompt
+    creators) and developers of web-based prompting interfaces. First, AI
+    prototypers can use Farsight in various ways: through this demo website, a
+    <a href='https://github.com/PAIR-code/farsight' target='_blank'
+    rel='noreferrer'>Chrome Extension</a> enabling it on Google AI Studio, or
+    using a <a href='https://pypi.org/project/farsight/' target='_blank'
+    rel='noreferrer'>Python package</a> to enable it on Jupyter Notebook.
+    Developers of prompting tools can easily integrate our open-source and
+    reusable components into their AI prototyping tools.
