@@ -65,5 +65,33 @@ usageAlert:
     class="code">remotely relevant</code> in an orange circle and <code
     class="code">moderately relevant</code> in a red circle as a proxy of the
     prompt's potential risk. In other words, we consider a prompt to have a
-    higher risk <strong>if many AI incident reports are semantically and syntactically
-    similar to it.</strong>
+    higher risk <strong>if many AI incident reports are semantically and
+    syntactically similar to it.</strong> See Figure 1 for a visualization of
+    the embeddings of AI incident reports and prompts written by real users. An
+    interactive version is available at <a
+    href='https://poloclub.github.io/wizmap/?dataURL=https://huggingface.co/datasets/xiaohk/embeddings/resolve/main/ai-incident/data.ndjson&gridURL=https://huggingface.co/datasets/xiaohk/embeddings/resolve/main/ai-incident/grid.json'
+    target='_blank' rel='noreferrer'>WizMap</a>.
+
+figures:
+  alert:
+    url: https://github.com/xiaohk/xiaohk/assets/15007159/8f15498c-8e2a-44d8-b569-73df5b16dabe
+    caption: >
+      A visualization of the PaLM 2 embeddings of 3,474 <a
+      href='https://incidentdatabase.ai/' target='_blank' rel='noreferrer'>AI
+      incident reports</a> (blue dots and contour) and 153 <a
+      href='https://github.com/f/awesome-chatgpt-prompts' target='_blank'
+      rel='noreferrer'>Awesome ChatGPT Prompts</a> (red dots and contour). The
+      embeddings' dimensions were reduced from 768 to 2 using <a
+      href='https://umap-learn.readthedocs.io/en/latest/' target='_blank'
+      rel='noreferrer'>UMAP</a>. The rectangles and labels show the summaries of
+      AI incident reports in high-density embedding neighborhoods.  The overlap
+      between the red and blue contours indicates that user prompts can be in
+      close proximity to AI incident reports in the 2D embedding space. This
+      observation inspires us to use high-dimensional embedding similarities to
+      calculate the alert levels in Farsight. Note that in this example, the 153
+      user prompts form a cluster due to the primary focus of AwesomeGPT prompts
+      on conversational agents. The distribution of our 1,000 internal prompts
+      (featuring classification, translation, code generation, etc.) is more
+      spread out. For an interactive version of this visualization, visit <a
+      href='https://poloclub.github.io/wizmap/?dataURL=https://huggingface.co/datasets/xiaohk/embeddings/resolve/main/ai-incident/data.ndjson&gridURL=https://huggingface.co/datasets/xiaohk/embeddings/resolve/main/ai-incident/grid.json'
+      target='_blank' rel='noreferrer'>WizMap</a>.

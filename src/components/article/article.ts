@@ -17,10 +17,22 @@ import componentCSS from './article.css?inline';
 import iconLogo from '../../images/icon-logo.svg?raw';
 import textData from './article.yaml';
 
+interface FigureData {
+  url: string;
+  caption: string;
+}
+
 interface TextData {
   intro: string[];
   usageIntro: string[];
   usageAlert: string[];
+
+  figures: {
+    alert: FigureData;
+  };
+  videos: {
+    alert: FigureData;
+  };
 }
 
 const text = textData as TextData;
@@ -111,12 +123,16 @@ export class FarsightArticle extends LitElement {
     }
 
     // Usage: alert
-    let usageAlert = html`<h4>Alert Symbol</h4>`;
-
-    for (const p of text.usageAlert) {
-      usageAlert = html`${usageAlert}
-        <p>${unsafeHTML(p)}</p>`;
-    }
+    const usageAlert = html`<h4>Alert Symbol</h4>
+      <p>${unsafeHTML(text.usageAlert[0])}</p>
+      <p>${unsafeHTML(text.usageAlert[1])}</p>
+      <p>${unsafeHTML(text.usageAlert[2])}</p>
+      <div class="figure">
+        <img src=${text.figures.alert.url} />
+        <div class="figure-caption">
+          Figure 1. ${unsafeHTML(text.figures.alert.caption)}
+        </div>
+      </div> `;
 
     return html`
       <div class="article">${introduction} ${usage} ${usageAlert}</div>
