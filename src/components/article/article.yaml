@@ -133,28 +133,34 @@ usageHarmEnvisioner:
     in-context reminders to help users reflect on potential harms associated
     with their prompts. However, instead of passively reading AI incident
     reports and LLM-generated content, some users desire to actively edit and
-    add new use cases, stakeholders, and harms. Also, active participation—a key
-    factor in learning—may help foster AI prototypers' ability to independently
-    identify harms. Therefore, we design Harm Envisioner to support users in
-    actively envisioning potential harms associated with their prompts.
+    add new <span class="colored use-case">use cases</span>, <span class="colored
+    stakeholder">stakeholders</span>, and <span class="colored
+    harm">harms</span>. Also, active participation—a key factor in
+    learning—may help foster AI prototypers' ability to independently identify
+    harms. Therefore, we design Harm Envisioner to support users in actively
+    envisioning potential harms associated with their prompts.
 
   - >
     After clicking the "Envision Consequences & Harms" button in the Awareness
     Sidebar, Harm Envisioner appears as a pop-up window on top of the
     prompt-crafting tool. It begins with a text box filled with an LLM-generated
-    summary of a user's prompt. The user is prompted to revise the summary to
-    align with the target task in their prompt. Next, the window transitions
-    into an interactive node-link tree visualization, where the user can pan and
-    zoom to navigate the view. First, the window shows the user's prompt summary
-    as the root of the tree which is visualized as a text box. The user can
-    click the root node to ask AI to generate potential use cases of an AI
-    application based on the user's prompt, and the use cases are visualized as
-    the root's children nodes. Similarly, users can click a generated node to
-    let AI generate its children nodes (stakeholders and then harms). There is a
-    max of four layers, following an order of the user's prompt summary → use
-    cases → stakeholders → harms. This layer order reflects the recommended harm
-    envisioning workflow in responsible AI literature and helps users
-    comprehend and organize diverse harms across different contexts.
+    <span class="colored summary">summary</span> of a user's prompt. The user is
+    prompted to revise the <span class="colored summary">summary</span> to align with
+    the target task in their prompt. Next, the window transitions into an
+    interactive node-link tree visualization, where the user can pan and zoom to
+    navigate the view. First, the window shows the user's <span class="colored
+    summary">prompt summary</span> as the root of the tree which is visualized
+    as a text box. The user can click the root node to ask AI to generate
+    potential use cases of an AI application based on the user's prompt, and the
+    use cases are visualized as the root's children nodes. Similarly, users can
+    click a generated node to let AI generate its children nodes (stakeholders
+    and then harms). There is a max of four layers, following an order of the
+    user's <span class="colored summary">prompt summary</span> → <span
+    class="colored use-case">use cases</span> → <span class="colored
+    stakeholder">stakeholders</span> → <span class="colored harm">harms</span>.
+    This layer order reflects the recommended harm envisioning workflow in
+    responsible AI literature and helps users comprehend and organize diverse
+    harms across different contexts.
 
 figures:
   alert:

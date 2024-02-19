@@ -581,3 +581,33 @@ video {
     background: var(--red-100);
   }
 }
+
+.colored {
+  padding: 0px 5px;
+  border-radius: 10px;
+
+  &.summary {
+    border: 2px solid var(--light-blue-400);
+    background-color: var(--light-blue-50);
+  }
+
+  &.use-case {
+    border: 2px solid var(--purple-400);
+    background-color: var(--purple-50);
+  }
+
+  &.stakeholder {
+    border: 2px solid var(--indigo-400);
+    background-color: var(--indigo-50);
+  }
+
+  &.functionality {
+    border: 2px solid var(--light-blue-400);
+    background-color: var(--light-blue-50);
+  }
+
+  &.harm {
+    border: 2px solid var(--red-400);
+    background-color: var(--red-50);
+  }
+}
