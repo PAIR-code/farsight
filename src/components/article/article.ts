@@ -19,6 +19,8 @@ import textData from './article.yaml';
 
 interface TextData {
   intro: string[];
+  usageIntro: string[];
+  usageAlert: string[];
 }
 
 const text = textData as TextData;
@@ -100,7 +102,25 @@ export class FarsightArticle extends LitElement {
         <p>${unsafeHTML(p)}</p>`;
     }
 
-    return html` <div class="article">${introduction}</div> `;
+    // Usage
+    let usage = html`<h2>What Can I Do with Farsight?</h2>`;
+
+    for (const p of text.usageIntro) {
+      usage = html`${usage}
+        <p>${unsafeHTML(p)}</p>`;
+    }
+
+    // Usage: alert
+    let usageAlert = html`<h4>Alert Symbol</h4>`;
+
+    for (const p of text.usageAlert) {
+      usageAlert = html`${usageAlert}
+        <p>${unsafeHTML(p)}</p>`;
+    }
+
+    return html`
+      <div class="article">${introduction} ${usage} ${usageAlert}</div>
+    `;
   }
 
   static styles = [

@@ -24,3 +24,46 @@ intro:
     rel='noreferrer'>Python package</a> to enable it on Jupyter Notebook.
     Developers of prompting tools can easily integrate our open-source and
     reusable components into their AI prototyping tools.
+
+usageIntro:
+  - >
+    Farsight includes a collection of <strong><em>in situ</em> widgets</strong>
+    that can be integrated into diverse prompting workflows, such as web-based
+    prompting GUIs and computational notebooks. To ensure users remain focused
+    on their primary task or of writing prompting, Farsight uses progressive
+    disclosure to gradually reveal these widgets with increasing complexity and
+    engagement: (1) Alert Symbol → (2) Awareness Sidebar → (3) Harm
+    Envisioner.
+
+usageAlert:
+  - >
+    The Alert Symbol is an always-on display on top of the AI prototyping tool,
+    displaying the alert level of a user's prompt. Every time the user runs
+    their prompt, the Alert Symbol updates the alert level using the new prompt.
+    Based on the computed alert level, there are three modes, each characterized
+    by a progressively more attention-grabbing style. Thus, Farsight only
+    disrupts AI prototypers' flow when their prompts require more caution.
+
+  - >
+    To categorize the potential harms that might arise from users' prompts,
+    Farsight employs a novel technique that uses the <strong>similarity between
+    the prompt and previously documented AI incident reports</strong> as a proxy
+    for the prompt's alert level. First, we use LLM to extract high-dimensional
+    latent representations (embeddings) of all AI incident reports indexed in
+    the <a href='https://incidentdatabase.ai/' target='_blank'
+    rel='noreferrer'>AI Incident Database</a>, which includes more than 3k
+    community-curated news reports about AI failures and harms. Then, we extract
+    the embedding of the user's prompt and compute pairwise cosine distances
+    between the prompt embedding and AI incident report embeddings. We label
+    each incident report as <code class="code">irrelevant</code>, <code
+    class="code">remotely relevant</code>, and <code class="code">moderately
+    relevant</code> based on two distance thresholds 0.69 and 0.75. We determine
+    these two thresholds from an experiment with 1k random prompts.
+
+  - >
+    Finally, we show the numbers of AI incidents that are classified as <code
+    class="code">remotely relevant</code> in an orange circle and <code
+    class="code">moderately relevant</code> in a red circle as a proxy of the
+    prompt's potential risk. In other words, we consider a prompt to have a
+    higher risk <strong>if many AI incident reports are semantically and syntactically
+    similar to it.</strong>
