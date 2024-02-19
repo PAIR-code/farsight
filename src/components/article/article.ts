@@ -26,10 +26,14 @@ interface TextData {
   intro: string[];
   usageIntro: string[];
   usageAlert: string[];
+  usageIncident: string[];
+  usageUseCase: string[];
+  usageHarmEnvisioner: string[];
 
   figures: {
     alert: FigureData;
   };
+
   videos: {
     alert: FigureData;
   };
@@ -126,16 +130,35 @@ export class FarsightArticle extends LitElement {
     const usageAlert = html`<h4>Alert Symbol</h4>
       <p>${unsafeHTML(text.usageAlert[0])}</p>
       <p>${unsafeHTML(text.usageAlert[1])}</p>
-      <p>${unsafeHTML(text.usageAlert[2])}</p>
+
       <div class="figure">
         <img src=${text.figures.alert.url} />
         <div class="figure-caption">
           Figure 1. ${unsafeHTML(text.figures.alert.caption)}
         </div>
-      </div> `;
+      </div>
+      <p>${unsafeHTML(text.usageAlert[2])}</p> `;
+
+    // Usage: incident panel
+    const usageIncident = html`<h4>Awareness Sidebar: Incident Panel</h4>
+      <p>${unsafeHTML(text.usageIncident[0])}</p>
+      <p>${unsafeHTML(text.usageIncident[1])}</p>`;
+
+    // Usage: use case panel
+    const usageUseCase = html`<h4>Awareness Sidebar: Use Case Panel</h4>
+      <p>${unsafeHTML(text.usageUseCase[0])}</p>
+      <p>${unsafeHTML(text.usageUseCase[1])}</p>`;
+
+    // Usage: harm envisioner
+    const usageHarmEnvisioner = html`<h4>Harm Envisioner</h4>
+      <p>${unsafeHTML(text.usageHarmEnvisioner[0])}</p>
+      <p>${unsafeHTML(text.usageHarmEnvisioner[1])}</p>`;
 
     return html`
-      <div class="article">${introduction} ${usage} ${usageAlert}</div>
+      <div class="article">
+        ${introduction} ${usage} ${usageAlert} ${usageIncident} ${usageUseCase}
+        ${usageHarmEnvisioner}
+      </div>
     `;
   }
 

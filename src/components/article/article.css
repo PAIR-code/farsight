@@ -173,7 +173,7 @@
   }
 
   .figure-caption {
-    margin-top: 0px;
+    margin-top: 3px;
   }
 }
 
@@ -561,5 +561,23 @@ video {
       height: 50px;
       width: unset;
     }
+  }
+}
+
+.label {
+  /* color: white; */
+  padding: 0px 5px;
+  border-radius: 3px;
+
+  &.label-intended {
+    background: var(--green-100);
+  }
+
+  &.label-high-stakes {
+    background: var(--orange-100);
+  }
+
+  &.label-misuse {
+    background: var(--red-100);
   }
 }
