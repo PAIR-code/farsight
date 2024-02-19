@@ -19,6 +19,10 @@ import iconLogo from '../../images/icon-logo.svg?raw';
 import textData from './article.yaml';
 import iconCheckBox from '../../images/icon-check-box.svg?raw';
 import iconCopy from '../../images/icon-copy-box.svg?raw';
+import iconGT from '../../images/logo-gt.svg?raw';
+import iconGoogle from '../../images/logo-google.svg?raw';
+import iconEmory from '../../images/logo-emory.svg?raw';
+import iconEbay from '../../images/logo-ebay.svg?raw';
 
 interface FigureData {
   url: string;
@@ -289,12 +293,48 @@ export class FarsightArticle extends LitElement {
       </div>
     `;
 
+    // Footer
+    const footer = html`
+      <div class="article-footer">
+        <div class="footer-main">
+          <div class="footer-logo">
+            <a target="_blank" href="https://research.google/">
+              <div class="svg-logo" title="Georgia Tech">
+                ${unsafeHTML(iconGoogle)}
+              </div>
+            </a>
+
+            <a target="_blank" href="https://www.gatech.edu/">
+              <div class="svg-logo" title="Georgia Tech">
+                ${unsafeHTML(iconGT)}
+              </div>
+            </a>
+
+            <a target="_blank" href="https://www.emory.edu/">
+              <div class="svg-logo" title="Emory University">
+                ${unsafeHTML(iconEmory)}
+              </div>
+            </a>
+
+            <a target="_blank" href="https://www.ebayinc.com/company/">
+              <div class="svg-logo" title="eBay">${unsafeHTML(iconEbay)}</div>
+            </a>
+          </div>
+
+          <div class="footer-cp">
+            Copyright © ${new Date().getFullYear()} Google LLC
+          </div>
+        </div>
+      </div>
+    `;
+
     return html`
       <div class="article">
         ${introduction} ${usage} ${usageAlert} ${usageIncident} ${usageUseCase}
         ${usageHarmEnvisioner} ${whereTo} ${development} ${who} ${contribution}
         ${learnMore} ${paperInfo}
       </div>
+      ${footer}
     `;
   }
 

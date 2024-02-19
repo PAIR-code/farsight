@@ -524,32 +524,31 @@ video {
   width: 100%;
   justify-content: center;
 
-  display: grid;
-  grid-template-columns:
-    [start] 1fr [long-start] calc((1000px - 78ch) / 2) [text-start] minmax(
-      auto,
-      78ch
-    )
-    [text-end] calc((1000px - 78ch) / 2) [long-end] 1fr [end];
+  display: flex;
+  justify-content: center;
 }
 
 .footer-main {
-  grid-column: text-start / text-end;
   display: flex;
+  justify-content: center;
+  align-items: center;
   max-width: 100ch;
   flex-direction: row;
+  gap: 30px;
 }
 
 .footer-cp {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .footer-logo {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  gap: 30px;
 
   .svg-logo {
     height: 100%;
