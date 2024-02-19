@@ -29,6 +29,11 @@ interface TextData {
   usageIncident: string[];
   usageUseCase: string[];
   usageHarmEnvisioner: string[];
+  whereTo: string[];
+  development: string[];
+  contribution: string[];
+  learnMore: string[];
+  who: string[];
 
   figures: {
     alert: FigureData;
@@ -119,7 +124,9 @@ export class FarsightArticle extends LitElement {
     }
 
     // Usage
-    let usage = html`<h2>What Can I Do with Farsight?</h2>`;
+    let usage = html`<h2>
+      What Can I Do with <span class="tool-name">Farsight</span>?
+    </h2>`;
 
     for (const p of text.usageIntro) {
       usage = html`${usage}
@@ -154,10 +161,46 @@ export class FarsightArticle extends LitElement {
       <p>${unsafeHTML(text.usageHarmEnvisioner[0])}</p>
       <p>${unsafeHTML(text.usageHarmEnvisioner[1])}</p>`;
 
+    // Where to
+    const whereTo = html`
+      <h2>Where Can I Use <span class="tool-name">Farsight</span>?</h2>
+      <p>${unsafeHTML(text.whereTo[0])}</p>
+      <h4>I'm an AI Prototyper</h2>
+      <p>${unsafeHTML(text.whereTo[1])}</p>
+      <h4>I'm a Developer of Prompting Tools</h2>
+      <p>${unsafeHTML(text.whereTo[2])}</p>
+    `;
+
+    // Development
+    const development = html`
+      <h2>How is <span class="tool-name">Farsight</span>&nbsp;Developed?</h2>
+      <p>${unsafeHTML(text.development[0])}</p>
+    `;
+
+    const who = html`
+      <h2>Who Developed <span class="tool-name">Farsight</span>?</h2>
+      <p>${unsafeHTML(text.who[0])}</p>
+      <p>${unsafeHTML(text.who[1])}</p>
+    `;
+
+    // Contribution
+    const contribution = html`
+      <h2>How Can I Contribute?</h2>
+      <p>${unsafeHTML(text.contribution[0])}</p>
+      <p>${unsafeHTML(text.contribution[1])}</p>
+    `;
+
+    // Learn more
+    const learnMore = html`
+      <h2>How to Learn More?</h2>
+      <p>${unsafeHTML(text.learnMore[0])}</p>
+    `;
+
     return html`
       <div class="article">
         ${introduction} ${usage} ${usageAlert} ${usageIncident} ${usageUseCase}
-        ${usageHarmEnvisioner}
+        ${usageHarmEnvisioner} ${whereTo} ${development} ${who} ${contribution}
+        ${learnMore}
       </div>
     `;
   }

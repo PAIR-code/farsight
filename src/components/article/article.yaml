@@ -21,7 +21,7 @@ intro:
     <a href='https://github.com/PAIR-code/farsight' target='_blank'
     rel='noreferrer'>Chrome Extension</a> enabling it on Google AI Studio, or
     using a <a href='https://pypi.org/project/farsight/' target='_blank'
-    rel='noreferrer'>Python package</a> to enable it on Jupyter Notebook.
+    rel='noreferrer'>Python package</a> to enable it on computational notebooks.
     Developers of prompting tools can easily integrate our open-source and
     reusable components into their AI prototyping tools.
 
@@ -161,6 +161,115 @@ usageHarmEnvisioner:
     This layer order reflects the recommended harm envisioning workflow in
     responsible AI literature and helps users comprehend and organize diverse
     harms across different contexts.
+
+whereTo:
+  - >
+    We develop Farsight for both AI prototypers (i.e., prompt creators) and
+    prompting tool developers.
+
+  - >
+    AI prototypers can use Farsight in various ways: through this demo website,
+    <a href='https://github.com/PAIR-code/farsight' target='_blank'
+    rel='noreferrer'>a Chrome Extension</a>, and <a
+    href='https://pypi.org/project/farsight/' target='_blank' rel='noreferrer'>a
+    Python package</a>. The Chrome extension injects Farsight into Google AI Studio. The Python package allows AI
+    prototypers to use Farsight in computational notebooks including Jupyter
+    Notebook, JupyterLab, VS Code Notebook, and Google Colab. Visit <a
+    href='https://colab.research.google.com/drive/1aTIW3tRX1BRcNMCg8bRKktpZxRXtMF3-?usp=sharing'
+    target='_blank' rel='noreferrer'>this Colab Notebook</a> for a notebook demo.
+
+  - >
+    Developers of prompting tools can easily integrate Farsight into their
+    web-based prompting GUIs. Farsight includes four open-source reusable Web
+    Components: (1) Alert Symbol, (2) Incident Panel, (3) Use Case Panel, and
+    (4) Harm Envisioner. Developers can import these components into their
+    project regardless of the development stack (e.g., React, Svelte, Vue, or
+    Vanilla JavaScript). Farsight uses LLM API endpoints to generate embeddings
+    and content. The default is Gemini Pro. Developers can change it to other
+    services like <a
+    href='https://help.openai.com/en/articles/7102672-how-can-i-access-gpt-4'
+    target='_blank' rel='noreferrer'>GPT 4</a> and <a
+    href='https://docs.anthropic.com/claude/reference/getting-started-with-the-api'
+    target='_blank' rel='noreferrer'>Claude 2</a>.
+
+development:
+  - >
+    To make Farsight easily adoptable by both AI prototypers and AI companies,
+    we implement Farsight to be <strong>model-agnostic</strong> and
+    <strong>environment-agnostic</strong> and open-source our implementation. To
+    help AI companies and researchers integrate Farsight into their AI
+    prototyping tools, we leverage <a
+    href='https://developer.mozilla.org/en-US/docs/Web/API/Web_components'
+    target='_blank' rel='noreferrer'>Web Components</a> and <a
+    href='https://lit.dev/' target='_blank' rel='noreferrer'>Lit</a> to
+    implement Farsight as reusable modules, which can be easily integrated into
+    any web-based interfaces regardless of their development stacks (e.g.,
+    React, Vue, Svelte). We implement the interactive tree visualization using
+    <a href='https://d3js.org/' target='_blank' rel='noreferrer'>D3.js</a> and
+    embedding similarity computation using <a
+    href='https://www.tensorflow.org/js' target='_blank'
+    rel='noreferrer'>TensorFlow.js</a> with <a
+    href='https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API'
+    target='_blank' rel='noreferrer'>WebGL acceleration</a>. We use <a
+    href='https://github.com/poloclub/nova' target='_blank'
+    rel='noreferrer'>NOVA</a> for the computational notebook integration.
+
+who:
+  - >
+    Led by <a href='https://zijie.wang' target='_blank' rel='noreferrer'>Jay
+    Wang</a>, Farsight started as an intern project at Google Research (PAIR and
+    TASC). Farsight is created by <a href='https://zijie.wang' target='_blank'
+    rel='noreferrer'>Jay Wang</a>, <a
+    href='https://www.linkedin.com/in/chinmayk' target='_blank'
+    rel='noreferrer'>Chinmay Kulkarni</a>, <a
+    href='https://www.linkedin.com/in/laurenwilcox' target='_blank'
+    rel='noreferrer'>Lauren Wilcox</a>, <a
+    href='https://research.google/people/michael-terry/' target='_blank'
+    rel='noreferrer'>Michael Terry</a>, and <a href='http://michaelmadaio.com/'
+    target='_blank' rel='noreferrer'>Michael Madaio</a>.
+
+  - >
+    We express our gratitude to all anonymous participants who took part in our
+    co-design and evaluation studies. We are thankful to Jaemarie Solyst and
+    Savvas Petridis for piloting our studies. We thank Renee Shelby, Negar
+    Rostamzadeh, and Andrew Zaldivar for rating the harms collected from the
+    evaluation study. We are immensely grateful for the invaluable feedback
+    provided by Ellen Jiang, Taylor Roper, Parker Barnes, Renee Shelby, Ann
+    Yuan, Mahima Pushkarna, Jaemarie Solyst, Savvas Petridis, Minsuk Kahng,
+    Vivian Tsai, Alicia Parrish, Kevin Robinson, Carrie Cai, James Wexler,
+    Dheeraj Rajagopal, Tesh Goyal, Adam Pearce, Shaun Kane, Alex Fiannaca, and
+    Donald Martin. We thank the anonymous Google employees who generously
+    allowed us to use their prompts to design and prototype Farsight.
+    Additionally, we are grateful to James Wexler, Paul Yang, Tulsee Doshi, and
+    Marian Croak for their assistance in open sourcing Farsight. Lastly, we
+    would like to acknowledge the anonymous reviewers for their detailed and
+    helpful feedback.
+
+contribution:
+  - >
+    If you have any questions or feedback, feel free to <a
+    href='https://github.com/PAIR-code/farsight/issues' target='_blank'
+    rel='noreferrer'>open an issue</a> or contact <a href='https://zijie.wang'
+    target='_blank' rel='noreferrer'>Jay Wang</a>. If you plan to integrate
+    Farsight into your prompting tool, we are happy to help!
+
+  - >
+    We'd love to hear your experience with Farsight! If you'd like to share
+    (e.g., what is your typical workflow to write prompts, what features of
+    Farsight that you find helpful or unhelpful), please reach out to us.
+    Farsight is an open-source project, and we welcome <a
+    href='https://github.com/PAIR-code/farsight/pulls' target='_blank'
+    rel='noreferrer'>pull requests</a> for new feature implementations and bug
+    fixes, etc.
+
+learnMore:
+  - >
+    To learn more about Farsight, please read our <a
+    href='https://github.com/PAIR-code/farsight' target='_blank'
+    rel='noreferrer'>research paper</a> (published at <a
+    href='https://chi2024.acm.org/' target='_blank'
+    rel='noreferrer'>CHI'24</a>). If you find Farsight useful for your research,
+    please consider citing our paper. Thanks!
 
 figures:
   alert:
