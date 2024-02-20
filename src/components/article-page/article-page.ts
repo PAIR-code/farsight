@@ -26,11 +26,6 @@ import iconVideo from '../../images/icon-play.svg?raw';
 import iconFile from '../../images/icon-file.svg?raw';
 
 const promptMap: Record<string, string> = {
-  'Article Summarizer': `I want you to act as a text summarizer. You will summarize my article in one sentence.
-
-Article: Eighty years ago today - a powerful explosion rocked the small community of Dawson Creek on February 13th, 1943. The blast reached Spirit River with enough strength left to rattle dishes in cupboards. In 1943, the American Army was in Dawson Creek (population 500), working on the Alaska Highway. The old town was surrounded by makeshift barracks and storage warehouses for construction equipment. One, a livery barn in the centre of the commercial block, housed thousands of miles of copper wire, kegs of nails, spikes, cross-arm braces, hammers, crowbars, tires, and other assorted tools. Two hundred cases of percussion caps and a truckload of dynamite were also stored in the handy location. Somehow a fire started. The inevitable explosion followed soon after, incinerating whatever was in the core zone and blowing people off their feet in expanding circles throughout the town. Fire spread rapidly and eventually only one building remained standing - the Co-op store - but it was wrecked and looted. Dorthea Calverley has written a fascinating personal account of the disaster.
-Summary: A powerful explosion in Dawson Creek on February 13th, 1943 destroyed most of the town.
-  `,
   'Email Summarizer': `You are an expert in writing emails. Rewrite the given emails to make them shorter and better.
 
   Email: "Good morning, Alex. I wanted to write you this note because I think we should schedule a follow-up meeting. I am thinking we could meet next week, would that work for you? I think the deck is looking solid but I have some thoughts on it that I would like to share with you."
@@ -71,6 +66,9 @@ output: toxic
 
 input: He is not living proof that gay conversion therapy works.
 output:`,
+  'Therapy Chatbot': `You are an expert in psychotherapy. A patient chats with you to seek help about their mental health. Your task is to give the best advice.
+
+Patient: "I'm feeling really down lately."`,
   'Math Tutor': `You are a great math tutor. Given some mathematical equations or concepts, your will explain them in easy-to-understand terms. You will provide more than the basic definition and help the student to learn the underlying reasons.
 
 User: What's the upper bound and lower bound of sin()?
@@ -81,10 +79,10 @@ Tutor:`,
   'New Prompt': ''
 };
 
-// const ENDPOINT =
-//   'https://e6uzge3qj1.execute-api.us-east-1.amazonaws.com/prod/run/';
 const ENDPOINT =
-  'https://nloror73zf.execute-api.localhost.localstack.cloud:4566/prod/run/';
+  'https://e6uzge3qj1.execute-api.us-east-1.amazonaws.com/prod/run/';
+// const ENDPOINT =
+//   'https://nloror73zf.execute-api.localhost.localstack.cloud:4566/prod/run/';
 
 /**
  * Demo page element.
@@ -104,6 +102,7 @@ export class FarsightArticlePage extends LitElement {
 
   @state()
   selectedPrompt = 'Legal Brief Writer';
+  // selectedPrompt = 'French Translator';
 
   @query('#farsight-dialog')
   farsightDialogElement: HTMLDialogElement | undefined;

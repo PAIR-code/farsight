@@ -215,7 +215,7 @@ export class FarsightContainerSignal extends LitElement {
         () => {
           this.updateRiskScore(relevantAccidents);
         },
-        DEV_MODE ? 1000 : 1000
+        DEV_MODE ? 2000 : 1000
       );
     } else {
       // API call

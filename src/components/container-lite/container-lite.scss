@@ -28,6 +28,7 @@ $padding-v: 12px;
   justify-content: flex-start;
   align-items: flex-start;
   box-sizing: border-box;
+  border-radius: var(--border-radius, 0px);
 
   background-color: white;
   container-type: inline-size;
