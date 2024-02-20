@@ -156,7 +156,7 @@ export class FarsightArticle extends LitElement {
     }
 
     // Usage
-    let usage = html`<h2>
+    let usage = html`<h2 id="feature">
       What Can I Do with <span class="tool-name">Farsight</span>?
     </h2>`;
 
@@ -166,7 +166,7 @@ export class FarsightArticle extends LitElement {
     }
 
     // Usage: alert
-    const usageAlert = html`<h4>Alert Symbol</h4>
+    const usageAlert = html`<h4 id="alert-symbol">Alert Symbol</h4>
       <p>${unsafeHTML(text.usageAlert[0])}</p>
 
       <div class="video">
@@ -191,7 +191,9 @@ export class FarsightArticle extends LitElement {
       <p>${unsafeHTML(text.usageAlert[2])}</p> `;
 
     // Usage: incident panel
-    const usageIncident = html`<h4>Awareness Sidebar: Incident Panel</h4>
+    const usageIncident = html`<h4 id="incident-panel">
+        Awareness Sidebar: Incident Panel
+      </h4>
       <p>${unsafeHTML(text.usageIncident[0])}</p>
 
       <div class="video">
@@ -208,7 +210,9 @@ export class FarsightArticle extends LitElement {
       <p>${unsafeHTML(text.usageIncident[1])}</p>`;
 
     // Usage: use case panel
-    const usageUseCase = html`<h4>Awareness Sidebar: Use Case Panel</h4>
+    const usageUseCase = html`<h4 id="use-case-panel">
+        Awareness Sidebar: Use Case Panel
+      </h4>
       <p>${unsafeHTML(text.usageUseCase[0])}</p>
 
       <div class="video">
@@ -225,7 +229,9 @@ export class FarsightArticle extends LitElement {
       <p>${unsafeHTML(text.usageUseCase[1])}</p>`;
 
     // Usage: harm envisioner
-    const usageHarmEnvisioner = html`<h4>Harm Envisioner</h4>
+    const usageHarmEnvisioner = html`<h4 id="harm-envisioner">
+        Harm Envisioner
+      </h4>
       <p>${unsafeHTML(text.usageHarmEnvisioner[0])}</p>
 
       <div class="video">
@@ -243,10 +249,12 @@ export class FarsightArticle extends LitElement {
 
     // Where to
     const whereTo = html`
-      <h2>Where Can I Use <span class="tool-name">Farsight</span>?</h2>
+      <h2 id="where">
+        Where Can I Use <span class="tool-name">Farsight</span>?
+      </h2>
       <p>${unsafeHTML(text.whereTo[0])}</p>
 
-      <h4>I'm an AI Prototyper</h4>
+      <h4 id="where-ai-prototyper">I'm an AI Prototyper</h4>
       <p>${unsafeHTML(text.whereTo[1])}</p>
 
       <div class="video">
@@ -271,33 +279,37 @@ export class FarsightArticle extends LitElement {
         </div>
       </div>
 
-      <h4>I'm a Developer of Prompting Tools</h4>
+      <h4 id="where-developer">I'm a Developer of Prompting Tools</h4>
       <p>${unsafeHTML(text.whereTo[2])}</p>
     `;
 
     // Development
     const development = html`
-      <h2>How is <span class="tool-name">Farsight</span>&nbsp;Developed?</h2>
+      <h2 id="development">
+        How is <span class="tool-name">Farsight</span>&nbsp;Developed?
+      </h2>
       <p>${unsafeHTML(text.development[0])}</p>
     `;
 
     // Who
     const who = html`
-      <h2>Who Developed <span class="tool-name">Farsight</span>?</h2>
+      <h2 id="creator">
+        Who Developed <span class="tool-name">Farsight</span>?
+      </h2>
       <p>${unsafeHTML(text.who[0])}</p>
       <p>${unsafeHTML(text.who[1])}</p>
     `;
 
     // Contribution
     const contribution = html`
-      <h2>How Can I Contribute?</h2>
+      <h2 id="contribute">How Can I Contribute?</h2>
       <p>${unsafeHTML(text.contribution[0])}</p>
       <p>${unsafeHTML(text.contribution[1])}</p>
     `;
 
     // Learn more
     const learnMore = html`
-      <h2>How to Learn More?</h2>
+      <h2 id="learn-more">How to Learn More?</h2>
       <p>${unsafeHTML(text.learnMore[0])}</p>
     `;
 
