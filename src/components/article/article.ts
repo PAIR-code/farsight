@@ -63,6 +63,11 @@ interface TextData {
 
   videos: {
     alert: FigureData;
+    incident: FigureData;
+    useCase: FigureData;
+    harmEnvisioner: FigureData;
+    chromeExtension: FigureData;
+    notebook: FigureData;
   };
 }
 
@@ -163,6 +168,18 @@ export class FarsightArticle extends LitElement {
     // Usage: alert
     const usageAlert = html`<h4>Alert Symbol</h4>
       <p>${unsafeHTML(text.usageAlert[0])}</p>
+
+      <div class="video">
+        <video autoplay loop muted playsinline>
+          <source src=${text.videos.alert.url} />
+          <track kind="captions" />
+        </video>
+
+        <div class="figure-caption">
+          Video 1. ${unsafeHTML(text.videos.alert.caption)}
+        </div>
+      </div>
+
       <p>${unsafeHTML(text.usageAlert[1])}</p>
 
       <div class="figure">
@@ -176,25 +193,85 @@ export class FarsightArticle extends LitElement {
     // Usage: incident panel
     const usageIncident = html`<h4>Awareness Sidebar: Incident Panel</h4>
       <p>${unsafeHTML(text.usageIncident[0])}</p>
+
+      <div class="video">
+        <video autoplay loop muted playsinline>
+          <source src=${text.videos.incident.url} />
+          <track kind="captions" />
+        </video>
+
+        <div class="figure-caption">
+          Video 2. ${unsafeHTML(text.videos.incident.caption)}
+        </div>
+      </div>
+
       <p>${unsafeHTML(text.usageIncident[1])}</p>`;
 
     // Usage: use case panel
     const usageUseCase = html`<h4>Awareness Sidebar: Use Case Panel</h4>
       <p>${unsafeHTML(text.usageUseCase[0])}</p>
+
+      <div class="video">
+        <video autoplay loop muted playsinline>
+          <source src=${text.videos.useCase.url} />
+          <track kind="captions" />
+        </video>
+
+        <div class="figure-caption">
+          Video 3. ${unsafeHTML(text.videos.useCase.caption)}
+        </div>
+      </div>
+
       <p>${unsafeHTML(text.usageUseCase[1])}</p>`;
 
     // Usage: harm envisioner
     const usageHarmEnvisioner = html`<h4>Harm Envisioner</h4>
       <p>${unsafeHTML(text.usageHarmEnvisioner[0])}</p>
+
+      <div class="video">
+        <video autoplay loop muted playsinline>
+          <source src=${text.videos.harmEnvisioner.url} />
+          <track kind="captions" />
+        </video>
+
+        <div class="figure-caption">
+          Video 4. ${unsafeHTML(text.videos.harmEnvisioner.caption)}
+        </div>
+      </div>
+
       <p>${unsafeHTML(text.usageHarmEnvisioner[1])}</p>`;
 
     // Where to
     const whereTo = html`
       <h2>Where Can I Use <span class="tool-name">Farsight</span>?</h2>
       <p>${unsafeHTML(text.whereTo[0])}</p>
-      <h4>I'm an AI Prototyper</h2>
+
+      <h4>I'm an AI Prototyper</h4>
       <p>${unsafeHTML(text.whereTo[1])}</p>
-      <h4>I'm a Developer of Prompting Tools</h2>
+
+      <div class="video">
+        <video autoplay loop muted playsinline>
+          <source src=${text.videos.chromeExtension.url} />
+          <track kind="captions" />
+        </video>
+
+        <div class="figure-caption">
+          Video 5. ${unsafeHTML(text.videos.chromeExtension.caption)}
+        </div>
+      </div>
+
+      <div class="video">
+        <video autoplay loop muted playsinline>
+          <source src=${text.videos.notebook.url} />
+          <track kind="captions" />
+        </video>
+
+        <div class="figure-caption">
+          Video 6. ${unsafeHTML(text.videos.notebook.caption)}
+        </div>
+      </div>
+
+      <h4>I'm a Developer of Prompting Tools</h4>
       <p>${unsafeHTML(text.whereTo[2])}</p>
     `;
 

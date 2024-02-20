@@ -331,3 +331,74 @@ figures:
       spread out. For an interactive version of this visualization, visit <a
       href='https://poloclub.github.io/wizmap/?dataURL=https://huggingface.co/datasets/xiaohk/embeddings/resolve/main/ai-incident/data.ndjson&gridURL=https://huggingface.co/datasets/xiaohk/embeddings/resolve/main/ai-incident/grid.json'
       target='_blank' rel='noreferrer'>WizMap</a>.
+
+videos:
+  alert:
+    url: https://github.com/xiaohk/xiaohk/assets/15007159/49d9a0ce-fad3-46be-9c95-e1fceddecbb9
+    caption: >
+      The Alert Symbol is a persistent overlay that appears on top or next to
+      the prompting tool. When a user runs the prompt, Farsight calculates the
+      cosine distance between the prompt's embedding and the embeddings of AI
+      incident reports. It then categorizes all incident reports as
+      <em>moderately relevant</em>, <em>remotely relevant</em>, or
+      <em>irrelevant</em> based on these distances. The Alert Symbol uses the
+      number of <em>moderately relevant</em> and <em>remotely relevant</em>
+      reports to determine an alert level (such as neutral, caution, or warning)
+      and adjusts its display style to alert users accordingly.
+
+  incident:
+    url: https://github.com/xiaohk/xiaohk/assets/15007159/41e5a87a-0161-4b3a-aacd-f11a0cd2fb91
+    caption: >
+      The Incident Panel surfaces AI incident reports that are relevant to the
+      user’s current prompt by using the cosine distance between the prompt’s
+      embedding and the embeddings of AI incident reports. It displays the title
+      and thumbnail of relevant reports in a list, highlighting moderately
+      relevant reports with a red tint and remotely relevant reports with an
+      orange tint. Users can click on a report to read the full article in a new
+      browser tab.
+
+  useCase:
+    url: https://github.com/xiaohk/xiaohk/assets/15007159/7f8f4714-3fee-49d6-bc19-22a54c1c1bdd
+    caption: >
+      The Use Case Panel helps the user envision how different people may use
+      the AI application that the user is prototyping. This panel uses LLM to
+      generate potential use cases, stakeholders in each use case, and the
+      potential harm that could occur to the stakeholders.  This panel also uses
+      LLM to classify each use case as (1) <em>intended</em>, (2)
+      <em>high-stakes</em>, and (3) <em>misuse</em>. The firs tab "Mix" shows
+      one use case from each category. The <em>intended</em> use cases are those
+      that align with the development target use cases. The <em>high-stakes</em>
+      use cases encompass those that may arise in high-stakes domains, such as
+      medicine, finance, and the law. The <em>misuse</em> category includes
+      scenarios where malicious actors exploit the AI application to cause
+      harms.
+
+  harmEnvisioner:
+    url: https://github.com/xiaohk/xiaohk/assets/15007159/11eb5fcb-8613-4074-b84f-9ea54a45be00
+    caption: >
+      The Harm Envisioner allows users to interactively envision potential harms
+      using LLM. Initially, a summary of the user's prompt is generated for
+      editing and confirmation. Then, LLM generates various use cases (intended,
+      high-stakes, and misuse) which are organized in an interactive node-link
+      visualization. Users can edit the content and click the Farsight button to
+      have LLM envision potential stakeholders and harms related to the use
+      case. Nodes can be edited, and deleted, and stakeholders (direct and
+      indirect) and harms can be relabeled based on a <a
+      href='https://arxiv.org/abs/2210.05791' target='_blank'
+      rel='noreferrer'>harm taxonomy</a>). Additionally, users can rate the
+      severity of a harm by clicking the fire icon.
+
+  chromeExtension:
+    url: https://github.com/xiaohk/xiaohk/assets/15007159/c72ce94e-0ba4-4535-ba84-b56e9f930b1c
+    caption: >
+      AI prototypers can use our Chrome extension to enable Farsight on Google AI Studio.
+
+  notebook:
+    url: https://github.com/xiaohk/xiaohk/assets/15007159/62b9a9c6-18b0-4953-b535-371ed9ccd9f8
+    caption: >
+      AI prototypers can use our Python package to use Farsight in computational
+      notebooks, including Jupyter Notebook, JupyterLab, Google Colab, and VS
+      Code Notebook. For JupyterLab users, we also recommend using <a
+      href='https://github.com/xiaohk/stickyland' target='_blank'
+      rel='noreferrer'>StickyLand</a> to create a persistent 2D dashboard with
+      Farsight components.

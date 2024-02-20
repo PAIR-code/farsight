@@ -157,6 +157,8 @@
 
 .figure {
   width: 100%;
+  margin: 24px 0px 10px 0px;
+  padding: 5px 0;
   grid-column: text-start / text-end;
 
   &.wide-figure {
@@ -165,8 +167,7 @@
 
   & img {
     width: 100%;
-    margin: 16px 0 0 0;
-    padding: 5px 0;
+
     box-shadow: 0px 0px 3px hsla(0, 0%, 0%, 0.2),
       0px 2px 8px hsla(0, 0%, 0%, 0.1);
     border-radius: 10px;
@@ -177,32 +178,30 @@
   }
 }
 
-.video {
+.video video,
+.wide-video video {
   width: 100%;
+  box-shadow: 0px 0px 3px hsla(0, 0%, 0%, 0.2), 0px 2px 8px hsla(0, 0%, 0%, 0.1);
+  border-radius: 10px;
+}
+
+.wide-video video {
+  width: 100%;
+  box-shadow: 0px 0px 3px hsla(0, 0%, 0%, 0.2), 0px 2px 8px hsla(0, 0%, 0%, 0.1);
+  border-radius: 10px;
+}
+
+.video {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
 
-video {
   width: 100%;
   grid-column: text-start / text-end;
-
-  box-shadow: 0px 0px 3px hsla(0, 0%, 0%, 0.2), 0px 2px 8px hsla(0, 0%, 0%, 0.1);
-  border-radius: 10px;
-
-  &.wide-video {
-    grid-column: long-start / long-end;
-  }
-}
-
-.video {
-  width: 100%;
-  grid-column: text-start / text-end;
-  margin: 16px 0 0 0;
+  margin: 24px 0px 10px 0px;
   padding: 5px 0;
 
-  &.wide-video {
+  &.wide {
     grid-column: long-start / long-end;
   }
 }
