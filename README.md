@@ -8,7 +8,7 @@
 
 <!-- [![arxiv badge](https://img.shields.io/badge/arXiv-2401.14447-red)](https://arxiv.org/abs/2401.14447) -->
 
-In situ interactive widget for responsible AI 🌱
+In situ interactive widgets for responsible AI 🌱
 
 <table>
   <tr>
@@ -81,15 +81,6 @@ With a novel _in situ_ design, contextual AI incident feed, and human-AI collabo
 
 For a live demo, visit: <https://PAIR-code.github.io/farsight/>.
 
-### Chrome Extension
-
-If you use Google AI Studio to prototype AI applications, you can manually install our Chrome Extension at `./chrome-extension/dist`.
-
-1. Download `farsight.crx`
-2. Open `chrome://extensions/` in Chrome
-3. Drag `farsight.crx` into the page
-4. Visit [Google AI Studio](https://aistudio.google.com/app/prompts/new_chat) and you should see Farsight :)
-
 ### Computational Notebook
 
 If you use computational notebooks (e.g., Jupyter Notebook, JupyterLab, Google Colab, VS Code Notebook), you can easily use Farsight via its Python Package.
@@ -111,6 +102,15 @@ farsight.sidebar(prompt)
 # Harm Envisioner
 farsight.envision(prompt)
 ```
+
+### Google AI Studio
+
+If you use Google AI Studio to prototype AI applications, you can manually install our Chrome Extension at `./chrome-extension/dist`.
+
+1. Download `farsight.crx`
+2. Open `chrome://extensions/` in Chrome
+3. Drag `farsight.crx` into the page
+4. Visit [Google AI Studio](https://aistudio.google.com/app/prompts/new_chat) and you should see Farsight :)
 
 ## Integrating Farsight into Prompting Tools
 
