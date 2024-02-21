@@ -10,10 +10,6 @@
     "gemini",
     "gemini pro"
   ],
-  "files": [
-    "dist",
-    "dist-extensions"
-  ],
   "types": "./dist/farsight.d.ts",
   "exports": {
     ".": {

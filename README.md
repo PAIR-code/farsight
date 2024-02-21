@@ -2,8 +2,8 @@
 
 [![Github Actions Status](https://github.com/PAIR-code/farsight/workflows/build/badge.svg)](https://github.com/PAIR-code/farsight/actions/workflows/build.yml)
 [![license](https://img.shields.io/badge/License-Apache_2.0-blue)](https://github.com/PAIR-code/farsight/blob/main/LICENSE)
-[![npm](https://img.shields.io/npm/v/farsight?color=yellow)](https://www.npmjs.com/package/farsight)
-[![pypi](https://img.shields.io/pypi/v/farsight?color=brightgreen)](https://pypi.org/project/farsight/)
+[![npm](https://img.shields.io/npm/v/@xiaohk/farsight?color=orange)](https://www.npmjs.com/package/@xiaohk/farsight)
+[![pypi](https://img.shields.io/pypi/v/farsight?color=yellow)](https://pypi.org/project/farsight/)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1aTIW3tRX1BRcNMCg8bRKktpZxRXtMF3-?usp=sharing)
 
 <!-- [![arxiv badge](https://img.shields.io/badge/arXiv-2401.14447-red)](https://arxiv.org/abs/2401.14447) -->
