@@ -25,11 +25,11 @@ export default defineConfig(({ command, mode }) => {
     // Development
     return {
       plugins: [
-        yaml(),
-        hmrPlugin({
-          include: ['./src/**/*.ts'],
-          presets: [presets.lit]
-        })
+        yaml()
+        // hmrPlugin({
+        //   include: ['./src/**/*.ts'],
+        //   presets: [presets.lit]
+        // })
       ]
     };
   } else if (command === 'build') {

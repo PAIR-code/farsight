@@ -13,6 +13,8 @@ import {
   stopLogoAnimation
 } from '../container-signal/container-signal';
 
+import '../youtube/youtube';
+
 // Assets
 import componentCSS from './article.css?inline';
 import iconLogo from '../../images/icon-logo.svg?raw';
@@ -69,6 +71,14 @@ interface TextData {
     chromeExtension: FigureData;
     notebook: FigureData;
   };
+
+  youtubeTimes: YoutubeChapter[];
+}
+
+interface YoutubeChapter {
+  startTime: number;
+  name: string;
+  timestamp: string;
 }
 
 const text = textData as TextData;
@@ -283,6 +293,26 @@ export class FarsightArticle extends LitElement {
       <p>${unsafeHTML(text.whereTo[2])}</p>
     `;
 
+    // Demo video BlSFbGkOlHk
+    // <lite-youtube videoid="BlSFbGkOlHk">
+    //   <a
+    //     class="lite-youtube-fallback"
+    //     href="https://www.youtube.com/watch?v=BlSFbGkOlHk"
+    //   >
+    //     Watch on YouTube
+    //   </a>
+    // </lite-youtube>;
+    const demoVideo = html`
+      <h2 id="youtube-video">Demo Video</h2>
+
+      <div class="youtube-video">
+        <nightjar-youtube
+          videoId="BlSFbGkOlHk"
+          playerId="demo-video"
+        ></nightjar-youtube>
+      </div>
+    `;
+
     // Development
     const development = html`
       <h2 id="development">
@@ -420,8 +450,8 @@ export class FarsightArticle extends LitElement {
     return html`
       <div class="article">
         ${introduction} ${usage} ${usageAlert} ${usageIncident} ${usageUseCase}
-        ${usageHarmEnvisioner} ${whereTo} ${development} ${who} ${contribution}
-        ${learnMore} ${paperInfo}
+        ${usageHarmEnvisioner} ${whereTo} ${demoVideo} ${development} ${who}
+        ${contribution} ${learnMore} ${paperInfo}
       </div>
       ${footer}
     `;

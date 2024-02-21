@@ -402,3 +402,47 @@ videos:
       href='https://github.com/xiaohk/stickyland' target='_blank'
       rel='noreferrer'>StickyLand</a> to create a persistent 2D dashboard with
       Farsight components.
+
+youtubeTimes:
+  - startTime: 0
+    name: Introduction
+    timestamp: (0:00-0:26)
+  - startTime: 26
+    name: Alert Symbol
+    timestamp: (0:26-0:38)
+  - startTime: 38
+    name: Incident Panel
+    timestamp: (0:38-0:53)
+  - startTime: 63
+    name: Use Case Panel
+    timestamp: (0:53-1:12)
+  - startTime: 72
+    name: Legal Brief Writer Example
+    timestamp: (1:12-1:45)
+  - startTime: 105
+    name: Translator Example
+    timestamp: (1:45-1:55)
+  - startTime: 115
+    name: Harm Envisioner Summary
+    timestamp: (1:55-2:05)
+  - startTime: 125
+    name: Use Cases
+    timestamp: (2:05-2:20)
+  - startTime: 140
+    name: Stakeholders & Harms
+    timestamp: (2:20-2:35)
+  - startTime: 135
+    name: Human-AI Collaborative Envisioning
+    timestamp: (2:35-3:50)
+  - startTime: 230
+    name: Export Harms
+    timestamp: (3:50-4:00)
+  - startTime: 240
+    name: Google AI Studio
+    timestamp: (4:00-4:20)
+  - startTime: 260
+    name: Computational notebook
+    timestamp: (4:20-4:50)
+  - startTime: 290
+    timestamp: (4:50-5:00)
+    name: Live Demo
