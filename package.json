@@ -37,7 +37,7 @@
     "build:library": "pnpm tsc && pnpm vite build --mode library",
     "build:extension": "pnpm tsc && pnpm vite build --mode extension",
     "build:notebook": "pnpm tsc && pnpm vite build --mode notebook",
-    "build:npm": "npm tsc && npm run build:library && npm run build:extension",
+    "build:npm": "npx tsc && npm run build:library && npm run build:extension",
     "preview": "vite preview"
   },
   "devDependencies": {

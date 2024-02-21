@@ -29,6 +29,8 @@ Farsight is a collection of _in situ_ interactive widgets that help large langua
 With a novel _in situ_ design, contextual AI incident feed, and human-AI collaborative harm envisioning, Farsight empowers prompt creators with diverse backgrounds to be more mindful of responsible AI during early AI prototyping.
 
 <table>
+  <td colspan="3">Widgets</td>
+  <tr></tr>
   <tr>
     <td>1️⃣</td>
     <td><strong>Alert Symbol</strong></td>
@@ -53,18 +55,25 @@ With a novel _in situ_ design, contextual AI incident feed, and human-AI collabo
     <td>Human-AI collaborative harm envisioning tool</td>
   </tr>
   <tr></tr>
+  <td colspan="3">Distributions</td>
+  <tr></tr>
     <tr>
     <td>📦</td>
-    <td>Chrome Extension</td>
+    <td><a href="https://pair-code.github.io/farsight/" >Live Demo</a></td>
+    <td>Try Farsight with Gemini Pro and GPT-3.5</td>
+  </tr>
+  <tr></tr>
+    <tr>
+    <td>📦</td>
+    <td><a href="https://github.com/PAIR-code/farsight/releases" >Chrome Extension</a></td>
     <td>Google AI Studio support</td>
   </tr>
   <tr></tr>
   <tr>
     <td>📦</td>
-    <td>Python Package</td>
+    <td><a href="https://pair-code.github.io/farsight/" >Python Package</a></td>
     <td>Computational notebook support (Jupyter, Colab, VS Code notebook)</td>
   </tr>
-  <tr></tr>
   <tr></tr>
 </table>
 
@@ -83,9 +92,9 @@ For a live demo, visit: <https://PAIR-code.github.io/farsight/>.
 
 ### Computational Notebook
 
-If you use computational notebooks (e.g., Jupyter Notebook, JupyterLab, Google Colab, VS Code Notebook), you can easily use Farsight via its Python Package.
+If you use computational notebooks (e.g., Jupyter Notebook, JupyterLab, Google Colab, VS Code Notebook), you can easily use Farsight via its Python Package. We recommend using [StickyLand](https://github.com/xiaohk/stickyland) to enable sticky cells.
 
-We recommend using [StickyLand](https://github.com/xiaohk/stickyland) to enable persistent 2D display in notebooks.
+Visit this [Colab Notebook](https://colab.research.google.com/drive/1aTIW3tRX1BRcNMCg8bRKktpZxRXtMF3-?usp=sharing) for a demo.
 
 ```python
 # Install Farsight
@@ -105,12 +114,12 @@ farsight.envision(prompt)
 
 ### Google AI Studio
 
-If you use Google AI Studio to prototype AI applications, you can manually install our Chrome Extension at `./chrome-extension/dist`.
+If you use Google AI Studio to prototype AI applications, you can manually install our Chrome Extension package from the [latest release](https://github.com/PAIR-code/farsight/releases).
 
 1. Download `farsight.crx`
 2. Open `chrome://extensions/` in Chrome
 3. Drag `farsight.crx` into the page
-4. Visit [Google AI Studio](https://aistudio.google.com/app/prompts/new_chat) and you should see Farsight :)
+4. Visit [Google AI Studio](https://aistudio.google.com/app/prompts/new_chat) and you will see Farsight :)
 
 ## Integrating Farsight into Prompting Tools
 
