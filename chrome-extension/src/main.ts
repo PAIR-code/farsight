@@ -1,10 +1,10 @@
 import '@webcomponents/custom-elements';
-import 'farsight/extension';
+import '@xiaohk/farsight/extension';
 import {
   FarsightContainer,
   FarsightContainerLite,
-  FarsightContainerSignal,
-} from 'farsight/extension';
+  FarsightContainerSignal
+} from '@xiaohk/farsight/extension';
 
 import './main.css';
 

@@ -2,6 +2,14 @@
   "name": "@xiaohk/farsight",
   "version": "0.1.1",
   "type": "module",
+  "keywords": [
+    "responsible ai",
+    "llm",
+    "google ai studio",
+    "large language model",
+    "gemini",
+    "gemini pro"
+  ],
   "files": [
     "dist"
   ],
