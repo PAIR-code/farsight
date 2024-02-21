@@ -2,7 +2,7 @@
 
 """The setup script."""
 
-from json import loads
+from json import loads, load, dump
 from setuptools import setup, find_packages
 from pathlib import Path
 
@@ -12,6 +12,15 @@ with open("README.md", "r") as readme_file:
 requirements = ["ipython"]
 
 test_requirements = []
+
+# Read the version from package.json
+package_json_path = "./package.json"
+
+# Read the package.json file
+with open(package_json_path, "r", encoding="utf8") as f:
+    package_json = load(f)
+    version = package_json["version"]
+    dump(package_json, open("./package-copy.json", "w", encoding="utf8"))
 
 setup(
     author="Jay Wang",
@@ -23,9 +32,12 @@ setup(
         "JupyterLab",
         "JupyterLab3",
         "Machine Learning",
-        "Visualization",
-        "Interactive Visualization",
-        "Embeddings",
+        "LLM",
+        "Gemini Pro",
+        "Responsible AI",
+        "AI",
+        "Large Language Model",
+        "ChatGPT",
     ],
     classifiers=[
         "License :: OSI Approved :: MIT License",
@@ -50,6 +62,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/PAIR-code/farsight",
-    version="0.1.2",
+    version=version,
     zip_safe=False,
 )

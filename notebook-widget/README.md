@@ -1,1 +1,1 @@
-# Farsight
+../README.md
