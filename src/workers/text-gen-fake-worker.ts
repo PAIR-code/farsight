@@ -1,11 +1,12 @@
-import { HarmCategory, HarmBlockThreshold } from '../types/palm-api-types';
 import { FakeWorker } from './fake-worker';
 import type { TextGenWorkerMessage } from '../types/common-types';
-import type {
-  PalmGenerateTextRequestBody,
-  PalmGenerateTextResponseBody,
-  SafetySetting
-} from '../types/palm-api-types';
+import {
+  GeminiGenerateTextRequestBody,
+  GeminiGenerateTextResponseBody,
+  HarmCategory,
+  SafetySetting,
+  HarmBlockThreshold
+} from '../types/gemini-types';
 
 export class TextGenFakeWorker extends FakeWorker<TextGenWorkerMessage> {
   constructor(
@@ -46,10 +47,10 @@ export class TextGenFakeWorker extends FakeWorker<TextGenWorkerMessage> {
   }
 
   /**
-   * Use PaLM API to generate text based on a given prompt
-   * @param apiKey PaLM API key
+   * Use Gemini API to generate text based on a given prompt
+   * @param apiKey Gemini API key
    * @param requestID Worker request ID
-   * @param prompt Prompt to give to the PaLM model
+   * @param prompt Prompt to give to the Gemini model
    * @param temperature Model temperature
    */
   async startTextGen(
@@ -63,44 +64,42 @@ export class TextGenFakeWorker extends FakeWorker<TextGenWorkerMessage> {
     // Configure safety setting to allow low-probability unsafe responses
     const safetySettings: SafetySetting[] = [
       {
-        category: HarmCategory.HARM_CATEGORY_DANGEROUS,
+        category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
         threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH
       },
       {
-        category: HarmCategory.HARM_CATEGORY_DEROGATORY,
+        category: HarmCategory.HARM_CATEGORY_HARASSMENT,
         threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH
       },
       {
-        category: HarmCategory.HARM_CATEGORY_MEDICAL,
+        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
         threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH
       },
       {
-        category: HarmCategory.HARM_CATEGORY_SEXUAL,
-        threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH
-      },
-      {
-        category: HarmCategory.HARM_CATEGORY_TOXICITY,
-        threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH
-      },
-      {
-        category: HarmCategory.HARM_CATEGORY_UNSPECIFIED,
-        threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH
-      },
-      {
-        category: HarmCategory.HARM_CATEGORY_VIOLENCE,
+        category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
         threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH
       }
     ];
 
-    const parameter: PalmGenerateTextRequestBody = {
-      prompt: { text: prompt },
-      safetySettings: safetySettings,
-      temperature,
-      stopSequences
+    const parameter: GeminiGenerateTextRequestBody = {
+      contents: [
+        {
+          parts: [
+            {
+              text: prompt
+            }
+          ]
+        }
+      ],
+      safetySettings,
+      generationConfig: {
+        temperature,
+        stopSequences
+      }
     };
 
-    const model = 'text-bison-001';
-    let url = `https://generativelanguage.googleapis.com/v1beta2/models/${model}:generateText`;
+    const model = 'gemini-pro';
+    let url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
     const urlParam = new URLSearchParams();
     urlParam.append('key', apiKey);
     url += `?${urlParam.toString()}`;
@@ -113,23 +112,28 @@ export class TextGenFakeWorker extends FakeWorker<TextGenWorkerMessage> {
 
     try {
       const response = await fetch(url, requestOptions);
-      const data = (await response.json()) as PalmGenerateTextResponseBody;
+      const data = (await response.json()) as GeminiGenerateTextResponseBody;
       if (response.status !== 200) {
-        throw Error('PaLM API error' + JSON.stringify(data));
+        throw Error('Gemini API error' + JSON.stringify(data));
       }
 
       if (data.candidates === undefined) {
-        console.error('PaLM API is blocked, feedback: ', data.filters[0]);
-        throw Error('PaLM API Error' + JSON.stringify(data));
+        console.error(
+          'Gemini API is blocked, feedback: ',
+          data.promptFeedback.safetyRatings,
+          data
+        );
+        throw Error('Gemini API Error' + JSON.stringify(data));
       }
 
       // Send back the data to the main thread
+      const result = data.candidates[0].content.parts[0].text;
       const message: TextGenWorkerMessage = {
         command: 'finishTextGen',
         payload: {
           requestID,
           apiKey,
-          result: data.candidates[0].output,
+          result,
           prompt: prompt,
           detail: detail
         }

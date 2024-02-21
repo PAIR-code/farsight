@@ -533,7 +533,7 @@ export class FarsightContainerSignal extends LitElement {
           >
         </div>
         <div class="content">
-          <input id="input-api-key" placeholder="Paste PaLM API key" />
+          <input id="input-api-key" placeholder="Paste Gemini API key" />
           <button
             class="button-submit"
             @click=${() => this.apiSubmitButtonClicked()}

@@ -190,13 +190,13 @@ export class FarsightModalAuth extends LitElement {
     return html`
       <div class="modal-auth">
         <div class="dialog-window">
-          <div class="header">Enter PaLM API Key</div>
+          <div class="header">Enter Gemini API Key</div>
 
           <div class="content">
             <span class="info-text">
               Find your key at
-              <a href="https://makersuite.google.com/app/apikey" target="_blank"
-                >MakerSuite</a
+              <a href="https://aistudio.google.com/app/apikey" target="_blank"
+                >Google AI Studio</a
               >
             </span>
 

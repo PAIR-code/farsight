@@ -1630,7 +1630,7 @@ export class FarsightContainerLite extends LitElement {
                 <div
                   class="error-container"
                   id="error-container-use-case"
-                  ?shown=${this.isUseCaseGenFailed}
+                  ?shown=${false}
                 >
                   <span class="loader-text"
                     >The AI model fails to envision use cases due to safety
