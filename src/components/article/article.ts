@@ -12,6 +12,7 @@ import {
   startLogoBlinkAnimation,
   stopLogoAnimation
 } from '../container-signal/container-signal';
+import type { NightjarYoutube } from '../youtube/youtube';
 
 import '../youtube/youtube';
 
@@ -97,6 +98,9 @@ export class FarsightArticle extends LitElement {
 
   @state()
   bibtexHovering = false;
+
+  @query('nightjar-youtube')
+  youtubeComponent: NightjarYoutube | null | undefined;
 
   //==========================================================================||
   //                             Lifecycle Methods                            ||
@@ -293,17 +297,25 @@ export class FarsightArticle extends LitElement {
       <p>${unsafeHTML(text.whereTo[2])}</p>
     `;
 
-    // Demo video BlSFbGkOlHk
-    // <lite-youtube videoid="BlSFbGkOlHk">
-    //   <a
-    //     class="lite-youtube-fallback"
-    //     href="https://www.youtube.com/watch?v=BlSFbGkOlHk"
-    //   >
-    //     Watch on YouTube
-    //   </a>
-    // </lite-youtube>;
+    // Demo video
+    let videoTimeList = html``;
+    for (const time of text.youtubeTimes) {
+      videoTimeList = html`${videoTimeList}
+        <li
+          class="video-link"
+          @click=${() => this.youtubeComponent?.play(time.startTime)}
+        >
+          ${time.name}
+          <small>${time.timestamp}</small>
+        </li> `;
+    }
+
     const demoVideo = html`
       <h2 id="youtube-video">Demo Video</h2>
+
+      <ul class="video-list">
+        ${videoTimeList}
+      </ul>
 
       <div class="youtube-video">
         <nightjar-youtube
