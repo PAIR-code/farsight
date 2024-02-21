@@ -1,0 +1,77 @@
+@import url('./define.css');
+
+.extension {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .card {
+    background-color: var(--md-red-100);
+  }
+}
+
+.farsight-signal-wrapper {
+  /* position: absolute; */
+  display: flex;
+  top: 50%;
+  right: 0px;
+  width: auto;
+  height: auto;
+  /* transform: translate(150%, -50%); */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+.farsight-sidebar-wrapper {
+  display: flex;
+  width: 310px;
+  min-width: 250px;
+  height: 100%;
+  flex: 1 0 auto;
+  box-shadow: -2px 0px 5px 1px hsla(0, 0%, 0%, 0.05);
+  z-index: 10;
+  opacity: 1;
+
+  direction: rtl;
+  resize: horizontal;
+  overflow: hidden;
+
+  &.is-hidden {
+    width: 0px;
+    min-width: 0px;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+farsight-container-lite {
+  width: 100%;
+  height: 100%;
+  direction: ltr;
+}
+
+farsight-container {
+  width: 100%;
+  height: 100%;
+}
+
+.farsight-wrapper[open] {
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+  pointer-events: all;
+  box-shadow: 0px 0px 10px 1px hsla(0, 0%, 0%, 0.1);
+  background-color: white;
+
+  width: 90%;
+  height: 90%;
+
+  &::backdrop {
+    background-color: hsla(0, 0%, 0%, 0.1);
+    animation: fade-in 300ms;
+  }
+}
