@@ -11,7 +11,8 @@
     "gemini pro"
   ],
   "files": [
-    "dist"
+    "dist",
+    "dist-extensions"
   ],
   "types": "./dist/farsight.d.ts",
   "exports": {
@@ -34,9 +35,9 @@
     "build:github": "tsc && vite build --mode github",
     "deploy:github": "pnpm run build:github && pnpm gh-pages -m \"Deploy $(git log '--format=format:%H' main -1)\" -d ./dist",
     "build:x20": "tsc && vite build --mode x20",
-    "build:library": "pnpm tsc && pnpm vite build --mode library",
-    "build:extension": "pnpm tsc && pnpm vite build --mode extension",
-    "build:notebook": "pnpm tsc && pnpm vite build --mode notebook",
+    "build:library": "npx tsc && npx vite build --mode library",
+    "build:extension": "npx tsc && npx vite build --mode extension",
+    "build:notebook": "npx tsc && npx vite build --mode notebook",
     "build:npm": "npx tsc && npm run build:library && npm run build:extension",
     "preview": "vite preview"
   },

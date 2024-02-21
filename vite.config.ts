@@ -159,7 +159,7 @@ export default defineConfig(({ command, mode }) => {
               }
             }
           },
-          plugins: []
+          plugins: [yaml()]
         };
       }
 
