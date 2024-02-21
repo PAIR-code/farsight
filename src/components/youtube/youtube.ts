@@ -21,7 +21,7 @@ export class NightjarYoutube extends LitElement {
   //                              Class Properties                            ||
   //==========================================================================||
   @property({ type: String })
-  videoId: string;
+  videoId!: string;
 
   iframeApiReady = false;
 
@@ -37,6 +37,7 @@ export class NightjarYoutube extends LitElement {
     window.addEventListener('iframeApiReady', () => {
       if (!this.shadowRoot) throw Error('No shadow root');
       const playerElement = this.shadowRoot.querySelector('#demo-video');
+      // @ts-ignore
       this.player = new YT.Player(playerElement, {
         videoId: this.videoId,
         width: '780',
@@ -53,6 +54,7 @@ export class NightjarYoutube extends LitElement {
     tag.src = 'https://www.youtube.com/iframe_api';
     const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode!.insertBefore(tag, firstScriptTag);
+    // @ts-ignore
     window.onYouTubeIframeAPIReady = () => {
       window.dispatchEvent(new Event('iframeApiReady'));
     };

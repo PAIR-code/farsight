@@ -47,7 +47,7 @@ export default defineConfig(({ command, mode }) => {
               }
             }
           },
-          plugins: []
+          plugins: [yaml()]
         };
       }
 
@@ -58,7 +58,7 @@ export default defineConfig(({ command, mode }) => {
           build: {
             outDir: 'dist'
           },
-          plugins: []
+          plugins: [yaml()]
         };
       }
 
@@ -74,7 +74,7 @@ export default defineConfig(({ command, mode }) => {
               }
             }
           },
-          plugins: []
+          plugins: [yaml()]
         };
       }
 
