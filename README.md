@@ -5,6 +5,7 @@
 [![npm](https://img.shields.io/npm/v/@xiaohk/farsight?color=orange)](https://www.npmjs.com/package/@xiaohk/farsight)
 [![pypi](https://img.shields.io/pypi/v/farsight?color=yellow)](https://pypi.org/project/farsight/)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1aTIW3tRX1BRcNMCg8bRKktpZxRXtMF3-?usp=sharing)
+[![10.1145/3613904.3642335](https://img.shields.io/badge/DOI-10.1145/3613904.3642335-blue)](https://doi.org/10.1145/3613904.3642335)
 
 <!-- [![arxiv badge](https://img.shields.io/badge/arXiv-2401.14447-red)](https://arxiv.org/abs/2401.14447) -->
 
@@ -85,7 +86,7 @@ With a novel _in situ_ design, contextual AI incident feed, and human-AI collabo
 
 <details>
   <summary>Click to see the demo video!</summary>
-  <video src="https://github.com/poloclub/wordflow/assets/15007159/ce96979e-9973-4c8c-9264-eec610b11463"></video>
+  <video src="https://github.com/PAIR-code/farsight/assets/15007159/eb4b5e3e-50a2-47f5-b146-072290a4da87"></video>
 </details>
 
 ## Get Started
@@ -185,6 +186,19 @@ Farsight is a collection of [Web Components](https://developer.mozilla.org/en-US
 ## Credits
 
 Led by <a href='https://zijie.wang/' target='_blank'>Jay Wang</a>, Farsight is a result of a collaboration between researchers from Google Research, Georgia Tech, eBay, and Emory University. Farsight is created by <a href='https://zijie.wang/' target='_blank'>Jay Wang</a>, <a href='https://www.cs.emory.edu/people/faculty/individual.php?NUM=709' target='_blank'>Chinmay Kulkarni</a>, <a href='https://research.google/people/106542/' target='_blank'>Lauren Wilcox</a>, <a href='https://research.google/people/107786' target='_blank'>Mike Terry</a>, and <a href='http://michaelmadaio.com/' target='_blank'>Michael Madaio</a>.
+
+## Citation
+
+To learn more about Farsight, please read our research paper (published at [CHI 2024](https://chi2024.acm.org)).
+
+```bibtex
+@inproceedings{wangFarsightFosteringResponsible2024,
+  title = {Farsight: {{Fostering Responsible AI Awareness During AI Application Prototyping}}},
+  booktitle = {{{CHI Conference}} on {{Human Factors}} in {{Computing Systems}}},
+  author = {Wang, Zijie J. and Kulkarni, Chinmay and Wilcox, Lauren and Terry, Michael and Madaio, Michael},
+  year = {2024}
+}
+```
 
 ## License
 
