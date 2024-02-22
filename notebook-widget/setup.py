@@ -54,7 +54,7 @@ setup(
     ],
     description="A Python package to run Farsight in your computational notebooks.",
     install_requires=requirements,
-    license="MIT license",
+    license="Apache 2.0 license",
     long_description=readme,
     long_description_content_type="text/markdown",
     include_package_data=True,

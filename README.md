@@ -77,12 +77,13 @@ With a novel _in situ_ design, contextual AI incident feed, and human-AI collabo
   <tr></tr>
 </table>
 
+## Features
+
+<img width="100%" src='https://i.imgur.com/4VV0vGl.gif'>
+
 ### Demo Video
 
-<details>
-  <summary>Click to see the demo video!</summary>
-  <video src="https://github.com/poloclub/wordflow/assets/15007159/ce96979e-9973-4c8c-9264-eec610b11463"></video>
-</details>
+<video src="https://github.com/poloclub/wordflow/assets/15007159/ce96979e-9973-4c8c-9264-eec610b11463"></video>
 
 ## Get Started
 
