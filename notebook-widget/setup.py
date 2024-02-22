@@ -20,7 +20,8 @@ package_json_path = "./package.json"
 with open(package_json_path, "r", encoding="utf8") as f:
     package_json = load(f)
     version = package_json["version"]
-    dump(package_json, open("./package-copy.json", "w", encoding="utf8"))
+    with open("./farsight/version.txt", "w", encoding="utf8") as o:
+        o.write(version)
 
 setup(
     author="Jay Wang",

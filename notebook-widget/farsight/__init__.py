@@ -1,14 +1,9 @@
 """Your sidekick for responsible AI innovation."""
 
-from json import load
+import pkgutil
 
-# Read the version from package.json
-package_json_path = "../package-copy.json"
-
-# Read the package.json file
-with open(package_json_path, "r", encoding="utf8") as f:
-    package_json = load(f)
-    version = package_json["version"]
+# Read the version from a generated version.txt file
+version = pkgutil.get_data(__name__, "version.txt").decode()
 
 __author__ = """Jay Wang"""
 __email__ = "jayw@zijie.wang"
