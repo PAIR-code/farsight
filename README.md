@@ -79,11 +79,14 @@ With a novel _in situ_ design, contextual AI incident feed, and human-AI collabo
 
 ## Features
 
-<img width="100%" src='https://i.imgur.com/4VV0vGl.gif'>
+<img width="100%" src='https://github.com/xiaohk/gifs/blob/main/farsight-800.gif?raw=true'>
 
 ### Demo Video
 
-<video src="https://github.com/poloclub/wordflow/assets/15007159/ce96979e-9973-4c8c-9264-eec610b11463"></video>
+<details>
+  <summary>Click to see the demo video!</summary>
+  <video src="https://github.com/poloclub/wordflow/assets/15007159/ce96979e-9973-4c8c-9264-eec610b11463"></video>
+</details>
 
 ## Get Started
 
