@@ -1,7 +1,7 @@
 <h1>Farsight <a href="https://PAIR-code.github.io/farsight/"><img align="right" alt="Farsight logo." src="public/android-chrome-192x192.png" width="36" height="36"></a></h1>
 
 [![Github Actions Status](https://github.com/PAIR-code/farsight/workflows/build/badge.svg)](https://github.com/PAIR-code/farsight/actions/workflows/build.yml)
-[![license](https://img.shields.io/badge/License-Apache_2.0-blue)](https://github.com/PAIR-code/farsight/blob/main/LICENSE)
+[![license](https://img.shields.io/badge/License-Apache_2-blue)](https://github.com/PAIR-code/farsight/blob/main/LICENSE)
 [![npm](https://img.shields.io/npm/v/@xiaohk/farsight?color=orange)](https://www.npmjs.com/package/@xiaohk/farsight)
 [![pypi](https://img.shields.io/pypi/v/farsight?color=yellow)](https://pypi.org/project/farsight/)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1aTIW3tRX1BRcNMCg8bRKktpZxRXtMF3-?usp=sharing)
