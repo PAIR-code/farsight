@@ -255,23 +255,23 @@ export class FarsightArticlePage extends LitElement {
                     <span class="link-name">Code</span>
                   </a>
 
-                  <span
+                  <a
                     class="link-container example-button "
                     href="https://youtu.be/BlSFbGkOlHk"
                     target="_blank"
                   >
                     <span class="svg-icon">${unsafeHTML(iconVideo)}</span>
                     <span class="link-name">Video</span>
-                  </span>
+                  </a>
 
-                  <span
+                  <a
                     class="link-container example-button "
                     href="https://arxiv.org/abs/2402.15350"
                     target="_blank"
                   >
                     <span class="svg-icon">${unsafeHTML(iconFile)}</span>
                     <span class="link-name">Paper</span>
-                  </span>
+                  </a>
                 </div>
               </div>
             </div>
