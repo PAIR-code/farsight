@@ -5,22 +5,21 @@
 [![npm](https://img.shields.io/npm/v/@xiaohk/farsight?color=orange)](https://www.npmjs.com/package/@xiaohk/farsight)
 [![pypi](https://img.shields.io/pypi/v/farsight?color=yellow)](https://pypi.org/project/farsight/)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1aTIW3tRX1BRcNMCg8bRKktpZxRXtMF3-?usp=sharing)
+[![arxiv badge](https://img.shields.io/badge/arXiv-2402.15350-red)](https://arxiv.org/abs/2402.15350)
 [![10.1145/3613904.3642335](https://img.shields.io/badge/DOI-10.1145/3613904.3642335-blue)](https://doi.org/10.1145/3613904.3642335)
-
-<!-- [![arxiv badge](https://img.shields.io/badge/arXiv-2401.14447-red)](https://arxiv.org/abs/2401.14447) -->
 
 In situ interactive widgets for responsible AI 🌱
 
 <table>
   <tr>
-    <td colspan="2"><a href="https://PAIR-code.github.io/farsight"><img width="100%" src='https://github.com/poloclub/wordflow/assets/15007159/c2f01503-9eb7-477c-be20-0b92a2efd1f0'></a></td>
+    <td colspan="3"><a href="https://PAIR-code.github.io/farsight"><img width="100%" src='https://github.com/poloclub/wordflow/assets/15007159/c2f01503-9eb7-477c-be20-0b92a2efd1f0'></a></td>
   </tr>
   <tr></tr>
   <tr align="center">
     <td><a href="https://PAIR-code.github.io/farsight">🚀 Farsight Demo</a></td>
     <td><a href="https://youtu.be/BlSFbGkOlHk">📺 Demo Video</a></td>
     <!-- <td><a href="https://youtu.be/l1mr9z1TuAk">👨🏻‍🏫 Conference Talk</a></td> -->
-    <!-- <td><a href="https://arxiv.org/abs/2401.14447">📖 Research Paper</a></td> -->
+    <td><a href="https://arxiv.org/abs/2402.15350">📖 Research Paper</a></td>
   </tr>
 </table>
 
@@ -189,7 +188,7 @@ Led by <a href='https://zijie.wang/' target='_blank'>Jay Wang</a>, Farsight is a
 
 ## Citation
 
-To learn more about Farsight, please read our research paper (published at [CHI 2024](https://chi2024.acm.org)).
+To learn more about Farsight, please read our [research paper](https://arxiv.org/abs/2402.15350) (published at [CHI 2024](https://chi2024.acm.org)).
 
 ```bibtex
 @inproceedings{wangFarsightFosteringResponsible2024,

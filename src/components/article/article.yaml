@@ -265,7 +265,7 @@ contribution:
 learnMore:
   - >
     To learn more about Farsight, please read our <a
-    href='https://github.com/PAIR-code/farsight' target='_blank'
+    href='https://arxiv.org/abs/2402.15350' target='_blank'
     rel='noreferrer'>research paper</a> (published at <a
     href='https://chi2024.acm.org/' target='_blank'
     rel='noreferrer'>CHI'24</a>). If you find Farsight useful for your research,
@@ -284,7 +284,7 @@ paper:
     Farsight: Fostering Responsible AI Awareness During AI Application Prototyping
 
   paperLink: >
-    https://github.com/PAIR-code/farsight
+    https://arxiv.org/abs/2402.15350
 
   venue: >
     CHI Conference on Human Factors in Computing Systems (CHI) 2024

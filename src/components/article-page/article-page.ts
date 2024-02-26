@@ -257,7 +257,7 @@ export class FarsightArticlePage extends LitElement {
 
                   <span
                     class="link-container example-button "
-                    href=" https://youtu.be/BlSFbGkOlHk"
+                    href="https://youtu.be/BlSFbGkOlHk"
                     target="_blank"
                   >
                     <span class="svg-icon">${unsafeHTML(iconVideo)}</span>
@@ -266,7 +266,7 @@ export class FarsightArticlePage extends LitElement {
 
                   <span
                     class="link-container example-button "
-                    href="https://github.com/PAIR-code/farsight"
+                    href="https://arxiv.org/abs/2402.15350"
                     target="_blank"
                   >
                     <span class="svg-icon">${unsafeHTML(iconFile)}</span>
