@@ -1,5 +1,11 @@
 import { LitElement, css, unsafeCSS, html, PropertyValues } from 'lit';
-import { customElement, property, state, query } from 'lit/decorators.js';
+import {
+  customElement,
+  property,
+  state,
+  query,
+  queryAsync
+} from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { SupportedRemoteModel, textGenFarsight } from '../../llms/farsight-gen';
 
@@ -47,8 +53,8 @@ export class PromptPadContainer extends LitElement {
   @state()
   respondedPrompt = '';
 
-  @query('promptpad-editor')
-  editorElement: PromptPadEditor | undefined;
+  @queryAsync('promptpad-editor')
+  editorElement!: Promise<PromptPadEditor>;
 
   @state()
   promptOutput = '';
@@ -129,10 +135,9 @@ export class PromptPadContainer extends LitElement {
     }
   }
 
-  overridePrompt(prompt: string) {
-    if (this.editorElement) {
-      this.editorElement.overridePrompt(prompt);
-    }
+  async overridePrompt(prompt: string) {
+    const editorElement = await this.editorElement;
+    editorElement.overridePrompt(prompt);
   }
 
   // ===== Event Methods ======
@@ -166,17 +171,15 @@ export class PromptPadContainer extends LitElement {
   /**
    * Handler when user clicks run in the header
    */
-  requestRun() {
-    if (!this.editorElement) {
-      throw Error('Editor is null');
-    }
+  async requestRun() {
+    const editorElement = await this.editorElement;
 
     // Clear the last error message
     this.showError = false;
 
     // Pull the prompt (the prompt pushed from the child can be out of dated if
     // the user manually deletes the highlighted text)
-    this.prompt = this.editorElement.getCurPrompt();
+    this.prompt = editorElement.getCurPrompt();
 
     // Start the inference
     this.startTextGen();

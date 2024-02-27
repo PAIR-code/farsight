@@ -146,7 +146,7 @@ export class FarsightContainerLiteIncident extends LitElement {
   selectedUseCaseTab = UseCaseTab.ALL;
 
   @state()
-  selectedAccidentTab = AccidentTab.LATEST;
+  selectedAccidentTab = AccidentTab.RELATED;
 
   @state()
   curLatestAccidentPage = 0;

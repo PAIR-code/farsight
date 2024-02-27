@@ -34,7 +34,7 @@ Rewrite: "Morning. Let's schedule a follow-up. Next week works? Deck's solid, bu
 Email: "Alex, soooo hey, I think the current prototype isn't working so well unfortunately. Ok so how about
 this as a proposal for a plan: I think we should schedule a meeting to chat early next week. And during that time we can try to debug it live together. What do you think? Nicole"
 Rewrite:`,
-  'Legal Brief Writer': `You are a great lawyer. Please help me write a legal brief based on the following information.
+  'Legal Brief Writer': `You are a great lawyer. Please help me write a legal brief for my judge based on the following information.
 
 Case: Sunshine (Company) v. Evergreen (Company)
 Date: 2023
@@ -122,6 +122,14 @@ export class FarsightArticlePage extends LitElement {
    * @param changedProperties Property that has been changed
    */
   willUpdate(changedProperties: PropertyValues<this>) {}
+
+  firstUpdated() {
+    if (!this.promptpadContainerElement) {
+      throw Error('promptpadContainerElement is null');
+    }
+    const prompt = promptMap[this.selectedPrompt] as string;
+    this.promptpadContainerElement.overridePrompt(prompt);
+  }
 
   // ===== Custom Methods ======
   initData = async () => {};

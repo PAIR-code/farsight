@@ -8,30 +8,7 @@ export interface promptUpdatedMessage {
   prompt: string;
 }
 
-// const INIT_TEXT = `Given a review, determine if it is a positive review or a negative review.
-
-// Input: The food was superb, and the service was top-notch.
-// Output: Positive
-
-// Input: The portions were tiny, and the prices were exorbitant.
-// Output: Negative
-
-// Input: I tried their signature dessert, and it was out of this world
-// Output:`;
-
-// const INIT_TEXT = `Translate a sentence from English to French.
-
-// English: How are you?
-// French: Comment vas-tu?
-
-// English: Morning!
-// French:`;
-
-const INIT_TEXT = `You are a great lawyer. Please help me write a legal brief based on the following information.
-
-Case: Sunshine (Company) v. Evergreen (Company)
-Date: 2023
-Issue: Evergreen violates the contract signed with Sunshine in 2020.`;
+const INIT_TEXT = '';
 
 /**
  * Editor element.
@@ -57,10 +34,7 @@ export class PromptPadEditor extends LitElement {
     if (this.textBoxElement) {
       this.textBoxElement.focus();
     }
-
-    setTimeout(() => {
-      this.notifyParentPromptUpdate(INIT_TEXT);
-    }, 1000);
+    this.notifyParentPromptUpdate(INIT_TEXT);
   }
 
   /**
