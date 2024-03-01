@@ -379,6 +379,7 @@ export class FarsightHarmPanel extends LitElement {
         // Record that the user has gone through the tutorial
         if (USE_CACHE) {
           localStorage.setItem('hasFinishedFarsightOnboarding', 'true');
+          this.hasFinishedOnboarding = true;
         }
         break;
       }
