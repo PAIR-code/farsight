@@ -480,6 +480,8 @@ export class FarsightContainerLite extends LitElement {
         console.log('Skip text gen API call (prompt summary, cached, lite)');
       }
 
+      this.summary = response;
+
       window.setTimeout(
         () => {
           this.generateUseCases(response);

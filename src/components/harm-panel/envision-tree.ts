@@ -628,9 +628,7 @@ export class EnvisionTree {
         () => {
           this.addAutoHarms(nodeData, response);
         },
-        DEV_MODE
-          ? d3.randomInt(800, 2000)()
-          : config.layout.treeLayout.animationDuration
+        DEV_MODE ? d3.randomInt(800, 3000)() : d3.randomInt(800, 3000)()
       );
     } else {
       const message: TextGenWorkerMessage = {

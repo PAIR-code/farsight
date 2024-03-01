@@ -129,10 +129,23 @@ export class FarsightArticlePage extends LitElement {
     }
     const prompt = promptMap[this.selectedPrompt] as string;
     this.promptpadContainerElement.overridePrompt(prompt);
+
+    this.initData();
   }
 
   // ===== Custom Methods ======
-  initData = async () => {};
+  initData = async () => {
+    // Load the LLM response cache to make generation faster
+    const cacheData = (await (
+      await fetch(`${import.meta.env.BASE_URL}data/farsight-cache.json`)
+    ).json()) as Record<string, string>;
+
+    for (const key in cacheData) {
+      if (localStorage.getItem(key) === null) {
+        localStorage.setItem(key, cacheData[key]);
+      }
+    }
+  };
 
   // ===== Event Methods ======
   /**
