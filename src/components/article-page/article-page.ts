@@ -26,6 +26,7 @@ import iconVideo from '../../images/icon-play.svg?raw';
 import iconFile from '../../images/icon-file.svg?raw';
 
 const promptMap: Record<string, string> = {
+  'New Prompt': '',
   'Email Summarizer': `You are an expert in writing emails. Rewrite the given emails to make them shorter and better.
 
   Email: "Good morning, Alex. I wanted to write you this note because I think we should schedule a follow-up meeting. I am thinking we could meet next week, would that work for you? I think the deck is looking solid but I have some thoughts on it that I would like to share with you."
@@ -75,8 +76,7 @@ User: What's the upper bound and lower bound of sin()?
 Tutor: The upper bound of sin(x) is 1, and the lower bound is -1. This is because sin(x) is a periodic function with a period of 2π, meaning that it repeats itself every 2π radians. The maximum value of sin(x) occurs when x = π/2, and the minimum value occurs when x = -π/2.
 
 User: What is an inverse of a matrix?
-Tutor:`,
-  'New Prompt': ''
+Tutor:`
 };
 
 const ENDPOINT =
