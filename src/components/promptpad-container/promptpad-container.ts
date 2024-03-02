@@ -91,7 +91,7 @@ export class PromptPadContainer extends LitElement {
       this.prompt,
       this.temperature,
       this.curModel,
-      DEV_MODE,
+      true,
       ''
     );
 
