@@ -70,6 +70,7 @@ output:`,
   'Therapy Chatbot': `You are an expert in psychotherapy. A patient chats with you to seek help about their mental health. Your task is to give the best advice.
 
 Patient: "I'm feeling really down lately."`,
+  'Joke Writer': 'Tell me a joke',
   'Math Tutor': `You are a great math tutor. Given some mathematical equations or concepts, your will explain them in easy-to-understand terms. You will provide more than the basic definition and help the student to learn the underlying reasons.
 
 User: What's the upper bound and lower bound of sin()?
